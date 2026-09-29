@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+/*
+  Sistem desain ARTIC (B2B). Warna diambil dari logo asli:
+  navy #303860, emas #a88038, merah #e81820 (aksen sangat hemat).
+*/
+@theme {
+  --color-navy-50: #f3f5fa;
+  --color-navy-100: #e4e8f3;
+  --color-navy-200: #c7cfe4;
+  --color-navy-300: #9aa7cc;
+  --color-navy-400: #6b7db0;
+  --color-navy-500: #4a5b94;
+  --color-navy-600: #3d4a7d;
+  --color-navy-700: #303860;
+  --color-navy-800: #262d4d;
+  --color-navy-900: #1c2139;
+  --color-navy-950: #12152a;
+
+  --color-gold-50: #faf5ea;
+  --color-gold-100: #f2e6c9;
+  --color-gold-300: #d2b06a;
+  --color-gold-500: #a88038;
+  --color-gold-600: #8c6a2c;
+
+  --color-water-50: #f2f8fc;
+  --color-water-100: #e3f0f8;
+  --color-water-200: #c9e2f0;
+
+  --color-accent: #e81820;
+
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    background: #ffffff;
+    color: var(--color-navy-900);
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    letter-spacing: -0.01em;
+  }
+}
+
+@utility animate-wave-float {
+  animation: waveFloat 5s ease-in-out infinite;
+}
+
+@keyframes waveFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-wave-float {
+    animation: none;
+  }
+}

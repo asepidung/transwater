@@ -44,3 +44,10 @@ next-env.d.ts
 # bank account & phone numbers) — must not be pushed to this public repo
 /docs/
 /.agents/
+
+# payload cms: local database file and uploaded media (client content, never commit)
+/data/
+/media/
+
+# contoh variabel lingkungan (tanpa nilai rahasia) boleh di-commit
+!.env.example
