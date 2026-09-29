@@ -53,6 +53,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           alternateName: c.company.brand,
           url: siteUrl,
           logo: `${siteUrl}/images/logo.png`,
+          sameAs: c.company.instagram ? [c.company.instagram] : undefined,
           address: { '@type': 'PostalAddress', streetAddress: c.company.address, addressCountry: 'ID' },
         }}
       />

@@ -56,6 +56,7 @@ export async function getSiteContent(localeParam: string): Promise<SiteContent> 
 
     return {
       ...d,
+      showCredit: settings.showDeveloperCredit !== false,
       company: {
         ...d.company,
         name: text(settings.companyName, d.company.name),
@@ -65,6 +66,7 @@ export async function getSiteContent(localeParam: string): Promise<SiteContent> 
         phone: text(settings.phone, d.company.phone),
         email: text(settings.email, d.company.email),
         whatsapp: text(settings.whatsapp, d.company.whatsapp),
+        instagram: text(settings.instagramUrl, d.company.instagram),
       },
       hero: {
         eyebrow: text(home.hero?.eyebrow, d.hero.eyebrow),

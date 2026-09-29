@@ -36,15 +36,9 @@ export default function Header({ c, switchPath = '' }: { c: SiteContent; switchP
           >
             <Globe className="h-4 w-4" /> {c.lang.label}
           </a>
-          <a
-            href={`/${c.locale}#penawaran`}
-            className="whitespace-nowrap rounded-lg bg-navy-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy-800"
-          >
-            {c.cta.quote}
-          </a>
         </div>
 
-        <MobileMenu links={c.nav} ctaLabel={c.cta.quote} ctaHref={`/${c.locale}#penawaran`} lang={{ href: `/${c.lang.other}${switchPath}`, label: c.lang.label }} />
+        <MobileMenu links={c.nav} lang={{ href: `/${c.lang.other}${switchPath}`, label: c.lang.label }} />
       </div>
     </header>
   )

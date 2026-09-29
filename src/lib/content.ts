@@ -25,6 +25,7 @@ export interface SiteContent {
     phone: string
     email: string
     whatsapp: string
+    instagram: string
   }
   banner: string
   nav: { label: string; href: string }[]
@@ -134,7 +135,9 @@ export interface SiteContent {
     certifications: string[]
     rights: string
     privacy: string
+    credit: string
   }
+  showCredit: boolean
 }
 
 const company = {
@@ -145,7 +148,8 @@ const company = {
   // DUMMY sampai TRI kirim data resmi
   phone: '(021) 555-8989',
   email: 'info@articwater.co.id',
-  whatsapp: '6281234567890',
+  whatsapp: '6281399641608',
+  instagram: 'https://www.instagram.com/articwater.id/',
 }
 
 const images = {
@@ -158,6 +162,7 @@ const id: SiteContent = {
   locale: 'id',
   company,
   banner: 'Mockup tampilan dengan data contoh. Isi belum diverifikasi ARTIC.',
+  showCredit: true,
   nav: [
     { label: 'Produk', href: '/id/produk' },
     { label: 'Tentang', href: '/id/tentang' },
@@ -375,6 +380,7 @@ const id: SiteContent = {
     certTitle: 'Legalitas',
     certifications: ['Merek ARTIC terdaftar DJKI: IDM000818024', 'BPOM: menyusul', 'Halal: menyusul', 'SNI: menyusul', 'ISO: menyusul'],
     rights: 'Hak cipta dilindungi.',
+    credit: 'Website oleh',
     privacy: 'Kebijakan Privasi',
   },
 }
@@ -383,6 +389,7 @@ const en: SiteContent = {
   locale: 'en',
   company,
   banner: 'Design mockup with sample data. Content is not yet verified by ARTIC.',
+  showCredit: true,
   nav: [
     { label: 'Products', href: '/en/produk' },
     { label: 'About', href: '/en/tentang' },
@@ -600,6 +607,7 @@ const en: SiteContent = {
     certTitle: 'Legality',
     certifications: ['ARTIC trademark registered (DGIP): IDM000818024', 'BPOM: pending', 'Halal: pending', 'SNI: pending', 'ISO: pending'],
     rights: 'All rights reserved.',
+    credit: 'Website by',
     privacy: 'Privacy Policy',
   },
 }

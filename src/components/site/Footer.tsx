@@ -14,6 +14,21 @@ export default function Footer({ c }: { c: SiteContent }) {
             <Image src="/images/logo.png" alt="ARTIC Air Mineral" width={720} height={457} className="h-11 w-auto" />
           </span>
           <p className="mt-4 max-w-xs text-sm leading-relaxed">{f.description}</p>
+          {c.company.instagram && (
+            <a
+              href={c.company.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold hover:text-white"
+            >
+              <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+              </svg>
+              @{c.company.instagram.replace(/\/+$/, '').split('/').pop()}
+            </a>
+          )}
         </div>
 
         <div>
@@ -38,9 +53,24 @@ export default function Footer({ c }: { c: SiteContent }) {
       </div>
 
       <div className="border-t border-navy-800">
-        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-5 text-xs text-navy-300 sm:flex-row sm:justify-between">
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-5 text-xs text-navy-300 md:flex-row md:items-center md:justify-between">
           <p>&copy; {new Date().getFullYear()} {c.company.name}. {f.rights}</p>
-          <a href={`/${c.locale}/privasi`} className="hover:text-white">{f.privacy}</a>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <a href={`/${c.locale}/privasi`} className="hover:text-white">{f.privacy}</a>
+            {c.showCredit && (
+              <span>
+                {f.credit}{' '}
+                <a
+                  href="https://saepullrock.tech/"
+                  target="_blank"
+                  rel="noopener"
+                  className="font-semibold text-gold-300 hover:text-white"
+                >
+                  IDNX
+                </a>
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </footer>

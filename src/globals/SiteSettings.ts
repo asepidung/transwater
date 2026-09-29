@@ -30,6 +30,7 @@ export const SiteSettings: GlobalConfig = {
         { name: 'mapsUrl', type: 'text', label: 'Link Google Maps' },
         { name: 'phone', type: 'text', label: 'Telepon' },
         { name: 'email', type: 'email', label: 'Email' },
+        { name: 'instagramUrl', type: 'text', label: 'Link Instagram', admin: { description: 'Contoh: https://www.instagram.com/articwater.id/' } },
         {
           name: 'whatsapp',
           type: 'text',
@@ -44,6 +45,13 @@ export const SiteSettings: GlobalConfig = {
       label: 'Legalitas & Sertifikasi (footer)',
       admin: { description: 'Hanya isi yang sudah resmi & valid. Contoh: "BPOM MD 123456".' },
       fields: [{ name: 'text', type: 'text', required: true, localized: true }],
+    },
+    {
+      name: 'showDeveloperCredit',
+      type: 'checkbox',
+      defaultValue: true,
+      label: 'Tampilkan kredit developer di footer',
+      admin: { description: 'Menampilkan "Website oleh IDNX" di bagian bawah situs. Matikan jika diminta.' },
     },
     { name: 'footerDescription', type: 'textarea', localized: true, label: 'Deskripsi singkat footer' },
   ],

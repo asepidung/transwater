@@ -565,6 +565,10 @@ export interface SiteSetting {
   phone?: string | null;
   email?: string | null;
   /**
+   * Contoh: https://www.instagram.com/articwater.id/
+   */
+  instagramUrl?: string | null;
+  /**
    * Format internasional tanpa + atau spasi. Contoh: 6281234567890
    */
   whatsapp?: string | null;
@@ -577,6 +581,10 @@ export interface SiteSetting {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Menampilkan "Website oleh IDNX" di bagian bawah situs. Matikan jika diminta.
+   */
+  showDeveloperCredit?: boolean | null;
   footerDescription?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -767,6 +775,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   mapsUrl?: T;
   phone?: T;
   email?: T;
+  instagramUrl?: T;
   whatsapp?: T;
   certifications?:
     | T
@@ -774,6 +783,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         text?: T;
         id?: T;
       };
+  showDeveloperCredit?: T;
   footerDescription?: T;
   updatedAt?: T;
   createdAt?: T;

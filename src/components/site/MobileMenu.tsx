@@ -5,12 +5,10 @@ import { Menu, X, Globe } from 'lucide-react'
 
 interface Props {
   links: { label: string; href: string }[]
-  ctaLabel: string
-  ctaHref: string
   lang: { href: string; label: string }
 }
 
-export default function MobileMenu({ links, ctaLabel, ctaHref, lang }: Props) {
+export default function MobileMenu({ links, lang }: Props) {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
 
@@ -45,13 +43,6 @@ export default function MobileMenu({ links, ctaLabel, ctaHref, lang }: Props) {
               className="flex items-center gap-2 py-3.5 text-base font-semibold text-navy-600"
             >
               <Globe className="h-4 w-4" /> {lang.label}
-            </a>
-            <a
-              href={ctaHref}
-              onClick={close}
-              className="mb-2 mt-1 rounded-lg bg-navy-700 px-5 py-3.5 text-center text-base font-semibold text-white"
-            >
-              {ctaLabel}
             </a>
           </nav>
         </div>
