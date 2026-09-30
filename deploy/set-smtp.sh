@@ -12,6 +12,10 @@ read -rsp "App Password 16 karakter (tidak tampil saat diketik): " SMTP_PASS; ec
 read -rp "Email penerima notifikasi (pisahkan koma bila lebih dari satu): " NOTIFY
 
 SMTP_USER="${SMTP_USER// /}"; SMTP_PASS="${SMTP_PASS// /}"; NOTIFY="${NOTIFY// /}"
+echo "Panjang App Password yang terbaca: ${#SMTP_PASS} karakter (yang benar: 16)."
+if [ "${#SMTP_PASS}" -ne 16 ]; then
+  echo "PERINGATAN: bukan 16 karakter. App Password Google selalu 16 huruf kecil tanpa angka. Kemungkinan salah salin atau memakai password Gmail biasa."
+fi
 [ -n "$SMTP_USER" ] && [ -n "$SMTP_PASS" ] && [ -n "$NOTIFY" ] || { echo "Ada isian yang kosong, dibatalkan."; exit 1; }
 
 cp "$ENV_FILE" "$ENV_FILE.bak" && chmod 600 "$ENV_FILE.bak"
