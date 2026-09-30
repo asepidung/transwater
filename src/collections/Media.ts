@@ -7,7 +7,7 @@ const mediaDir = process.env.MEDIA_DIR ? path.resolve(process.env.MEDIA_DIR) : p
 
 export const Media: CollectionConfig = {
   slug: 'media',
-  labels: { singular: 'Media', plural: 'Media' },
+  labels: { singular: 'Foto/Berkas', plural: 'Foto & Berkas' },
   access: {
     read: () => true,
   },

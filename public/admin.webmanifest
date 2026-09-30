@@ -1,0 +1,31 @@
+{
+  "name": "ARTIC Admin",
+  "short_name": "ARTIC CMS",
+  "description": "Panel pengelola website ARTIC",
+  "start_url": "/admin",
+  "scope": "/admin",
+  "display": "standalone",
+  "lang": "id",
+  "background_color": "#ffffff",
+  "theme_color": "#303860",
+  "icons": [
+    {
+      "src": "/images/admin-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/admin-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/admin-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

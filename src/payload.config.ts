@@ -7,6 +7,8 @@ import sharp from 'sharp'
 import nodemailer from 'nodemailer'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 
+import { en } from '@payloadcms/translations/languages/en'
+import { idLanguage } from './i18n/admin-id'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Products } from './collections/Products'
@@ -52,10 +54,24 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     importMap: { baseDir: path.resolve(dirname) },
-    meta: { titleSuffix: '- ARTIC CMS' },
+    meta: {
+      titleSuffix: '- ARTIC CMS',
+      icons: [{ rel: 'icon', url: '/images/admin-icon-192.png' }],
+      manifest: '/admin.webmanifest',
+    },
     components: {
-      // Ikon mata (lihat/sembunyikan password) di semua kolom password panel admin
-      providers: ['/components/admin/PasswordToggle#PasswordToggle'],
+      // Ikon mata di kolom password + pendaftaran service worker (PWA)
+      providers: [
+        '/components/admin/PasswordToggle#PasswordToggle',
+        '/components/admin/PwaRegister#PwaRegister',
+      ],
+      graphics: {
+        Logo: '/components/admin/Logo#Logo',
+        Icon: '/components/admin/Icon#Icon',
+      },
+      beforeDashboard: ['/components/admin/DashboardIntro#DashboardIntro'],
+      afterLogin: ['/components/admin/AdminCredit#AdminCredit'],
+      afterNavLinks: ['/components/admin/AdminCredit#AdminCredit'],
     },
   },
   collections: [Users, Media, Products, Posts, Messages],
@@ -69,6 +85,10 @@ export default buildConfig({
     fallback: true,
   },
   ...(email ? { email } : {}),
+  i18n: {
+    fallbackLanguage: 'en',
+    supportedLanguages: { en, id: idLanguage },
+  },
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
