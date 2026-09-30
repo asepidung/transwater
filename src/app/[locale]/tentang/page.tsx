@@ -76,7 +76,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               </h2>
               <ul className="mt-6 flex flex-wrap gap-3">
                 {c.trust.items.map((item) => (
-<TrustPill key={item.label} label={item.label} status={item.status} />
+<TrustPill key={`${item.label}-${item.status}`} label={item.label} status={item.status} />
 ))}
               </ul>
             </div>

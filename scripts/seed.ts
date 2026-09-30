@@ -8,6 +8,7 @@ import { defaultContent, type Locale, type SiteContent } from '../src/lib/conten
 // Cara pakai:
 //   npm run seed                   -> isi data awal hanya jika belum ada produk
 //   SEED_RESET=1 npm run seed      -> hapus SEMUA produk & media, lalu isi ulang (akun user TIDAK disentuh)
+//   SEED_RESET=1 SEED_SCOPE=products npm run seed -> sama, tapi hanya produk + foto (teks halaman tidak ditimpa)
 const reset = process.env.SEED_RESET === '1'
 
 // Pengaman: seed dengan reset menghapus produk & foto. Di produksi (server sungguhan) harus disengaja.
@@ -79,6 +80,13 @@ for (const [index, item] of id.products.items.entries()) {
       _status: 'published',
     },
   })
+}
+
+// SEED_SCOPE=products: hanya produk + foto yang diisi ulang; teks halaman & pengaturan (yang mungkin
+// sudah diubah lewat admin) TIDAK disentuh.
+if (process.env.SEED_SCOPE === 'products') {
+  console.log('Seed selesai (lingkup produk): produk + foto diperbarui, pengaturan dan teks halaman tidak diubah.')
+  process.exit(0)
 }
 
 // ---------- Pengaturan situs ----------

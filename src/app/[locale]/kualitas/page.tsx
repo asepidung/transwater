@@ -68,7 +68,7 @@ export default async function QualityPage({ params }: { params: Promise<{ locale
             {c.trust.items.length > 0 && (
               <ul className="mt-6 flex flex-wrap gap-3">
                 {c.trust.items.map((item) => (
-<TrustPill key={item.label} label={item.label} status={item.status} onWhite />
+<TrustPill key={`${item.label}-${item.status}`} label={item.label} status={item.status} onWhite />
 ))}
               </ul>
             )}

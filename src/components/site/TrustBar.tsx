@@ -15,7 +15,7 @@ export default function TrustBar({ c }: { c: SiteContent }) {
         </p>
         <ul className="flex flex-wrap gap-3">
           {c.trust.items.map((item) => (
-<TrustPill key={item.label} label={item.label} status={item.status} />
+<TrustPill key={`${item.label}-${item.status}`} label={item.label} status={item.status} />
 ))}
         </ul>
       </div>

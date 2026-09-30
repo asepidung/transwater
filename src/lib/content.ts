@@ -191,7 +191,8 @@ const id: SiteContent = {
     title: 'Legalitas & sertifikasi',
     items: [
       { label: 'DJKI', status: 'Merek terdaftar · IDM000818024' },
-      { label: 'BPOM', status: 'Nomor menyusul' },
+      { label: 'BPOM', status: 'MD 265228003693 (botol)' },
+      { label: 'BPOM', status: 'MD 265228001693 (galon)' },
       { label: 'Halal', status: 'Nomor menyusul' },
       { label: 'SNI', status: 'Nomor menyusul' },
       { label: 'ISO', status: 'Nomor menyusul' },
@@ -211,8 +212,8 @@ const id: SiteContent = {
         imageAlt: 'Botol ARTIC 330 ml',
         specs: [
           { label: 'Volume', value: '330 ml' },
-          { label: 'Kemasan', value: 'Botol PET' },
-          { label: 'Isi per karton', value: 'Menyusul' },
+          { label: 'Kemasan', value: 'Botol' },
+          { label: 'Isi per karton', value: '24 botol' },
         ],
       },
       {
@@ -223,8 +224,8 @@ const id: SiteContent = {
         imageAlt: 'Botol ARTIC 600 ml',
         specs: [
           { label: 'Volume', value: '600 ml' },
-          { label: 'Kemasan', value: 'Botol PET' },
-          { label: 'Isi per karton', value: 'Menyusul' },
+          { label: 'Kemasan', value: 'Botol' },
+          { label: 'Isi per karton', value: '24 botol' },
         ],
       },
       {
@@ -378,7 +379,7 @@ const id: SiteContent = {
     description: 'Air minum dalam kemasan ARTIC oleh PT. Transwater Roberi Indonesia.',
     menuTitle: 'Menu',
     certTitle: 'Legalitas',
-    certifications: ['Merek ARTIC terdaftar DJKI: IDM000818024', 'BPOM: menyusul', 'Halal: menyusul', 'SNI: menyusul', 'ISO: menyusul'],
+    certifications: ['Merek ARTIC terdaftar DJKI: IDM000818024', 'BPOM botol: MD 265228003693', 'BPOM galon: MD 265228001693', 'Halal: menyusul', 'SNI: menyusul', 'ISO: menyusul'],
     rights: 'Hak cipta dilindungi.',
     credit: 'Website oleh',
     privacy: 'Kebijakan Privasi',
@@ -418,7 +419,8 @@ const en: SiteContent = {
     title: 'Legality & certification',
     items: [
       { label: 'DJKI', status: 'Registered trademark · IDM000818024' },
-      { label: 'BPOM', status: 'Number pending' },
+      { label: 'BPOM', status: 'MD 265228003693 (bottle)' },
+      { label: 'BPOM', status: 'MD 265228001693 (gallon)' },
       { label: 'Halal', status: 'Number pending' },
       { label: 'SNI', status: 'Number pending' },
       { label: 'ISO', status: 'Number pending' },
@@ -438,8 +440,8 @@ const en: SiteContent = {
         imageAlt: 'ARTIC 330 ml bottle',
         specs: [
           { label: 'Volume', value: '330 ml' },
-          { label: 'Packaging', value: 'PET bottle' },
-          { label: 'Units per carton', value: 'Coming soon' },
+          { label: 'Packaging', value: 'Bottle' },
+          { label: 'Units per carton', value: '24 bottles' },
         ],
       },
       {
@@ -450,8 +452,8 @@ const en: SiteContent = {
         imageAlt: 'ARTIC 600 ml bottle',
         specs: [
           { label: 'Volume', value: '600 ml' },
-          { label: 'Packaging', value: 'PET bottle' },
-          { label: 'Units per carton', value: 'Coming soon' },
+          { label: 'Packaging', value: 'Bottle' },
+          { label: 'Units per carton', value: '24 bottles' },
         ],
       },
       {
@@ -605,7 +607,7 @@ const en: SiteContent = {
     description: 'ARTIC bottled drinking water by PT. Transwater Roberi Indonesia.',
     menuTitle: 'Menu',
     certTitle: 'Legality',
-    certifications: ['ARTIC trademark registered (DGIP): IDM000818024', 'BPOM: pending', 'Halal: pending', 'SNI: pending', 'ISO: pending'],
+    certifications: ['ARTIC trademark registered (DGIP): IDM000818024', 'BPOM bottle: MD 265228003693', 'BPOM gallon: MD 265228001693', 'Halal: pending', 'SNI: pending', 'ISO: pending'],
     rights: 'All rights reserved.',
     credit: 'Website by',
     privacy: 'Privacy Policy',

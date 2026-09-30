@@ -45,7 +45,7 @@ export default function Hero({ c }: { c: SiteContent }) {
           </dl>
         </div>
 
-        <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-[2rem] bg-water-100 p-3 lg:max-w-md">
+        <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-[2rem] bg-gradient-to-b from-[#cde3f6] to-[#98bfe2] p-3 lg:max-w-md">
           <Image
             src="/images/floating.png"
             alt="Botol ARTIC"
