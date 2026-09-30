@@ -9,6 +9,12 @@ import { defaultContent, type Locale, type SiteContent } from '../src/lib/conten
 //   npm run seed                   -> isi data awal hanya jika belum ada produk
 //   SEED_RESET=1 npm run seed      -> hapus SEMUA produk & media, lalu isi ulang (akun user TIDAK disentuh)
 const reset = process.env.SEED_RESET === '1'
+
+// Pengaman: seed dengan reset menghapus produk & foto. Di produksi (server sungguhan) harus disengaja.
+if (process.env.NODE_ENV === 'production' && process.env.ALLOW_PROD_SEED !== '1') {
+  console.error('Seed ditolak di produksi. Untuk isi awal server baru: ALLOW_PROD_SEED=1 npm run seed (jangan pakai SEED_RESET=1 setelah ada konten asli).')
+  process.exit(1)
+}
 const root = process.cwd()
 
 const payload = await getPayload({ config })
