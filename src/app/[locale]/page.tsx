@@ -8,6 +8,7 @@ import Header from '@/components/site/Header'
 import Hero from '@/components/site/Hero'
 import TrustBar from '@/components/site/TrustBar'
 import Products from '@/components/site/Products'
+import BrandVideo from '@/components/site/BrandVideo'
 import Benefits from '@/components/site/Benefits'
 import Segments from '@/components/site/Segments'
 import Process from '@/components/site/Process'
@@ -38,6 +39,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <Hero c={c} />
         <TrustBar c={c} />
         <Products c={c} />
+        <BrandVideo c={c} />
         <Benefits c={c} />
         <Segments c={c} />
         <Process c={c} />

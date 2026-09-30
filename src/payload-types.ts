@@ -599,7 +599,7 @@ export interface HomePage {
     /**
      * Pilih tampilan bagian paling atas Beranda. Perubahan langsung tampil setelah disimpan.
      */
-    style?: ('banner' | 'mountain' | 'forest') | null;
+    style?: ('banner' | 'mountain' | 'forest' | 'photo') | null;
     eyebrow?: string | null;
     title: string;
     description?: string | null;
@@ -613,6 +613,12 @@ export interface HomePage {
           id?: string | null;
         }[]
       | null;
+  };
+  videoSection?: {
+    enabled?: boolean | null;
+    eyebrow?: string | null;
+    title?: string | null;
+    text?: string | null;
   };
   trust?: {
     title?: string | null;
@@ -823,6 +829,14 @@ export interface HomePageSelect<T extends boolean = true> {
               label?: T;
               id?: T;
             };
+      };
+  videoSection?:
+    | T
+    | {
+        enabled?: T;
+        eyebrow?: T;
+        title?: T;
+        text?: T;
       };
   trust?:
     | T

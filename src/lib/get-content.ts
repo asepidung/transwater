@@ -73,11 +73,17 @@ export async function getSiteContent(localeParam: string): Promise<SiteContent> 
         instagram: text(settings.instagramUrl, d.company.instagram),
       },
       hero: {
-        style: (['banner', 'mountain', 'forest'] as const).find((s) => s === home.hero?.style) ?? d.hero.style,
+        style: (['banner', 'mountain', 'forest', 'photo'] as const).find((s) => s === home.hero?.style) ?? d.hero.style,
         eyebrow: text(home.hero?.eyebrow, d.hero.eyebrow),
         title: text(home.hero?.title, d.hero.title),
         description: text(home.hero?.description, d.hero.description),
         facts: rows(home.hero?.facts, (f) => ({ value: f.value, label: f.label }), d.hero.facts),
+      },
+      videoSection: {
+        enabled: home.videoSection?.enabled !== false,
+        eyebrow: text(home.videoSection?.eyebrow, d.videoSection.eyebrow),
+        title: text(home.videoSection?.title, d.videoSection.title),
+        text: text(home.videoSection?.text, d.videoSection.text),
       },
       trust: {
         title: text(home.trust?.title, d.trust.title),

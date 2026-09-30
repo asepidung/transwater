@@ -32,12 +32,13 @@ export interface SiteContent {
   cta: { quote: string; chat: string; whatsappMessage: string }
   lang: { other: Locale; label: string }
   hero: {
-    style: 'banner' | 'mountain' | 'forest'
+    style: 'banner' | 'mountain' | 'forest' | 'photo'
     eyebrow: string
     title: string
     description: string
     facts: { value: string; label: string }[]
   }
+  videoSection: { enabled: boolean; eyebrow: string; title: string; text: string }
   trust: { title: string; items: { label: string; status: string }[] }
   products: {
     eyebrow: string
@@ -199,6 +200,12 @@ const id: SiteContent = {
       { value: '330 ml - 19 L', label: 'rentang ukuran' },
       { value: 'Bogor', label: 'Jawa Barat' },
     ],
+  },
+  videoSection: {
+    enabled: true,
+    eyebrow: 'Sekilas ARTIC',
+    title: 'Segar dari sumbernya',
+    text: 'Air minum dalam kemasan ARTIC diproduksi di Cileungsi, Bogor, dengan pengolahan bertahap dan kontrol kualitas di setiap tahap.',
   },
   trust: {
     title: 'Legalitas & sertifikasi',
@@ -456,6 +463,12 @@ const en: SiteContent = {
       { value: '330 ml - 19 L', label: 'size range' },
       { value: 'Bogor', label: 'West Java' },
     ],
+  },
+  videoSection: {
+    enabled: true,
+    eyebrow: 'A glimpse of ARTIC',
+    title: 'Fresh from the source',
+    text: 'ARTIC bottled drinking water is produced in Cileungsi, Bogor, with step-by-step treatment and quality control at every stage.',
   },
   trust: {
     title: 'Legality & certification',

@@ -36,6 +36,7 @@ export const HomePage: GlobalConfig = {
                 { label: 'Banner hutan & sungai (melebar)', value: 'banner' },
                 { label: 'Panel gunung & cipratan air', value: 'mountain' },
                 { label: 'Panel hutan', value: 'forest' },
+                { label: 'Foto produk (panel foto sungai & gunung)', value: 'photo' },
               ],
               admin: { description: 'Pilih tampilan bagian paling atas Beranda. Perubahan langsung tampil setelah disimpan.' },
             },
@@ -53,6 +54,21 @@ export const HomePage: GlobalConfig = {
                 { name: 'label', type: 'text', required: true, localized: true, label: 'Keterangan' },
               ],
             },
+          ],
+        },
+        {
+          label: 'Video',
+          name: 'videoSection',
+          fields: [
+            {
+              name: 'enabled',
+              type: 'checkbox',
+              label: 'Tampilkan bagian video di Beranda',
+              defaultValue: true,
+            },
+            { name: 'eyebrow', type: 'text', localized: true, label: 'Label kecil di atas judul' },
+            { name: 'title', type: 'text', localized: true, label: 'Judul' },
+            { name: 'text', type: 'textarea', localized: true, label: 'Deskripsi' },
           ],
         },
         {

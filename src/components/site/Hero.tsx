@@ -8,6 +8,7 @@ import { asset } from '@/lib/site'
 //  - banner   : foto hutan & sungai melebar sebagai latar, produk di kanan
 //  - mountain : panel biru dengan gunung samar + cipratan air asli
 //  - forest   : panel foto hutan yang dilunakkan
+//  - photo    : foto produk resmi (sungai & gunung) sebagai kartu di kanan
 export default function Hero({ c }: { c: SiteContent }) {
   const wa = whatsappLink(c.company.whatsapp, c.cta.whatsappMessage)
   const style = c.hero.style
@@ -99,6 +100,17 @@ export default function Hero({ c }: { c: SiteContent }) {
               priority
               sizes="(min-width: 1024px) 512px, 90vw"
               className="h-auto w-full drop-shadow-[0_24px_28px_rgba(20,40,80,0.28)] motion-safe:animate-wave-float"
+            />
+          </div>
+        ) : style === 'photo' ? (
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[2rem] bg-water-100 shadow-[0_24px_48px_-16px_rgba(20,40,80,0.35)] lg:max-w-md">
+            <Image
+              src={asset('/images/hero-photo.webp')}
+              alt="Botol 330 ml, 600 ml, dan galon 19 liter ARTIC di sungai pegunungan"
+              fill
+              priority
+              sizes="(min-width: 1024px) 448px, 90vw"
+              className="object-cover"
             />
           </div>
         ) : (
