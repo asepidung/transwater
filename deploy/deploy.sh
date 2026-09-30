@@ -2,6 +2,7 @@
 # Deploy di server (dijalankan sebagai user situs di folder aplikasi):
 #   bash deploy/deploy.sh            # deploy branch dari BRANCH (default main)
 #   BRANCH=feat/payload-cms bash deploy/deploy.sh
+#   RESEED=1 bash deploy/deploy.sh   # HANYA jika konten belum pernah diedit: isi ulang teks dari kode
 # Urutan sengaja begini: ambil kode -> pasang dependensi -> BACKUP -> migrasi DB -> build -> reload.
 # Build membaca database (halaman statis dibuat dari konten CMS), jadi migrasi HARUS sebelum build.
 set -euo pipefail
@@ -37,6 +38,10 @@ npm run migrate
 if [ "$FIRST_RUN" = "1" ]; then
   echo "-- Deploy pertama: isi data awal (produk, foto, teks) sebelum build"
   ALLOW_PROD_SEED=1 npm run seed
+fi
+if [ "${RESEED:-0}" = "1" ] && [ "$FIRST_RUN" != "1" ]; then
+  echo "-- RESEED=1: isi ulang produk, foto, dan SEMUA teks halaman dari kode (menimpa suntingan di admin!)"
+  SEED_RESET=1 ALLOW_PROD_SEED=1 npm run seed
 fi
 
 echo "== 5/6 Build"
