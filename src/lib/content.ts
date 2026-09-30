@@ -32,6 +32,7 @@ export interface SiteContent {
   cta: { quote: string; chat: string; whatsappMessage: string }
   lang: { other: Locale; label: string }
   hero: {
+    style: 'banner' | 'mountain' | 'forest'
     eyebrow: string
     title: string
     description: string
@@ -188,6 +189,7 @@ const id: SiteContent = {
   },
   lang: { other: 'en', label: 'EN' },
   hero: {
+    style: 'banner',
     eyebrow: 'Air minum dalam kemasan untuk bisnis',
     title: 'Air mineral ARTIC untuk kebutuhan bisnis Anda',
     description:
@@ -444,6 +446,7 @@ const en: SiteContent = {
   },
   lang: { other: 'id', label: 'ID' },
   hero: {
+    style: 'banner',
     eyebrow: 'Bottled drinking water for business',
     title: 'ARTIC mineral water for your business needs',
     description:

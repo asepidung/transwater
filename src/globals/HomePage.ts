@@ -27,6 +27,18 @@ export const HomePage: GlobalConfig = {
           label: 'Hero',
           name: 'hero',
           fields: [
+            {
+              name: 'style',
+              type: 'select',
+              label: 'Gaya tampilan hero',
+              defaultValue: 'banner',
+              options: [
+                { label: 'Banner hutan & sungai (melebar)', value: 'banner' },
+                { label: 'Panel gunung & cipratan air', value: 'mountain' },
+                { label: 'Panel hutan', value: 'forest' },
+              ],
+              admin: { description: 'Pilih tampilan bagian paling atas Beranda. Perubahan langsung tampil setelah disimpan.' },
+            },
             { name: 'eyebrow', type: 'text', localized: true, label: 'Label kecil' },
             { name: 'title', type: 'text', localized: true, required: true, label: 'Judul utama' },
             { name: 'description', type: 'textarea', localized: true, label: 'Deskripsi' },

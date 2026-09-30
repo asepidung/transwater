@@ -596,6 +596,10 @@ export interface SiteSetting {
 export interface HomePage {
   id: number;
   hero: {
+    /**
+     * Pilih tampilan bagian paling atas Beranda. Perubahan langsung tampil setelah disimpan.
+     */
+    style?: ('banner' | 'mountain' | 'forest') | null;
     eyebrow?: string | null;
     title: string;
     description?: string | null;
@@ -808,6 +812,7 @@ export interface HomePageSelect<T extends boolean = true> {
   hero?:
     | T
     | {
+        style?: T;
         eyebrow?: T;
         title?: T;
         description?: T;
