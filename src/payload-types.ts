@@ -599,7 +599,7 @@ export interface HomePage {
     /**
      * Pilih tampilan bagian paling atas Beranda. Perubahan langsung tampil setelah disimpan.
      */
-    style?: ('banner' | 'mountain' | 'forest' | 'photo') | null;
+    style?: ('banner' | 'lake' | 'mountain' | 'forest' | 'photo') | null;
     eyebrow?: string | null;
     title: string;
     description?: string | null;

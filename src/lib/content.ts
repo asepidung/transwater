@@ -32,7 +32,7 @@ export interface SiteContent {
   cta: { quote: string; chat: string; whatsappMessage: string }
   lang: { other: Locale; label: string }
   hero: {
-    style: 'banner' | 'mountain' | 'forest' | 'photo'
+    style: 'banner' | 'lake' | 'mountain' | 'forest' | 'photo'
     eyebrow: string
     title: string
     description: string

@@ -5,6 +5,7 @@ import { Ridge, Wave } from './Decor'
 import { asset } from '@/lib/site'
 
 // Tiga gaya hero, dipilih dari admin (Isi Halaman Utama > Hero > Gaya tampilan hero):
+//  - lake     : banner danau jernih & pegunungan berkabut (biru), produk di kanan
 //  - banner   : foto hutan & sungai melebar sebagai latar, produk di kanan
 //  - mountain : panel biru dengan gunung samar + cipratan air asli
 //  - forest   : panel foto hutan yang dilunakkan
@@ -12,7 +13,8 @@ import { asset } from '@/lib/site'
 export default function Hero({ c }: { c: SiteContent }) {
   const wa = whatsappLink(c.company.whatsapp, c.cta.whatsappMessage)
   const style = c.hero.style
-  const banner = style === 'banner'
+  const lake = style === 'lake'
+  const banner = style === 'banner' || lake
 
   return (
     <section
@@ -23,14 +25,16 @@ export default function Hero({ c }: { c: SiteContent }) {
         <>
           {/* <picture> memuat HANYA satu file sesuai layar (lebar untuk desktop, tinggi untuk HP) */}
           <picture>
-            <source media="(min-width: 1024px)" srcSet={asset('/images/hero-bg-wide.webp')} />
+            <source media="(min-width: 1024px)" srcSet={asset(lake ? '/images/hero-lake-wide.webp' : '/images/hero-bg-wide.webp')} />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={asset('/images/hero-bg-tall.webp')}
+              src={asset(lake ? '/images/hero-lake-tall.webp' : '/images/hero-bg-tall.webp')}
               alt=""
               aria-hidden
               fetchPriority="high"
-              className="absolute inset-0 -z-20 h-full w-full object-cover object-center lg:object-[60%_35%]"
+              className={`absolute inset-0 -z-20 h-full w-full object-cover ${
+                lake ? 'object-bottom lg:object-[70%_75%]' : 'object-center lg:object-[60%_35%]'
+              }`}
             />
           </picture>
           <div

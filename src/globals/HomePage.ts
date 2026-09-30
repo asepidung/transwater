@@ -34,6 +34,7 @@ export const HomePage: GlobalConfig = {
               defaultValue: 'banner',
               options: [
                 { label: 'Banner hutan & sungai (melebar)', value: 'banner' },
+                { label: 'Banner danau & pegunungan (melebar)', value: 'lake' },
                 { label: 'Panel gunung & cipratan air', value: 'mountain' },
                 { label: 'Panel hutan', value: 'forest' },
                 { label: 'Foto produk (panel foto sungai & gunung)', value: 'photo' },
