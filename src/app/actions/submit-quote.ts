@@ -3,6 +3,7 @@
 import { headers } from 'next/headers'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { getSiteContent } from '@/lib/get-content'
 
 export type QuoteResult = { ok: true } | { ok: false }
 
@@ -29,6 +30,16 @@ const esc = (v: string) =>
 // Hilangkan baris baru dari teks yang masuk ke header email (cegah header injection).
 const clean = (v: string) => v.replace(/\s+/g, ' ')
 
+// Nomor Indonesia -> tautan wa.me (08xx -> 628xx). Kembalikan null jika bentuknya tidak jelas.
+function waLink(contact: string): string | null {
+  const d = contact.replace(/\D/g, '')
+  let n: string | null = null
+  if (d.startsWith('62')) n = d
+  else if (d.startsWith('0')) n = `62${d.slice(1)}`
+  else if (d.startsWith('8')) n = `62${d}`
+  return n && n.length >= 10 && n.length <= 15 ? `https://wa.me/${n}` : null
+}
+
 function field(fd: FormData, key: keyof typeof MAX) {
   const v = fd.get(key)
   return typeof v === 'string' ? v.trim().slice(0, MAX[key]) : ''
@@ -53,7 +64,14 @@ export async function submitQuote(fd: FormData): Promise<QuoteResult> {
 
   try {
     const payload = await getPayload({ config })
-    const product = field(fd, 'product')
+    // Simpan nama produk yang terbaca manusia (bukan kode teknis), dalam bahasa Indonesia
+    // karena tim yang membaca pesan memakai bahasa itu.
+    const site = await getSiteContent('id')
+    const rawProduct = field(fd, 'product')
+    const product =
+      rawProduct === 'other'
+        ? site.quote.form.productOther
+        : (site.products.items.find((p) => p.id === rawProduct)?.name ?? rawProduct)
     const volume = field(fd, 'volume')
     const message = field(fd, 'message')
     await payload.create({
@@ -75,14 +93,22 @@ export async function submitQuote(fd: FormData): Promise<QuoteResult> {
           ['Catatan', message || '-'],
           ['Bahasa halaman', locale],
         ]
+        const wa = waLink(contact)
+        const adminUrl = `${(process.env.NEXT_PUBLIC_SITE_URL || '').replace(/\/+$/, '')}/admin/collections/messages`
+        const link = (href: string, label: string) => `<a href="${esc(href)}" style="color:#303860">${esc(label)}</a>`
         await payload.sendEmail({
           to: to.split(',').map((a) => a.trim()).filter(Boolean),
           subject: `[ARTIC] Permintaan penawaran baru: ${clean(company)}`,
-          text: rows.map(([k, v]) => `${k}: ${v}`).join('\n') + '\n\nLihat semua pesan di panel admin > Pesan Masuk.',
+          text:
+            rows.map(([k, v]) => `${k}: ${v}`).join('\n') +
+            (wa ? `\n\nBalas via WhatsApp: ${wa}` : '') +
+            `\nLihat semua pesan: ${adminUrl}`,
           html:
             '<table cellpadding="6" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">' +
             rows.map(([k, v]) => `<tr><td style="color:#555"><b>${esc(k)}</b></td><td>${esc(v)}</td></tr>`).join('') +
-            '</table><p style="font-family:sans-serif;font-size:13px;color:#555">Lihat semua pesan di panel admin &gt; Pesan Masuk.</p>',
+            '</table><p style="font-family:sans-serif;font-size:14px">' +
+            (wa ? `${link(wa, 'Balas via WhatsApp')} &nbsp;·&nbsp; ` : '') +
+            `${link(adminUrl, 'Buka Pesan Masuk di panel admin')}</p>`,
         })
       } catch (err) {
         console.error('[submitQuote] email notifikasi gagal terkirim', err)
