@@ -46,15 +46,27 @@ export default function Hero({ c }: { c: SiteContent }) {
           </dl>
         </div>
 
-        <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-[2rem] bg-gradient-to-b from-[#cde3f6] to-[#98bfe2] p-3 lg:max-w-md">
+        <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-[2rem] bg-gradient-to-b from-[#d6e9f8] to-[#a0c7e8] p-3 lg:max-w-md">
+          {/* Gunung samar (dua lapis) dan cipratan air asli di dasar panel */}
+          <Ridge className="absolute inset-x-0 top-[26%] h-[36%] text-white opacity-30" />
+          <Ridge className="absolute inset-x-0 top-[40%] h-[30%] translate-x-[-6%] scale-x-110 text-white opacity-25" />
+          <Image
+            src={asset('/images/hero-splash.webp')}
+            alt=""
+            aria-hidden
+            width={1300}
+            height={970}
+            sizes="(min-width: 1024px) 530px, 110vw"
+            className="pointer-events-none absolute left-1/2 top-[46.8%] w-[118%] max-w-none -translate-x-1/2"
+          />
           <Image
             src={asset('/images/floating.png')}
-            alt="Botol ARTIC"
+            alt="Botol dan galon ARTIC"
             width={800}
             height={800}
             priority
             sizes="(min-width: 1024px) 448px, 90vw"
-            className="h-full w-full object-contain motion-safe:animate-wave-float"
+            className="relative z-10 h-full w-full object-contain motion-safe:animate-wave-float"
           />
         </div>
       </div>
