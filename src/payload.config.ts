@@ -53,6 +53,10 @@ export default buildConfig({
     user: Users.slug,
     importMap: { baseDir: path.resolve(dirname) },
     meta: { titleSuffix: '- ARTIC CMS' },
+    components: {
+      // Ikon mata (lihat/sembunyikan password) di semua kolom password panel admin
+      providers: ['/components/admin/PasswordToggle#PasswordToggle'],
+    },
   },
   collections: [Users, Media, Products, Posts, Messages],
   globals: [SiteSettings, HomePage, AboutPage, InfoPages],
