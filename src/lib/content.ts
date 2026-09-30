@@ -62,6 +62,12 @@ export interface SiteContent {
     description: string
     storyTitle: string
     story: string[]
+    expertiseTitle: string
+    expertise: string[]
+    visionTitle: string
+    vision: string
+    missionTitle: string
+    mission: string
     valuesTitle: string
     values: { title: string; text: string }[]
     legalTitle: string
@@ -79,6 +85,11 @@ export interface SiteContent {
     legalNote: string
     ctaTitle: string
     ctaText: string
+  }
+  qualityGallery: {
+    title: string
+    intro: string
+    items: { file: string; alt: string; caption: string }[]
   }
   orderPage: {
     eyebrow: string
@@ -255,19 +266,29 @@ const id: SiteContent = {
   },
   about: {
     eyebrow: 'Tentang kami',
-    title: 'Pemasok air minum kemasan untuk bisnis',
+    title: 'Produsen air minum dalam kemasan ARTIC',
     description:
-      'PT. Transwater Roberi Indonesia memproduksi dan memasok air minum dalam kemasan ARTIC untuk kebutuhan perusahaan, kantor, dan usaha di wilayah Jabodetabek.',
+      'PT. Transwater Roberi Indonesia, didirikan pada 2017, memproduksi air minum dalam kemasan (AMDK) ARTIC di Cileungsi, Kabupaten Bogor, untuk kebutuhan bisnis dan masyarakat.',
     storyTitle: 'Siapa kami',
     story: [
-      'PT. Transwater Roberi Indonesia berkantor di Cileungsi, Kabupaten Bogor. Kami melayani pelanggan bisnis yang butuh pasokan air minum kemasan secara rutin, dalam kemasan botol dan galon.',
-      'Kami fokus pada hal yang paling penting bagi pelanggan bisnis: kualitas yang konsisten, pengiriman tepat waktu, dan komunikasi yang mudah.',
+      'PT. Transwater Roberi Indonesia, didirikan pada 2017, adalah perusahaan air minum dalam kemasan (AMDK) yang menyediakan air mineral, air alkali (pH tinggi), dan air alkali elektron. Kami berkomitmen menjaga kualitas produk dengan proses produksi yang mengacu pada Standar Nasional Indonesia (SNI 3553:2015).',
+      'Berbekal pengalaman bertahun-tahun di bidang AMDK, kami berdedikasi menyediakan solusi air minum berkualitas yang "Baik dan Benar" demi kesehatan bangsa.',
+      'Tim kami terdiri dari karyawan terlatih dan ahli di bidangnya. Kami fokus pada keunggulan produk dan inovasi berkelanjutan, serta menciptakan lingkungan kerja yang asri, aman, dan nyaman.',
     ],
-    valuesTitle: 'Yang kami pegang',
+    expertiseTitle: 'Keahlian kami',
+    expertise: ['Reverse Osmosis (RO)', 'Air mineral (Mineral Water)', 'Air alkali (pH tinggi)', 'Air alkali elektron'],
+    visionTitle: 'Visi',
+    vision:
+      'Menjadi perusahaan pembuat air minum dalam kemasan (AMDK) "Baik dan Benar" untuk konsumsi Indonesia yang sehat, dan meraih pasar internasional.',
+    missionTitle: 'Misi',
+    mission:
+      'Menyediakan air minum "Baik dan Benar" dengan teknologi modern untuk masyarakat Indonesia demi kesehatan yang terdepan dan terpercaya. Membangun citra merek dan layanan yang tak tertandingi, serta menjalin kemitraan yang menguntungkan bagi semua pihak terkait.',
+    valuesTitle: 'Nilai perusahaan',
     values: [
-      { title: 'Kualitas konsisten', text: 'Produk diproduksi dengan standar yang sama dari satu pengiriman ke pengiriman berikutnya.' },
-      { title: 'Tepat waktu', text: 'Jadwal pengiriman disepakati di awal dan kami berusaha memenuhinya.' },
-      { title: 'Mudah dihubungi', text: 'Satu jalur komunikasi yang jelas lewat WhatsApp, telepon, atau formulir penawaran.' },
+      { title: 'Integritas', text: 'Integritas yang didasari kejujuran.' },
+      { title: 'Kemitraan', text: 'Langkah kemitraan yang berjangka panjang.' },
+      { title: 'Profesional', text: 'Energi yang berdaya untuk tim yang profesional.' },
+      { title: 'Pertumbuhan', text: 'Gelora pertumbuhan untuk kesehatan bangsa Indonesia yang sehat.' },
     ],
     legalTitle: 'Legalitas & sertifikasi',
     ctaTitle: 'Ingin bekerja sama?',
@@ -279,21 +300,38 @@ const id: SiteContent = {
   },
   quality: {
     eyebrow: 'Kualitas',
-    title: 'Kualitas yang bisa Anda andalkan',
+    title: 'Kontrol kualitas di setiap tahap produksi',
     description:
-      'Bagi pelanggan bisnis, air minum harus aman dan konsisten dari satu pengiriman ke pengiriman berikutnya. Berikut hal yang kami jaga.',
-    pillarsTitle: 'Yang kami jaga',
+      'Kami menerapkan kontrol kualitas yang ketat, mulai dari pengujian sumber air sampai pengemasan dan penyimpanan.',
+    pillarsTitle: 'Yang kami lakukan',
     pillars: [
-      { title: 'Kemasan higienis', text: 'Botol dan galon disegel dan ditangani dengan prosedur kebersihan agar sampai ke pelanggan dalam kondisi baik.' },
-      { title: 'Konsistensi produk', text: 'Kami menjaga kualitas produk tetap sama antar pengiriman supaya pelanggan tidak perlu ragu.' },
-      { title: 'Penanganan pengiriman', text: 'Produk dikirim dan ditata dengan hati-hati untuk mengurangi risiko rusak atau bocor.' },
-      { title: 'Tanggapan cepat', text: 'Jika ada keluhan kualitas, hubungi kami dan tim akan menindaklanjuti.' },
+      { title: 'Pengujian sumber air', text: 'Proses dimulai dengan pengujian sumber air yang ketat.' },
+      { title: 'Pengolahan canggih', text: 'Air diolah untuk menghilangkan segala kemungkinan kontaminasi.' },
+      { title: 'Pengujian tambahan', text: 'Setelah pengolahan, dilakukan pengujian tambahan untuk memastikan air bebas dari kontaminasi.' },
+      { title: 'Kebersihan dan sterilisasi', text: 'Selama pengemasan, kebersihan dan sterilisasi dijaga.' },
+      { title: 'Kode batch untuk penelusuran', text: 'Setiap batch air kemasan diberi kode agar dapat ditelusuri.' },
+      { title: 'Audit rutin', text: 'Audit rutin memastikan kepatuhan dan penanganan cepat atas masalah.' },
     ],
     legalTitle: 'Legalitas & sertifikasi',
-    legalNote: 'Dokumen legalitas dan sertifikasi resmi akan ditampilkan di sini setelah diverifikasi. Untuk kebutuhan tender atau vendor, silakan minta salinan dokumen lewat formulir penawaran.',
+    legalNote:
+      'Nomor BPOM tercantum di atas. Sertifikat lain (SNI, Halal, ISO) akan ditampilkan setelah nomornya kami konfirmasi. Untuk kebutuhan tender atau vendor, silakan minta salinan dokumen lewat formulir penawaran.',
     ctaTitle: 'Butuh dokumen atau sampel?',
     ctaText: 'Hubungi kami dan sebutkan kebutuhan Anda.',
   },
+  qualityGallery: {
+    title: 'Dari pengolahan air sampai gudang',
+    intro: 'Foto fasilitas produksi PT. Transwater Roberi Indonesia di Cileungsi, Bogor.',
+    items: [
+      { file: 'filter', alt: 'Tangki penyaringan air', caption: 'Penyaringan air (water filter)' },
+      { file: 'alkali', alt: 'Tangki proses air alkali', caption: 'Proses air alkali' },
+      { file: 'ro', alt: 'Sistem reverse osmosis', caption: 'Sistem reverse osmosis (RO)' },
+      { file: 'filling-inside', alt: 'Mesin pengisian botol', caption: 'Mesin pengisian (filling machine)' },
+      { file: 'capped-label', alt: 'Botol berlabel ARTIC di jalur produksi', caption: 'Botol berlabel di jalur produksi' },
+      { file: 'packing', alt: 'Petugas mengemas botol ke dalam karton', caption: 'Pengemasan ke dalam karton' },
+      { file: 'warehouse', alt: 'Gudang produk jadi', caption: 'Gudang produk jadi' },
+    ],
+  },
+
   orderPage: {
     eyebrow: 'Cara pesan',
     title: 'Pesan air minum untuk bisnis Anda',
@@ -483,19 +521,29 @@ const en: SiteContent = {
   },
   about: {
     eyebrow: 'About us',
-    title: 'Bottled water supplier for businesses',
+    title: 'Maker of ARTIC bottled drinking water',
     description:
-      'PT. Transwater Roberi Indonesia produces and supplies ARTIC bottled drinking water for companies, offices, and businesses in the Greater Jakarta area.',
+      'PT. Transwater Roberi Indonesia, founded in 2017, produces ARTIC bottled drinking water in Cileungsi, Bogor Regency, for businesses and the public.',
     storyTitle: 'Who we are',
     story: [
-      'PT. Transwater Roberi Indonesia is based in Cileungsi, Bogor Regency. We serve business customers who need a regular supply of bottled water, in bottles and gallons.',
-      'We focus on what matters most to business customers: consistent quality, on-time delivery, and easy communication.',
+      'PT. Transwater Roberi Indonesia, founded in 2017, is a bottled drinking water company offering mineral water, alkaline water (high pH), and electrolyzed alkaline water. We are committed to product quality with production that follows the Indonesian National Standard (SNI 3553:2015).',
+      'With years of experience in bottled water, we are dedicated to providing quality drinking water that is "Good and Right" for the nation\'s health.',
+      'Our team consists of trained employees who are experts in their field. We focus on product excellence and continuous innovation, and we maintain a green, safe, and comfortable working environment.',
     ],
-    valuesTitle: 'What we stand for',
+    expertiseTitle: 'Our expertise',
+    expertise: ['Reverse Osmosis (RO)', 'Mineral water', 'Alkaline water (high pH)', 'Electrolyzed alkaline water'],
+    visionTitle: 'Vision',
+    vision:
+      'To become a bottled drinking water producer that is "Good and Right" for a healthy Indonesia, and to reach the international market.',
+    missionTitle: 'Mission',
+    mission:
+      'To provide "Good and Right" drinking water with modern technology for Indonesians, for leading and trusted health. To build an unmatched brand image and service, and to establish mutually beneficial partnerships with all related parties.',
+    valuesTitle: 'Company values',
     values: [
-      { title: 'Consistent quality', text: 'Products are made to the same standard from one delivery to the next.' },
-      { title: 'On time', text: 'Delivery schedules are agreed upfront and we work to meet them.' },
-      { title: 'Easy to reach', text: 'One clear channel via WhatsApp, phone, or the quote form.' },
+      { title: 'Integrity', text: 'Integrity grounded in honesty.' },
+      { title: 'Partnership', text: 'Long-term partnerships.' },
+      { title: 'Professional', text: 'Energy that empowers a professional team.' },
+      { title: 'Growth', text: 'Drive for growth toward a healthy Indonesia.' },
     ],
     legalTitle: 'Legality & certifications',
     ctaTitle: 'Want to work with us?',
@@ -507,21 +555,38 @@ const en: SiteContent = {
   },
   quality: {
     eyebrow: 'Quality',
-    title: 'Quality you can rely on',
+    title: 'Quality control at every stage of production',
     description:
-      'For business customers, drinking water must be safe and consistent from one delivery to the next. Here is what we look after.',
-    pillarsTitle: 'What we look after',
+      'We apply strict quality control, from testing the water source to packing and storage.',
+    pillarsTitle: 'What we do',
     pillars: [
-      { title: 'Hygienic packaging', text: 'Bottles and gallons are sealed and handled with hygiene procedures so they reach customers in good condition.' },
-      { title: 'Product consistency', text: 'We keep product quality the same between deliveries so customers never have to wonder.' },
-      { title: 'Delivery handling', text: 'Products are delivered and stacked carefully to reduce the risk of damage or leaks.' },
-      { title: 'Quick response', text: 'If you have a quality concern, contact us and the team will follow up.' },
+      { title: 'Water source testing', text: 'The process begins with strict testing of the water source.' },
+      { title: 'Advanced treatment', text: 'Water is treated to remove every possibility of contamination.' },
+      { title: 'Additional testing', text: 'After treatment, additional tests confirm the water is free from contamination.' },
+      { title: 'Hygiene and sterilization', text: 'Cleanliness and sterilization are maintained during packing.' },
+      { title: 'Batch codes for traceability', text: 'Every batch of bottled water is coded so it can be traced.' },
+      { title: 'Routine audits', text: 'Routine audits ensure compliance and quick handling of any issue.' },
     ],
     legalTitle: 'Legality & certifications',
-    legalNote: 'Official legal documents and certifications will be shown here once verified. For tender or vendor needs, please request copies through the quote form.',
+    legalNote:
+      'BPOM numbers are shown above. Other certificates (SNI, Halal, ISO) will be shown once their numbers are confirmed. For tender or vendor needs, please request copies through the quote form.',
     ctaTitle: 'Need documents or a sample?',
     ctaText: 'Contact us and tell us what you need.',
   },
+  qualityGallery: {
+    title: 'From water treatment to the warehouse',
+    intro: 'Photos of the PT. Transwater Roberi Indonesia production facility in Cileungsi, Bogor.',
+    items: [
+      { file: 'filter', alt: 'Water filtration tanks', caption: 'Water filtration' },
+      { file: 'alkali', alt: 'Alkaline water process tanks', caption: 'Alkaline water process' },
+      { file: 'ro', alt: 'Reverse osmosis system', caption: 'Reverse osmosis (RO) system' },
+      { file: 'filling-inside', alt: 'Bottle filling machine', caption: 'Filling machine' },
+      { file: 'capped-label', alt: 'ARTIC-labeled bottles on the production line', caption: 'Labeled bottles on the line' },
+      { file: 'packing', alt: 'Worker packing bottles into cartons', caption: 'Packing into cartons' },
+      { file: 'warehouse', alt: 'Finished goods warehouse', caption: 'Finished goods warehouse' },
+    ],
+  },
+
   orderPage: {
     eyebrow: 'How to order',
     title: 'Order drinking water for your business',

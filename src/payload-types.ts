@@ -686,6 +686,17 @@ export interface AboutPage {
           id?: string | null;
         }[]
       | null;
+    expertiseTitle?: string | null;
+    expertise?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    visionTitle?: string | null;
+    vision?: string | null;
+    missionTitle?: string | null;
+    mission?: string | null;
     valuesTitle?: string | null;
     values?:
       | {
@@ -895,6 +906,17 @@ export interface AboutPageSelect<T extends boolean = true> {
               text?: T;
               id?: T;
             };
+        expertiseTitle?: T;
+        expertise?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        visionTitle?: T;
+        vision?: T;
+        missionTitle?: T;
+        mission?: T;
         valuesTitle?: T;
         values?:
           | T

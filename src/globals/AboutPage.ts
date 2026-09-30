@@ -31,6 +31,17 @@ export const AboutPage: GlobalConfig = {
               label: 'Paragraf profil',
               fields: [{ name: 'text', type: 'textarea', required: true, localized: true, label: 'Paragraf' }],
             },
+            { name: 'expertiseTitle', type: 'text', localized: true, label: 'Judul bagian keahlian' },
+            {
+              name: 'expertise',
+              type: 'array',
+              label: 'Keahlian',
+              fields: [{ name: 'text', type: 'text', required: true, localized: true, label: 'Keahlian' }],
+            },
+            { name: 'visionTitle', type: 'text', localized: true, label: 'Judul Visi' },
+            { name: 'vision', type: 'textarea', localized: true, label: 'Visi' },
+            { name: 'missionTitle', type: 'text', localized: true, label: 'Judul Misi' },
+            { name: 'mission', type: 'textarea', localized: true, label: 'Misi' },
             { name: 'valuesTitle', type: 'text', localized: true, label: 'Judul bagian nilai' },
             {
               name: 'values',
