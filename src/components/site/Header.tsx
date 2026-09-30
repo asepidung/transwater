@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { Globe } from 'lucide-react'
 import type { SiteContent } from '@/lib/content'
 import MobileMenu from './MobileMenu'
+import { asset } from '@/lib/site'
 
 // switchPath: path halaman saat ini tanpa prefix bahasa (mis. '/produk'), agar
 // tombol bahasa pindah ke halaman yang sama, bukan ke Beranda.
@@ -11,7 +12,7 @@ export default function Header({ c, switchPath = '' }: { c: SiteContent; switchP
       <div className="relative mx-auto flex h-[68px] max-w-6xl items-center justify-between gap-6 px-5">
         <a href={`/${c.locale}`} className="flex shrink-0 items-center" aria-label={c.company.brand}>
           <Image
-            src="/images/logo.png"
+            src={asset('/images/logo.png')}
             alt="ARTIC Air Mineral"
             width={720}
             height={457}

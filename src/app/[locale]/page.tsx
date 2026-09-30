@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import { pageAlternates, siteUrl } from '@/lib/site'
+import { asset, pageAlternates, siteUrl } from '@/lib/site'
 import JsonLd from '@/components/site/JsonLd'
 import { getSiteContent } from '@/lib/get-content'
 import DraftBanner from '@/components/site/DraftBanner'
@@ -52,7 +52,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           name: c.company.name,
           alternateName: c.company.brand,
           url: siteUrl,
-          logo: `${siteUrl}/images/logo.png`,
+          logo: `${siteUrl}${asset('/images/logo.png')}`,
           sameAs: c.company.instagram ? [c.company.instagram] : undefined,
           address: { '@type': 'PostalAddress', streetAddress: c.company.address, addressCountry: 'ID' },
         }}

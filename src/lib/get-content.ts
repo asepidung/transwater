@@ -17,7 +17,11 @@ const isMedia = (value: unknown): value is Media => typeof value === 'object' &&
 
 function mediaUrl(media: unknown, fallback: string): string {
   if (!isMedia(media)) return fallback
-  return media.sizes?.card?.url ?? media.url ?? fallback
+  const url = media.sizes?.card?.url ?? media.url
+  if (!url) return fallback
+  // Versi = waktu file terakhir diubah, supaya foto yang diganti tidak tertahan di cache browser.
+  const v = media.updatedAt ? Date.parse(media.updatedAt) : 0
+  return v ? `${url}${url.includes('?') ? '&' : '?'}v=${v}` : url
 }
 
 export async function getSiteContent(localeParam: string): Promise<SiteContent> {

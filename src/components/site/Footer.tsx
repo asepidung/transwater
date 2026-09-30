@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import type { SiteContent } from '@/lib/content'
 import { Ridge } from './Decor'
+import { asset } from '@/lib/site'
 
 export default function Footer({ c }: { c: SiteContent }) {
   const f = c.footer
@@ -11,7 +12,7 @@ export default function Footer({ c }: { c: SiteContent }) {
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-3">
         <div>
           <span className="inline-flex rounded-xl bg-white px-3 py-2">
-            <Image src="/images/logo.png" alt="ARTIC Air Mineral" width={720} height={457} className="h-11 w-auto" />
+            <Image src={asset('/images/logo.png')} alt="ARTIC Air Mineral" width={720} height={457} className="h-11 w-auto" />
           </span>
           <p className="mt-4 max-w-xs text-sm leading-relaxed">{f.description}</p>
           {c.company.instagram && (

@@ -4,7 +4,7 @@ import { BadgeCheck, ShieldCheck } from 'lucide-react'
 import { setRequestLocale } from 'next-intl/server'
 import { getSiteContent } from '@/lib/get-content'
 import { routing } from '@/i18n/routing'
-import { pageAlternates } from '@/lib/site'
+import { asset, pageAlternates } from '@/lib/site'
 import DraftBanner from '@/components/site/DraftBanner'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
@@ -86,7 +86,7 @@ export default async function QualityPage({ params }: { params: Promise<{ locale
                     className={`relative aspect-[4/3] overflow-hidden rounded-2xl bg-water-100 shadow-sm lg:aspect-auto lg:min-h-[220px] ${TILE[i] ?? ''}`}
                   >
                     <Image
-                      src={`/images/pabrik/${item.file}.webp`}
+                      src={asset(`/images/pabrik/${item.file}.webp`)}
                       alt={item.alt}
                       fill
                       sizes={i === 0 ? '(min-width: 1024px) 552px, 100vw' : '(min-width: 1024px) 276px, (min-width: 640px) 50vw, 100vw'}

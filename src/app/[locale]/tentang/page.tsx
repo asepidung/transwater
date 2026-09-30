@@ -4,7 +4,7 @@ import { ShieldCheck } from 'lucide-react'
 import { setRequestLocale } from 'next-intl/server'
 import { getSiteContent } from '@/lib/get-content'
 import { routing } from '@/i18n/routing'
-import { pageAlternates } from '@/lib/site'
+import { asset, pageAlternates } from '@/lib/site'
 import DraftBanner from '@/components/site/DraftBanner'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
@@ -44,7 +44,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
             <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-2xl bg-water-100 shadow-sm sm:aspect-[21/9]">
               <Image
-                src="/images/pabrik/filling-far.webp"
+                src={asset('/images/pabrik/filling-far.webp')}
                 alt={c.qualityGallery.items[3]?.alt ?? ''}
                 fill
                 priority
@@ -67,7 +67,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             </div>
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-water-100 shadow-sm">
               <Image
-                src="/images/pabrik/packing.webp"
+                src={asset('/images/pabrik/packing.webp')}
                 alt={c.qualityGallery.items[5]?.alt ?? ''}
                 fill
                 sizes="(min-width: 1024px) 552px, 100vw"

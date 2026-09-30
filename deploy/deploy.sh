@@ -45,6 +45,8 @@ if [ "${RESEED:-0}" = "1" ] && [ "$FIRST_RUN" != "1" ]; then
 fi
 
 echo "== 5/6 Build"
+# Hapus cache pengoptimal gambar lama supaya foto yang diganti tidak tersaji dari salinan lama.
+rm -rf .next/cache/images
 npm run build
 
 echo "== 6/6 Restart aplikasi"

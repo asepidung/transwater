@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { MessageCircle } from 'lucide-react'
 import { whatsappLink, type SiteContent } from '@/lib/content'
 import { Ridge, Wave } from './Decor'
+import { asset } from '@/lib/site'
 
 export default function Hero({ c }: { c: SiteContent }) {
   const wa = whatsappLink(c.company.whatsapp, c.cta.whatsappMessage)
@@ -47,7 +48,7 @@ export default function Hero({ c }: { c: SiteContent }) {
 
         <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-[2rem] bg-gradient-to-b from-[#cde3f6] to-[#98bfe2] p-3 lg:max-w-md">
           <Image
-            src="/images/floating.png"
+            src={asset('/images/floating.png')}
             alt="Botol ARTIC"
             width={800}
             height={800}

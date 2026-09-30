@@ -4,7 +4,7 @@ import { Plus_Jakarta_Sans } from 'next/font/google'
 import { setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { getSiteContent } from '@/lib/get-content'
-import { allowIndexing, siteUrl } from '@/lib/site'
+import { allowIndexing, asset, siteUrl } from '@/lib/site'
 import '../globals.css'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       type: 'website',
       siteName: title,
       locale: locale === 'en' ? 'en_US' : 'id_ID',
-      images: [{ url: '/images/logo.png', alt: c.company.brand }],
+      images: [{ url: asset('/images/logo.png'), alt: c.company.brand }],
     },
     twitter: { card: 'summary' },
   }
