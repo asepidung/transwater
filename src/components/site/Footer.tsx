@@ -54,7 +54,7 @@ export default function Footer({ c }: { c: SiteContent }) {
       </div>
 
       <div className="border-t border-navy-800">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-5 text-xs text-navy-300 md:flex-row md:items-center md:justify-between">
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 pb-24 pt-5 text-xs text-navy-300 md:flex-row md:items-center md:justify-between lg:pb-5">
           <p>&copy; {new Date().getFullYear()} {c.company.name}. {f.rights}</p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <a href={`/${c.locale}/privasi`} className="hover:text-white">{f.privacy}</a>
