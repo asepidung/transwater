@@ -9,7 +9,7 @@ import DraftBanner from '@/components/site/DraftBanner'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import MobileCtaBar from '@/components/site/MobileCtaBar'
-import TrustPill from '@/components/site/TrustPill'
+import LegalityGrid from '@/components/site/LegalityGrid'
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -128,11 +128,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <h2 className="flex items-center gap-2 text-2xl font-extrabold text-navy-800">
                 <ShieldCheck className="h-6 w-6 text-gold-500" /> {a.legalTitle}
               </h2>
-              <ul className="mt-6 flex flex-wrap gap-3">
-                {c.trust.items.map((item) => (
-                  <TrustPill key={`${item.label}-${item.status}`} label={item.label} status={item.status} />
-                ))}
-              </ul>
+              <LegalityGrid items={c.trust.items} />
             </div>
           </section>
         )}
