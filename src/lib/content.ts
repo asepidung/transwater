@@ -24,6 +24,7 @@ export interface SiteContent {
     mapsUrl: string
     phone: string
     email: string
+    hours: string
     whatsapp: string
     instagram: string
   }
@@ -122,6 +123,7 @@ export interface SiteContent {
     addressTitle: string
     phoneTitle: string
     emailTitle: string
+    hoursTitle: string
     mapsLabel: string
     form: {
       company: string
@@ -156,11 +158,12 @@ export interface SiteContent {
 const company = {
   name: 'PT. Transwater Roberi Indonesia',
   brand: 'ARTIC',
-  address: 'Jl. Ciuncal No. RT.002/001, Cipeucang, Kec. Cileungsi, Kabupaten Bogor, Jawa Barat 16820',
+  address: 'Jl. Raya Cipeucang/Ciuncal No. 88 A, Cipeucang, Kec. Cileungsi, Kabupaten Bogor, Jawa Barat 16820',
   mapsUrl: 'https://maps.app.goo.gl/H3HvSkB4SLefVigU8',
-  // DUMMY sampai TRI kirim data resmi
-  phone: '(021) 555-8989',
-  email: 'info@articwater.co.id',
+  // Data resmi dari formulir requirement ARTIC (1 Okt 2026). Satu nomor dipakai untuk telepon dan WhatsApp.
+  phone: '+62 813-9964-1608',
+  email: 'transwaterroberi03.sn@gmail.com',
+  hours: '08.00 - 16.00 WIB',
   whatsapp: '6281399641608',
   instagram: 'https://www.instagram.com/articwater.id/',
 }
@@ -210,11 +213,12 @@ const id: SiteContent = {
   trust: {
     title: 'Legalitas & sertifikasi',
     items: [
+      { label: 'NIB', status: '9120106342207' },
       { label: 'DJKI', status: 'Merek terdaftar · IDM000818024' },
       { label: 'BPOM', status: 'MD 122882000900549 (botol)' },
       { label: 'BPOM', status: 'Galon: menyusul (perpanjangan diproses)' },
-      { label: 'Halal', status: 'Nomor menyusul' },
-      { label: 'SNI', status: 'Nomor menyusul' },
+      { label: 'Halal', status: 'BPJPH · ID00110007032150723' },
+      { label: 'SNI', status: 'Mengacu SNI 3553:2023 · sertifikat menyusul' },
       { label: 'ISO', status: 'Nomor menyusul' },
     ],
   },
@@ -280,7 +284,7 @@ const id: SiteContent = {
       'PT. Transwater Roberi Indonesia berdiri pada 2017 dan memproduksi air minum dalam kemasan ARTIC di Cileungsi, Bogor: botol 330 ml, 600 ml, dan galon 19 liter untuk bisnis maupun masyarakat.',
     storyTitle: 'Tentang perusahaan',
     story: [
-      'Kami adalah produsen air minum dalam kemasan (AMDK) yang berbasis di Cileungsi, Kabupaten Bogor. Selain air mineral ARTIC, kami menyediakan air alkali (pH tinggi) dan air alkali elektron.',
+      'Kami adalah produsen air minum dalam kemasan (AMDK) yang berbasis di Cileungsi, Kabupaten Bogor. Selain air mineral ARTIC, kami menyediakan air alkali (pH tinggi) dan air alkali elektron. Proses produksi kami mengacu pada SNI 3553:2023 untuk air mineral dan SNI 8982:2021 untuk air minum pH tinggi.',
       'Bagi pelanggan bisnis, air minum harus aman dan konsisten dari satu pengiriman ke pengiriman berikutnya. Karena itu setiap tahap, mulai dari pengolahan air sampai pengemasan, dijalankan dengan kontrol kualitas yang ketat.',
       'Di balik itu ada tim karyawan terlatih yang fokus pada mutu produk dan inovasi berkelanjutan, dalam lingkungan kerja yang asri, aman, dan nyaman.',
     ],
@@ -404,6 +408,7 @@ const id: SiteContent = {
     addressTitle: 'Alamat kantor',
     phoneTitle: 'Telepon',
     emailTitle: 'Email',
+    hoursTitle: 'Jam operasional',
     mapsLabel: 'Lihat di Google Maps',
     form: {
       company: 'Nama perusahaan',
@@ -427,7 +432,7 @@ const id: SiteContent = {
     description: 'Air minum dalam kemasan ARTIC oleh PT. Transwater Roberi Indonesia.',
     menuTitle: 'Menu',
     certTitle: 'Legalitas',
-    certifications: ['Merek ARTIC terdaftar DJKI: IDM000818024', 'BPOM botol: MD 122882000900549', 'BPOM galon: menyusul (perpanjangan diproses)', 'Halal: menyusul', 'SNI: menyusul', 'ISO: menyusul'],
+    certifications: ['NIB: 9120106342207', 'Merek ARTIC terdaftar DJKI: IDM000818024', 'BPOM botol: MD 122882000900549', 'BPOM galon: menyusul (perpanjangan diproses)', 'Halal BPJPH: ID00110007032150723', 'SNI 3553:2023: sertifikat menyusul', 'ISO: menyusul'],
     rights: 'Hak cipta dilindungi.',
     credit: 'Website oleh',
     privacy: 'Kebijakan Privasi',
@@ -473,11 +478,12 @@ const en: SiteContent = {
   trust: {
     title: 'Legality & certification',
     items: [
+      { label: 'NIB', status: '9120106342207' },
       { label: 'DJKI', status: 'Registered trademark · IDM000818024' },
       { label: 'BPOM', status: 'MD 122882000900549 (bottle)' },
       { label: 'BPOM', status: 'Gallon: pending (renewal in progress)' },
-      { label: 'Halal', status: 'Number pending' },
-      { label: 'SNI', status: 'Number pending' },
+      { label: 'Halal', status: 'BPJPH · ID00110007032150723' },
+      { label: 'SNI', status: 'Based on SNI 3553:2023 · certificate pending' },
       { label: 'ISO', status: 'Number pending' },
     ],
   },
@@ -543,7 +549,7 @@ const en: SiteContent = {
       'PT. Transwater Roberi Indonesia was founded in 2017 and produces ARTIC bottled drinking water in Cileungsi, Bogor: 330 ml and 600 ml bottles and 19-liter gallons for businesses and the public.',
     storyTitle: 'About the company',
     story: [
-      'We are a bottled drinking water producer based in Cileungsi, Bogor Regency. Besides ARTIC mineral water, we offer alkaline water (high pH) and electrolyzed alkaline water.',
+      'We are a bottled drinking water producer based in Cileungsi, Bogor Regency. Besides ARTIC mineral water, we offer alkaline water (high pH) and electrolyzed alkaline water. Our production is based on SNI 3553:2023 for mineral water and SNI 8982:2021 for high-pH drinking water.',
       'For business customers, drinking water has to be safe and consistent from one delivery to the next. That is why every stage, from water treatment to packing, runs under strict quality control.',
       'Behind it is a team of trained employees focused on product quality and continuous innovation, in a green, safe, and comfortable working environment.',
     ],
@@ -667,6 +673,7 @@ const en: SiteContent = {
     addressTitle: 'Office address',
     phoneTitle: 'Phone',
     emailTitle: 'Email',
+    hoursTitle: 'Opening hours',
     mapsLabel: 'View on Google Maps',
     form: {
       company: 'Company name',
@@ -690,7 +697,7 @@ const en: SiteContent = {
     description: 'ARTIC bottled drinking water by PT. Transwater Roberi Indonesia.',
     menuTitle: 'Menu',
     certTitle: 'Legality',
-    certifications: ['ARTIC trademark registered (DGIP): IDM000818024', 'BPOM bottle: MD 122882000900549', 'BPOM gallon: pending (renewal in progress)', 'Halal: pending', 'SNI: pending', 'ISO: pending'],
+    certifications: ['NIB: 9120106342207', 'ARTIC trademark registered (DGIP): IDM000818024', 'BPOM bottle: MD 122882000900549', 'BPOM gallon: pending (renewal in progress)', 'Halal BPJPH: ID00110007032150723', 'SNI 3553:2023: certificate pending', 'ISO: pending'],
     rights: 'All rights reserved.',
     credit: 'Website by',
     privacy: 'Privacy Policy',

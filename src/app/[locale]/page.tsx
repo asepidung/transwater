@@ -20,8 +20,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params
   const c = await getSiteContent(locale)
   return {
-    title: `${c.company.brand} - ${c.company.name}`,
-    description: c.hero.description,
+    // Nama brand publik dari ARTIC: "Artic Premium Mineral Water". Deskripsi disusun untuk pencarian
+    // "air mineral" / "AMDK" di Jabodetabek (pasar utama menurut formulir requirement).
+    title: `${c.company.brand} Premium Mineral Water - ${c.company.name}`,
+    description:
+      locale === 'en'
+        ? 'ARTIC mineral water (bottled drinking water): 330 ml and 600 ml bottles and 19-liter gallons for businesses in Greater Jakarta (Jabodetabek). Produced in Cileungsi, Bogor.'
+        : 'Air mineral ARTIC (AMDK): botol 330 ml, 600 ml, dan galon 19 liter untuk bisnis di Jabodetabek. Diproduksi di Cileungsi, Bogor. Minta penawaran lewat formulir atau WhatsApp.',
     alternates: pageAlternates(locale),
   }
 }
@@ -56,6 +61,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           url: siteUrl,
           logo: `${siteUrl}${asset('/images/logo.png')}`,
           sameAs: c.company.instagram ? [c.company.instagram] : undefined,
+          email: c.company.email,
+          telephone: c.company.phone,
           address: { '@type': 'PostalAddress', streetAddress: c.company.address, addressCountry: 'ID' },
         }}
       />

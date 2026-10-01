@@ -565,6 +565,10 @@ export interface SiteSetting {
   phone?: string | null;
   email?: string | null;
   /**
+   * Contoh: 08.00 - 16.00 WIB
+   */
+  hours?: string | null;
+  /**
    * Contoh: https://www.instagram.com/articwater.id/
    */
   instagramUrl?: string | null;
@@ -796,6 +800,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   mapsUrl?: T;
   phone?: T;
   email?: T;
+  hours?: T;
   instagramUrl?: T;
   whatsapp?: T;
   certifications?:

@@ -30,6 +30,7 @@ export const SiteSettings: GlobalConfig = {
         { name: 'mapsUrl', type: 'text', label: 'Link Google Maps' },
         { name: 'phone', type: 'text', label: 'Telepon' },
         { name: 'email', type: 'email', label: 'Email' },
+        { name: 'hours', type: 'text', label: 'Jam operasional', admin: { description: 'Contoh: 08.00 - 16.00 WIB' } },
         { name: 'instagramUrl', type: 'text', label: 'Link Instagram', admin: { description: 'Contoh: https://www.instagram.com/articwater.id/' } },
         {
           name: 'whatsapp',

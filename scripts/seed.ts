@@ -100,9 +100,10 @@ const settingsId = await payload.updateGlobal({
     brandName: id.company.brand,
     address: id.company.address,
     mapsUrl: id.company.mapsUrl,
-    // DUMMY sampai TRI kirim data resmi
+    // Data resmi dari formulir requirement ARTIC (1 Okt 2026)
     phone: id.company.phone,
     email: id.company.email,
+    hours: id.company.hours,
     whatsapp: id.company.whatsapp,
     footerDescription: id.footer.description,
     certifications: certs('id'),

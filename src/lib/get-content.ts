@@ -71,6 +71,7 @@ export async function getSiteContent(localeParam: string): Promise<SiteContent> 
         email: text(settings.email, d.company.email),
         whatsapp: text(settings.whatsapp, d.company.whatsapp),
         instagram: text(settings.instagramUrl, d.company.instagram),
+        hours: text(settings.hours, d.company.hours),
       },
       hero: {
         style: (['banner', 'lake', 'mountain', 'forest', 'photo'] as const).find((s) => s === home.hero?.style) ?? d.hero.style,
