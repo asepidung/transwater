@@ -1,3 +1,4 @@
+import { isSafeHttpUrl } from './validate'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { Media } from '@/payload-types'
@@ -12,6 +13,8 @@ const text = (value: string | null | undefined, fallback: string): string =>
 // Ambil array CMS jika punya isi, kalau kosong pakai bawaan.
 const rows = <T, R>(value: T[] | null | undefined, map: (row: T) => R, fallback: R[]): R[] =>
   Array.isArray(value) && value.length > 0 ? value.map(map) : fallback
+
+const safeUrl = (value: string | null | undefined, fallback: string) => (isSafeHttpUrl(value) ? value.trim() : fallback)
 
 const isMedia = (value: unknown): value is Media => typeof value === 'object' && value !== null && 'url' in value
 
@@ -51,7 +54,8 @@ export async function getSiteContent(localeParam: string): Promise<SiteContent> 
         id: p.slug,
         name: p.title,
         tagline: p.tagline ?? '',
-        image: mediaUrl(p.image, ''),
+        // Foto produk hilang (mis. media terhapus): pakai foto bawaan supaya halaman tidak rusak.
+        image: mediaUrl(p.image, d.products.items.find((i) => i.id === p.slug)?.image ?? d.products.items[0]?.image ?? ''),
         imageAlt: isMedia(p.image) ? p.image.alt : p.title,
         specs: (p.specs ?? []).map((s) => ({ label: s.label, value: s.value })),
       }),
@@ -66,11 +70,11 @@ export async function getSiteContent(localeParam: string): Promise<SiteContent> 
         name: text(settings.companyName, d.company.name),
         brand: text(settings.brandName, d.company.brand),
         address: text(settings.address, d.company.address),
-        mapsUrl: text(settings.mapsUrl, d.company.mapsUrl),
+        mapsUrl: safeUrl(settings.mapsUrl, d.company.mapsUrl),
         phone: text(settings.phone, d.company.phone),
         email: text(settings.email, d.company.email),
         whatsapp: text(settings.whatsapp, d.company.whatsapp),
-        instagram: text(settings.instagramUrl, d.company.instagram),
+        instagram: safeUrl(settings.instagramUrl, d.company.instagram),
         hours: text(settings.hours, d.company.hours),
       },
       hero: {
@@ -184,8 +188,10 @@ export async function getSiteContent(localeParam: string): Promise<SiteContent> 
       },
     }
   } catch (error) {
-    // CMS tidak terjangkau saat build/render: tampilkan teks bawaan, jangan gagalkan situs.
-    console.error('[getSiteContent] gagal membaca Payload, memakai teks bawaan:', error)
+    console.error('[getSiteContent] gagal membaca Payload:', error)
+    // Produksi: lempar error supaya build/revalidate gagal dan Next mempertahankan halaman lama,
+    // bukan menyimpan teks bawaan seolah-olah itu isi CMS. Dev: pakai teks bawaan agar tetap bisa dikerjakan.
+    if (process.env.NODE_ENV === 'production') throw error
     return d
   }
 }

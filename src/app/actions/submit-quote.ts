@@ -51,7 +51,9 @@ export async function submitQuote(fd: FormData): Promise<QuoteResult> {
   if (fd.get('website')) return { ok: true }
 
   const h = await headers()
-  const ip = h.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+  // Elemen TERAKHIR yang ditambahkan nginx (alamat asli). Elemen pertama bisa dipalsukan pengunjung.
+  const xff = h.get('x-forwarded-for')?.split(',').map((x) => x.trim()).filter(Boolean)
+  const ip = xff?.[xff.length - 1] || 'unknown'
   if (rateLimited(ip)) return { ok: false }
 
   const company = field(fd, 'company')

@@ -217,7 +217,7 @@ export interface Product {
   id: number;
   title: string;
   /**
-   * Huruf kecil, tanpa spasi. Contoh: artic-600ml
+   * Huruf kecil, angka, dan tanda hubung. Contoh: artic-600ml
    */
   slug: string;
   /**
@@ -598,6 +598,9 @@ export interface SiteSetting {
   companyName: string;
   brandName: string;
   address: string;
+  /**
+   * Harus diawali https://
+   */
   mapsUrl?: string | null;
   phone?: string | null;
   email?: string | null;
@@ -610,7 +613,7 @@ export interface SiteSetting {
    */
   instagramUrl?: string | null;
   /**
-   * Format internasional tanpa + atau spasi. Contoh: 6281234567890
+   * Boleh ditulis 0812-3456-7890 atau +62 812 3456 7890; situs mengubahnya ke format yang benar.
    */
   whatsapp?: string | null;
   /**

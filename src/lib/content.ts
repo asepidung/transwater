@@ -2,6 +2,8 @@
 // Konten yang tampil di situs dibaca dari Payload lewat lib/get-content.ts;
 // file ini jadi cadangan dan sumber seed. Teks UI tetap (label form dll) juga di sini.
 
+import { normalizeWhatsapp } from './validate'
+
 export type Locale = 'id' | 'en'
 
 export type IconName = 'package' | 'zap' | 'truck' | 'headset'
@@ -709,5 +711,5 @@ export function getDefaultContent(locale: string): SiteContent {
 }
 
 export function whatsappLink(number: string, message: string): string {
-  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`
+  return `https://wa.me/${normalizeWhatsapp(number)}?text=${encodeURIComponent(message)}`
 }

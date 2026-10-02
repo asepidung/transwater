@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { revalidateSite } from '../lib/revalidate'
+import { validateSlug } from '../lib/validate'
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -34,7 +35,8 @@ export const Products: CollectionConfig = {
       type: 'text',
       required: true,
       unique: true,
-      admin: { position: 'sidebar', description: 'Huruf kecil, tanpa spasi. Contoh: artic-600ml' },
+      validate: validateSlug,
+      admin: { position: 'sidebar', description: 'Huruf kecil, angka, dan tanda hubung. Contoh: artic-600ml' },
     },
     {
       name: 'order',
