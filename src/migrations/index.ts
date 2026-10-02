@@ -3,6 +3,7 @@ import * as migration_20260930_053449_about_vision_mission from './20260930_0534
 import * as migration_20260930_070818_hero_style from './20260930_070818_hero_style';
 import * as migration_20260930_091240_video_section from './20260930_091240_video_section';
 import * as migration_20261001_143023_site_hours from './20261001_143023_site_hours';
+import * as migration_20261002_032616_activity_log from './20261002_032616_activity_log';
 
 export const migrations = [
   {
@@ -28,6 +29,11 @@ export const migrations = [
   {
     up: migration_20261001_143023_site_hours.up,
     down: migration_20261001_143023_site_hours.down,
-    name: '20261001_143023_site_hours'
+    name: '20261001_143023_site_hours',
+  },
+  {
+    up: migration_20261002_032616_activity_log.up,
+    down: migration_20261002_032616_activity_log.down,
+    name: '20261002_032616_activity_log'
   },
 ];

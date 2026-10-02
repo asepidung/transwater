@@ -14,6 +14,8 @@ import { Media } from './collections/Media'
 import { Products } from './collections/Products'
 import { Posts } from './collections/Posts'
 import { Messages } from './collections/Messages'
+import { ActivityLog } from './collections/ActivityLog'
+import { withAuditCollection, withAuditGlobal } from './lib/audit'
 import { SiteSettings } from './globals/SiteSettings'
 import { HomePage } from './globals/HomePage'
 import { AboutPage } from './globals/AboutPage'
@@ -74,8 +76,8 @@ export default buildConfig({
       afterNavLinks: ['/components/admin/AdminCredit#AdminCredit'],
     },
   },
-  collections: [Users, Media, Products, Posts, Messages],
-  globals: [SiteSettings, HomePage, AboutPage, InfoPages],
+  collections: [Users, Media, Products, Posts, Messages, ActivityLog].map(withAuditCollection),
+  globals: [SiteSettings, HomePage, AboutPage, InfoPages].map(withAuditGlobal),
   localization: {
     locales: [
       { label: 'Bahasa Indonesia', code: 'id' },

@@ -72,6 +72,7 @@ export interface Config {
     products: Product;
     posts: Post;
     messages: Message;
+    'activity-log': ActivityLog;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     products: ProductsSelect<false> | ProductsSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     messages: MessagesSelect<false> | MessagesSelect<true>;
+    'activity-log': ActivityLogSelect<false> | ActivityLogSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -298,6 +300,23 @@ export interface Message {
   createdAt: string;
 }
 /**
+ * Riwayat perubahan di panel admin: siapa, kapan, apa. Hanya bisa dibaca.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "activity-log".
+ */
+export interface ActivityLog {
+  id: number;
+  actor?: string | null;
+  action?: ('login' | 'create' | 'update' | 'delete') | null;
+  area?: string | null;
+  item?: string | null;
+  fields?: string | null;
+  summary?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -340,6 +359,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'messages';
         value: number | Message;
+      } | null)
+    | ({
+        relationTo: 'activity-log';
+        value: number | ActivityLog;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -509,6 +532,20 @@ export interface MessagesSelect<T extends boolean = true> {
   message?: T;
   locale?: T;
   handled?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "activity-log_select".
+ */
+export interface ActivityLogSelect<T extends boolean = true> {
+  actor?: T;
+  action?: T;
+  area?: T;
+  item?: T;
+  fields?: T;
+  summary?: T;
   updatedAt?: T;
   createdAt?: T;
 }

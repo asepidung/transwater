@@ -88,7 +88,8 @@ export async function getSiteContent(localeParam: string): Promise<SiteContent> 
       },
       trust: {
         title: text(home.trust?.title, d.trust.title),
-        // Bar sertifikasi disembunyikan hanya jika CMS sengaja dikosongkan setelah pernah diisi.
+        // Hanya item yang ada isinya yang tampil. Item yang masih menunggu data cukup dihapus dari daftar di admin.
+        // (Jika SEMUA baris dihapus, teks bawaan dari kode dipakai.)
         items: rows(home.trust?.items, (i) => ({ label: i.label, status: i.status }), d.trust.items),
       },
       products: {
