@@ -6,7 +6,7 @@ import type { SiteContent } from '@/lib/content'
 import { asset } from '@/lib/site'
 import { Ridge } from './Decor'
 
-// Video diputar otomatis (tanpa suara) hanya saat terlihat di layar. Pengunjung dengan
+// Video lebar 16:9 (ketiga produk + cipratan air), diputar otomatis (tanpa suara) hanya saat terlihat di layar. Pengunjung dengan
 // "kurangi gerakan" atau penghemat data hanya melihat poster dan bisa memutar sendiri.
 export default function BrandVideo({ c }: { c: SiteContent }) {
   const v = c.videoSection
@@ -39,8 +39,8 @@ export default function BrandVideo({ c }: { c: SiteContent }) {
   return (
     <section id="video" className="scroll-mt-20 relative isolate overflow-hidden bg-navy-900 py-16 text-white lg:py-20">
       <Ridge className="absolute inset-x-0 bottom-0 -z-10 h-40 text-white opacity-[0.04] sm:h-56" />
-      <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 lg:grid-cols-[1.1fr_auto] lg:gap-16">
-        <div className="max-w-xl">
+      <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14">
+        <div className="max-w-xl lg:max-w-none">
           <p className="text-xs font-bold uppercase tracking-[0.14em] text-gold-300">{v.eyebrow}</p>
           <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">{v.title}</h2>
           <p className="mt-4 text-lg leading-relaxed text-navy-100">{v.text}</p>
@@ -52,11 +52,11 @@ export default function BrandVideo({ c }: { c: SiteContent }) {
           </a>
         </div>
 
-        <div className="relative mx-auto aspect-[9/16] w-full max-w-[280px] overflow-hidden rounded-[1.75rem] bg-navy-800 shadow-2xl shadow-black/40 lg:max-w-[300px]">
+        <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-navy-800 shadow-2xl shadow-black/40">
           <video
             ref={ref}
             className="h-full w-full object-cover"
-            poster={asset('/videos/artic-splash-poster.webp')}
+            poster={asset('/videos/artic-wide-poster.webp')}
             muted
             loop
             playsInline
@@ -65,7 +65,7 @@ export default function BrandVideo({ c }: { c: SiteContent }) {
             onPlay={() => setPlaying(true)}
             onPause={() => setPlaying(false)}
           >
-            <source src={asset('/videos/artic-splash.mp4')} type="video/mp4" />
+            <source src={asset('/videos/artic-wide.mp4')} type="video/mp4" />
           </video>
           {manual && !playing && (
             <button
