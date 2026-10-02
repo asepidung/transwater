@@ -4,6 +4,7 @@ import * as migration_20260930_070818_hero_style from './20260930_070818_hero_st
 import * as migration_20260930_091240_video_section from './20260930_091240_video_section';
 import * as migration_20261001_143023_site_hours from './20261001_143023_site_hours';
 import * as migration_20261002_032616_activity_log from './20261002_032616_activity_log';
+import * as migration_20261002_122200_user_role from './20261002_122200_user_role';
 
 export const migrations = [
   {
@@ -34,6 +35,11 @@ export const migrations = [
   {
     up: migration_20261002_032616_activity_log.up,
     down: migration_20261002_032616_activity_log.down,
-    name: '20261002_032616_activity_log'
+    name: '20261002_032616_activity_log',
+  },
+  {
+    up: migration_20261002_122200_user_role.up,
+    down: migration_20261002_122200_user_role.down,
+    name: '20261002_122200_user_role'
   },
 ];

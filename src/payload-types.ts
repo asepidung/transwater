@@ -134,12 +134,18 @@ export interface UserAuthOperations {
   };
 }
 /**
+ * Hanya Pemilik yang bisa menambah atau menghapus akun. Staf hanya bisa mengubah akunnya sendiri.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: number;
   name?: string | null;
+  /**
+   * Pemilik bisa menambah, menghapus akun, dan mengatur peran.
+   */
+  role: 'owner' | 'staff';
   updatedAt: string;
   createdAt: string;
   email?: string | null;
@@ -412,6 +418,7 @@ export interface PayloadMigration {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
