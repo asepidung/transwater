@@ -78,3 +78,7 @@ bash deploy/backup.sh                       # backup manual
 
 **Restore database:** hentikan app (`pm2 stop artic`), salin `backups/artic-YYYY-...db` menjadi `artic.db`, jalankan lagi.
 **Jangan** jalankan `SEED_RESET=1 npm run seed` setelah ada konten asli (menghapus produk dan foto).
+
+
+## Tombol AI di admin
+Butuh `GEMINI_API_KEY` di `~/artic-data/.env.production`. Pasang dengan `bash ~/app/deploy/set-gemini.sh` (user situs): kunci diketik tersembunyi, diuji ke Gemini, baru disimpan, lalu pm2 di-restart. Tanpa kunci, tombol tetap tampil tetapi menjawab "Kunci AI belum diatur". Endpoint `/api/ai/improve` hanya untuk pengguna admin yang login, dibatasi 30 permintaan per 10 menit per pengguna, dan hasilnya hanya mengisi form (tidak menyimpan).

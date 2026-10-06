@@ -136,3 +136,74 @@ html[data-theme='light'] a:not(.btn):not([class*='nav']) {
     opacity: 0.7;
   }
 }
+
+/* Tombol AI di bawah kolom teks (src/components/admin/AiButtons.tsx) */
+.artic-ai {
+  margin-top: 6px;
+  margin-bottom: 8px;
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  &__btn {
+    cursor: pointer;
+    border: 1px solid var(--theme-elevation-200);
+    background: var(--theme-elevation-50);
+    color: var(--theme-text);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    line-height: 1.4;
+
+    &:hover:not(:disabled) {
+      background: var(--theme-elevation-100);
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    &--primary {
+      background: #303860;
+      border-color: #303860;
+      color: #fff;
+      &:hover:not(:disabled) {
+        background: #262c4d;
+      }
+    }
+  }
+
+  &__note {
+    margin: 6px 0 0;
+    font-size: 12px;
+    &--ok {
+      color: var(--theme-success-600, #2e7d32);
+    }
+    &--error {
+      color: var(--theme-error-600, #c62828);
+    }
+  }
+
+  &__suggestion {
+    margin-top: 6px;
+    padding: 8px 10px;
+    border: 1px dashed var(--theme-elevation-300);
+    border-radius: 6px;
+    background: var(--theme-elevation-50);
+  }
+  &__suggestion-label {
+    margin: 0 0 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--theme-elevation-600);
+  }
+  &__suggestion-text {
+    margin: 0 0 8px;
+    font-size: 13px;
+    white-space: pre-wrap;
+  }
+}
