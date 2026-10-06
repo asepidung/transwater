@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server'
 import { asset, pageAlternates, siteUrl } from '@/lib/site'
 import JsonLd from '@/components/site/JsonLd'
 import { getSiteContent } from '@/lib/get-content'
+import { phoneNumbers } from '@/lib/content'
 import DraftBanner from '@/components/site/DraftBanner'
 import Header from '@/components/site/Header'
 import Hero from '@/components/site/Hero'
@@ -62,7 +63,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           logo: `${siteUrl}${asset('/images/logo.png')}`,
           sameAs: c.company.instagram ? [c.company.instagram] : undefined,
           email: c.company.email,
-          telephone: c.company.phone,
+          telephone: phoneNumbers(c.company.phone),
           address: { '@type': 'PostalAddress', streetAddress: c.company.address, addressCountry: 'ID' },
         }}
       />

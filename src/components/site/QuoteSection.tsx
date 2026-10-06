@@ -1,5 +1,5 @@
 import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react'
-import { whatsappLink, type SiteContent } from '@/lib/content'
+import { phoneNumbers, whatsappLink, type SiteContent } from '@/lib/content'
 import QuoteForm from './QuoteForm'
 import { Ridge } from './Decor'
 
@@ -41,9 +41,11 @@ export default function QuoteSection({ c, asH1 = false }: { c: SiteContent; asH1
               </span>
               <div>
                 <p className="font-bold text-white">{q.phoneTitle}</p>
-                <a href={`tel:${c.company.phone.replace(/[^\d+]/g, '')}`} className="mt-0.5 block text-navy-200">
-                  {c.company.phone}
-                </a>
+                {phoneNumbers(c.company.phone).map((phone) => (
+                  <a key={phone} href={`tel:${phone.replace(/[^\d+]/g, '')}`} className="mt-0.5 block text-navy-200">
+                    {phone}
+                  </a>
+                ))}
               </div>
             </li>
             <li className="flex gap-4">

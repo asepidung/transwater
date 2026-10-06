@@ -29,7 +29,7 @@ export const SiteSettings: GlobalConfig = {
       fields: [
         { name: 'address', type: 'textarea', localized: true, required: true, label: 'Alamat' },
         { name: 'mapsUrl', type: 'text', label: 'Link Google Maps', validate: validateHttpUrl, admin: { description: 'Harus diawali https://' } },
-        { name: 'phone', type: 'text', label: 'Telepon' },
+        { name: 'phone', type: 'text', label: 'Telepon', admin: { description: 'Lebih dari satu nomor? Pisahkan dengan /, contoh: (021) 8993-1363 / +62 813-9964-1608' } },
         { name: 'email', type: 'email', label: 'Email' },
         { name: 'hours', type: 'text', label: 'Jam operasional', admin: { description: 'Contoh: 08.00 - 16.00 WIB' } },
         { name: 'instagramUrl', type: 'text', label: 'Link Instagram', validate: validateHttpUrl, admin: { description: 'Contoh: https://www.instagram.com/articwater.id/' } },

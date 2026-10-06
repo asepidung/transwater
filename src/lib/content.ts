@@ -162,8 +162,8 @@ const company = {
   brand: 'ARTIC',
   address: 'Jl. Raya Cipeucang/Ciuncal No. 88 A, Cipeucang, Kec. Cileungsi, Kabupaten Bogor, Jawa Barat 16820',
   mapsUrl: 'https://maps.app.goo.gl/H3HvSkB4SLefVigU8',
-  // Data resmi dari formulir requirement ARTIC (1 Okt 2026). Satu nomor dipakai untuk telepon dan WhatsApp.
-  phone: '+62 813-9964-1608',
+  // Data resmi dari formulir requirement ARTIC (1 Okt 2026). Nomor kantor ditambahkan 6 Okt 2026 (permintaan Pak Feri).
+  phone: '(021) 8993-1363 / +62 813-9964-1608',
   email: 'transwaterroberi03.sn@gmail.com',
   hours: '08.00 - 16.00 WIB',
   whatsapp: '6281399641608',
@@ -197,7 +197,7 @@ const id: SiteContent = {
   hero: {
     style: 'banner',
     eyebrow: 'Air minum dalam kemasan untuk bisnis',
-    title: 'Air mineral ARTIC untuk kebutuhan bisnis Anda',
+    title: 'Air mineral ARTIC untuk kebutuhan air minum Anda',
     description:
       'Tersedia dalam kemasan botol 330 ml, 600 ml, dan galon 19 liter untuk distributor, hotel, restoran, perkantoran, dan acara. Kirim kebutuhan Anda dan tim kami akan menghubungi kembali dengan penawaran.',
     facts: [
@@ -278,9 +278,9 @@ const id: SiteContent = {
   },
   about: {
     eyebrow: 'Tentang kami',
-    title: 'Air minum kemasan yang "Baik dan Benar", diproduksi di Bogor',
+    title: 'Air minum kemasan yang "Premium dan Higienis", diproduksi di Bogor',
     description:
-      'PT. Transwater Roberi Indonesia berdiri pada 2017 dan memproduksi air minum dalam kemasan ARTIC di Cileungsi, Bogor: botol 330 ml, 600 ml, dan galon 19 liter untuk bisnis maupun masyarakat.',
+      'PT. Transwater Roberi Indonesia berdiri pada 2017 dan memproduksi air minum dalam kemasan ARTIC di Cileungsi, Bogor: botol 330 ml, 600 ml, dan galon 19 liter untuk konsumen bisnis dan individu.',
     storyTitle: 'Tentang perusahaan',
     story: [
       'Kami adalah produsen air minum dalam kemasan (AMDK) yang berbasis di Cileungsi, Kabupaten Bogor. Selain air mineral ARTIC, kami menyediakan air alkali (pH tinggi) dan air alkali elektron. Proses produksi kami mengacu pada SNI 3553:2023 untuk air mineral dan SNI 8982:2021 untuk air minum pH tinggi.',
@@ -291,10 +291,10 @@ const id: SiteContent = {
     expertise: ['Reverse Osmosis (RO)', 'Air mineral', 'Air alkali (pH tinggi)', 'Air alkali elektron'],
     visionTitle: 'Visi',
     vision:
-      'Menjadi produsen air minum dalam kemasan yang "Baik dan Benar" untuk Indonesia yang sehat, dan menjangkau pasar internasional.',
+      'Menjadi produsen air minum dalam kemasan yang "Premium dan Higienis" untuk Indonesia yang sehat, dan menjangkau pasar internasional.',
     missionTitle: 'Misi',
     mission:
-      'Menyediakan air minum yang "Baik dan Benar" dengan teknologi modern demi kesehatan masyarakat Indonesia. Membangun citra merek dan layanan yang unggul, serta menjalin kemitraan yang saling menguntungkan.',
+      'Menyediakan air minum yang "Premium dan Higienis" dengan teknologi modern demi kesehatan masyarakat Indonesia. Membangun citra merek dan layanan yang unggul, serta menjalin kemitraan yang saling menguntungkan.',
     valuesTitle: 'Nilai yang kami pegang',
     values: [
       { title: 'Integritas', text: 'Bekerja dengan jujur dan dapat dipercaya.' },
@@ -389,7 +389,7 @@ const id: SiteContent = {
   segments: {
     eyebrow: 'Kami melayani',
     title: 'Untuk berbagai kebutuhan usaha',
-    items: ['Distributor & agen', 'Hotel, restoran & kafe', 'Perkantoran', 'Event & katering', 'Sekolah & instansi'],
+    items: ['Distributor & Agen', 'Hotel, Restoran & Kafe', 'Perkantoran', 'Event & Katering', 'Sekolah & Instansi'],
   },
   process: {
     eyebrow: 'Cara pemesanan',
@@ -459,7 +459,7 @@ const en: SiteContent = {
   hero: {
     style: 'banner',
     eyebrow: 'Bottled drinking water for business',
-    title: 'ARTIC mineral water for your business needs',
+    title: 'ARTIC mineral water for your drinking water needs',
     description:
       'Available in 330 ml and 600 ml bottles and a 19-liter gallon for distributors, hotels, restaurants, offices, and events. Send us your requirements and our team will get back to you with a quotation.',
     facts: [
@@ -540,9 +540,9 @@ const en: SiteContent = {
   },
   about: {
     eyebrow: 'About us',
-    title: 'Bottled water that is "Good and Right", made in Bogor',
+    title: 'Bottled water that is "Premium and Hygienic", made in Bogor',
     description:
-      'PT. Transwater Roberi Indonesia was founded in 2017 and produces ARTIC bottled drinking water in Cileungsi, Bogor: 330 ml and 600 ml bottles and 19-liter gallons for businesses and the public.',
+      'PT. Transwater Roberi Indonesia was founded in 2017 and produces ARTIC bottled drinking water in Cileungsi, Bogor: 330 ml and 600 ml bottles and 19-liter gallons for business and individual consumers.',
     storyTitle: 'About the company',
     story: [
       'We are a bottled drinking water producer based in Cileungsi, Bogor Regency. Besides ARTIC mineral water, we offer alkaline water (high pH) and electrolyzed alkaline water. Our production is based on SNI 3553:2023 for mineral water and SNI 8982:2021 for high-pH drinking water.',
@@ -553,10 +553,10 @@ const en: SiteContent = {
     expertise: ['Reverse Osmosis (RO)', 'Mineral water', 'Alkaline water (high pH)', 'Electrolyzed alkaline water'],
     visionTitle: 'Vision',
     vision:
-      'To become a bottled drinking water producer that is "Good and Right" for a healthy Indonesia, and to reach the international market.',
+      'To become a bottled drinking water producer that is "Premium and Hygienic" for a healthy Indonesia, and to reach the international market.',
     missionTitle: 'Mission',
     mission:
-      'To provide "Good and Right" drinking water with modern technology for the health of Indonesians. To build an outstanding brand image and service, and to form mutually beneficial partnerships.',
+      'To provide "Premium and Hygienic" drinking water with modern technology for the health of Indonesians. To build an outstanding brand image and service, and to form mutually beneficial partnerships.',
     valuesTitle: 'What we stand for',
     values: [
       { title: 'Integrity', text: 'Working honestly and being someone you can trust.' },
@@ -651,7 +651,7 @@ const en: SiteContent = {
   segments: {
     eyebrow: 'Who we serve',
     title: 'For a wide range of businesses',
-    items: ['Distributors & agents', 'Hotels, restaurants & cafes', 'Offices', 'Events & catering', 'Schools & institutions'],
+    items: ['Distributors & Agents', 'Hotels, Restaurants & Cafes', 'Offices', 'Events & Catering', 'Schools & Institutions'],
   },
   process: {
     eyebrow: 'How to order',
@@ -712,4 +712,12 @@ export function getDefaultContent(locale: string): SiteContent {
 
 export function whatsappLink(number: string, message: string): string {
   return `https://wa.me/${normalizeWhatsapp(number)}?text=${encodeURIComponent(message)}`
+}
+
+// Kolom Telepon boleh berisi beberapa nomor, dipisah "/" (mis. kantor / HP).
+export function phoneNumbers(value: string): string[] {
+  return value
+    .split('/')
+    .map((p) => p.trim())
+    .filter(Boolean)
 }
