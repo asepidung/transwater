@@ -31,8 +31,13 @@ export async function POST(request: Request) {
   }
 
   try {
-    const result = await runAi(mode, locale, text)
-    const added = findAddedClaims(text, result)
+    let result = await runAi(mode, locale, text)
+    let added = findAddedClaims(text, result)
+    if (added.length > 0) {
+      // Ulang sekali dengan suhu 0 (paling setia); kalau masih menambah klaim, dibuang.
+      result = await runAi(mode, locale, text, 0)
+      added = findAddedClaims(text, result)
+    }
     if (added.length > 0) {
       return NextResponse.json(
         {
@@ -43,7 +48,7 @@ export async function POST(request: Request) {
     }
     return NextResponse.json({ text: result })
   } catch (error) {
-    if (error instanceof AiError) return NextResponse.json({ error: error.message }, { status: error.status === 503 ? 503 : error.status === 422 ? 422 : 502 })
+    if (error instanceof AiError) return NextResponse.json({ error: error.message }, { status: [429, 503, 422].includes(error.status) ? error.status : 502 })
     console.error('[ai] error tak terduga:', error)
     return NextResponse.json({ error: 'Terjadi kesalahan. Coba lagi.' }, { status: 500 })
   }
