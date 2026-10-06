@@ -7,11 +7,12 @@ export type AiLocale = 'id' | 'en'
 
 export const MAX_INPUT = 2000
 
-const RULES = `Kamu editor teks untuk website perusahaan air minum dalam kemasan PT. Transwater Roberi Indonesia (merek ARTIC).
+const RULES = `Kamu editor teks untuk website sebuah perusahaan air minum dalam kemasan.
 ATURAN WAJIB:
 - Keluarkan HANYA teks hasil. Tanpa tanda kutip pembuka/penutup, tanpa markdown, tanpa penjelasan, tanpa awalan seperti "Berikut".
 - DILARANG menambah fakta atau klaim baru yang tidak ada di teks asli: angka, sertifikasi atau izin (BPOM, SNI, ISO, Halal), pH, TDS, manfaat kesehatan, penghargaan, perbandingan dengan merek lain, atau kata superlatif seperti "terbaik", "nomor 1", "terdepan".
 - Pertahankan semua fakta, angka, nama merek, nama perusahaan, dan nomor persis seperti aslinya.
+- JANGAN menambahkan nama perusahaan, nama merek, atau nama tempat yang tidak tertulis di teks asli. Jika teks asli memakai "kami", tetap pakai "kami".
 - Pertahankan struktur paragraf dan baris baru. Jangan menambah paragraf baru.
 - Jika teks kosong atau tidak bermakna, kembalikan apa adanya.`
 
@@ -42,6 +43,7 @@ const CLAIM_GROUPS: RegExp[] = [
   /100\s*%/,
   /klinis|clinical/i,
   /penghargaan|award/i,
+  /transwater|artic/i, // nama perusahaan/merek tidak boleh disisipkan jika tidak ada di teks asli
   /menyembuhkan|menyehatkan|cure|healing|detox/i,
 ]
 
@@ -77,7 +79,8 @@ export function rateLimited(key: string): boolean {
 }
 
 // ---------- Gemini ----------
-const MODELS = (process.env.GEMINI_MODELS || 'gemini-flash-latest,gemini-flash-lite-latest')
+// Urutan: lite dulu (cepat dan stabil, ~1 dtk di uji 7 Okt 2026); flash-latest sering 503/timeout sebagai cadangan.
+const MODELS = (process.env.GEMINI_MODELS || 'gemini-flash-lite-latest,gemini-flash-latest')
   .split(',')
   .map((m) => m.trim())
   .filter(Boolean)
@@ -100,7 +103,7 @@ async function callModel(model: string, system: string, text: string, key: strin
       contents: [{ role: 'user', parts: [{ text }] }],
       generationConfig: { temperature: 0.3, maxOutputTokens: 2048 },
     }),
-    signal: AbortSignal.timeout(25_000),
+    signal: AbortSignal.timeout(12_000),
   })
   if (!res.ok) throw new AiError(`Gemini ${model}: HTTP ${res.status}`, res.status)
   const data = (await res.json()) as {
