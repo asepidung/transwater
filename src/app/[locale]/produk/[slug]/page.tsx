@@ -111,7 +111,7 @@ export default async function ProductDetail({ params }: Props) {
         </section>
 
         {others.length > 0 && (
-          <section className="bg-white py-12">
+          <section className="bg-white pb-20 pt-12 sm:pb-24">
             <div className="mx-auto max-w-6xl px-5">
               <h2 className="text-2xl font-extrabold text-navy-800">{pp.othersTitle}</h2>
               <ul className="mt-6 grid gap-4 sm:grid-cols-2">

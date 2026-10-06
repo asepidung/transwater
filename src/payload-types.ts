@@ -609,6 +609,9 @@ export interface SiteSetting {
    * Harus diawali https://
    */
   mapsUrl?: string | null;
+  /**
+   * Lebih dari satu nomor? Pisahkan dengan /, contoh: (021) 8993-1363 / +62 813-9964-1608
+   */
   phone?: string | null;
   email?: string | null;
   /**
