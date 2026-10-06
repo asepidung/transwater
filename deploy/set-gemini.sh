@@ -10,12 +10,11 @@ ENV_FILE="${ENV_FILE:-$HOME/artic-data/.env.production}"
 read -rsp "Kunci Gemini API (tidak tampil saat diketik/ditempel): " KEY; echo
 KEY="${KEY//[[:space:]]/}"
 [ -n "$KEY" ] || { echo "Kosong, dibatalkan."; exit 1; }
-echo "Panjang kunci yang terbaca: ${#KEY} karakter (kunci Gemini dari AI Studio: 39, diawali AIza)."
+echo "Panjang kunci yang terbaca: ${#KEY} karakter (format lama: 39, diawali AIza; format baru: 53, diawali AQ.)."
 case "$KEY" in
   AIza*) ;;
-  AQ.*) echo "PERINGATAN: awalan 'AQ.' = kunci Vertex AI / Google Cloud. Itu BUKAN kunci Gemini API dan tidak akan bekerja di sini."
-        echo "            Buat kunci baru di https://aistudio.google.com/apikey (Create API key)." ;;
-  *)    echo "PERINGATAN: tidak diawali 'AIza'. Pastikan itu kunci dari aistudio.google.com/apikey." ;;
+  AQ.*) echo "Format kunci baru dari Google (awalan AQ.) terbaca. Ini normal; yang menentukan adalah hasil uji di bawah." ;;
+  *)    echo "PERINGATAN: awalan kunci tidak dikenal. Pastikan itu kunci dari aistudio.google.com/apikey." ;;
 esac
 
 echo "Menguji kunci ke Gemini..."
