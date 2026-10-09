@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <title>Company Profile ARTIC - PT. Transwater Roberi Indonesia</title>
 <!--
-  Sumber company profile ARTIC (PDF 2 halaman, A4 lanskap).
-  Teks dari src/lib/content.ts (id) dan handoff/compro-brief.md, hanya data "BOLEH tampil".
-  Cetak: compro/build.sh
+  Company profile ARTIC: PDF 2 halaman, A4 lanskap, format lipat tiga (3 panel x 99 mm)
+  mengikuti tata letak compro 2023. Teks dari src/lib/content.ts (id) dan
+  handoff/compro-brief.md, hanya data "BOLEH tampil". Cetak: compro/build.sh
 -->
 <style>
   @font-face { font-family: 'Jakarta'; font-weight: 400; src: url(fonts/plus-jakarta-sans-latin-400-normal.woff2) format('woff2'); }
@@ -16,297 +16,273 @@
   @font-face { font-family: 'Jakarta'; font-weight: 800; src: url(fonts/plus-jakarta-sans-latin-800-normal.woff2) format('woff2'); }
 
   :root {
-    --navy-50: #f3f5fa; --navy-100: #e4e8f3; --navy-200: #c7cfe4; --navy-300: #9aa7cc;
-    --navy-500: #4a5b94; --navy-700: #303860; --navy-800: #262d4d; --navy-900: #1c2139; --navy-950: #12152a;
+    --navy-100: #e4e8f3; --navy-200: #c7cfe4; --navy-300: #9aa7cc; --navy-500: #4a5b94;
+    --navy-700: #303860; --navy-800: #262d4d; --navy-900: #1c2139; --navy-950: #12152a;
     --gold-100: #f2e6c9; --gold-300: #d2b06a; --gold-500: #a88038; --gold-600: #8c6a2c;
-    --water-50: #f2f8fc; --water-100: #e3f0f8; --water-200: #c9e2f0;
+    --water-50: #f2f8fc; --water-200: #c9e2f0;
   }
   @page { size: 297mm 210mm; margin: 0; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: #fff; }
-  body {
-    font-family: 'Jakarta', sans-serif; color: var(--navy-900);
-    -webkit-print-color-adjust: exact; print-color-adjust: exact;
-  }
-  .page {
-    width: 297mm; height: 210mm; position: relative; overflow: hidden;
-    break-after: page; background: #fff;
-  }
+  body { font-family: 'Jakarta', sans-serif; color: var(--navy-900); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: 297mm; height: 210mm; position: relative; overflow: hidden; break-after: page; background: #fff; }
   .page:last-child { break-after: auto; }
-  svg.i { width: 4.2mm; height: 4.2mm; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .eyebrow { font-size: 7.5pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-500); }
-  h2 { font-size: 15pt; font-weight: 800; color: var(--navy-700); line-height: 1.15; }
-  .rule { width: 12mm; height: .9mm; background: var(--gold-500); border-radius: 1mm; margin: 2mm 0 3mm; }
+  .abs { position: absolute; }
+  .deco { position: absolute; inset: 0; width: 297mm; height: 210mm; }
+  svg.i { width: 4mm; height: 4mm; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  h3 { font-size: 9pt; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--navy-700); }
+  h3::after { content: ''; display: block; width: 9mm; height: .7mm; background: var(--gold-500); border-radius: 1mm; margin-top: 1.4mm; }
+  .txt { font-size: 8pt; line-height: 1.52; color: var(--navy-800); }
+  .txt + .txt { margin-top: 1.4mm; }
+  q { quotes: '“' '”'; }
 
-  /* ---------- Legal strip (both pages) ---------- */
-  .legal {
-    position: absolute; left: 0; right: 0; bottom: 0; height: 17mm;
-    background: var(--navy-950); color: #fff;
-    display: flex; align-items: center; gap: 4mm; padding: 0 12mm;
+  /* ===== Halaman 1 ===== */
+  .a-logo { left: 9mm; top: 8mm; height: 25mm; }
+  .a-navy {
+    left: 20mm; top: 38mm; width: 79mm; height: 172mm; background: var(--navy-700);
+    border-top-left-radius: 7mm; padding: 7mm 6mm 0 7mm; color: #fff;
   }
-  .legal .label { font-size: 7pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-300); width: 26mm; flex: none; line-height: 1.3; }
-  .legal ul { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; flex: 1; }
-  .legal li { border-left: .5mm solid var(--gold-500); padding-left: 2.6mm; }
-  .legal li b { display: block; font-size: 6.6pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--navy-200); }
-  .legal li span { font-size: 8.2pt; font-weight: 600; }
+  .a-title { font-size: 13.5pt; font-weight: 800; line-height: 1.18; text-transform: uppercase; text-align: center; }
+  .a-title em { font-style: normal; color: var(--gold-300); }
+  .pills { margin-top: 6mm; display: grid; gap: 4.2mm; }
+  .pill b {
+    display: inline-flex; align-items: center; gap: 1.6mm; background: #fff; color: var(--gold-600);
+    border-radius: 3mm; padding: .9mm 3mm .9mm 2mm; font-size: 7.4pt; font-weight: 800; text-transform: uppercase; letter-spacing: .02em;
+  }
+  .pill b::before { content: ''; width: 1.8mm; height: 1.8mm; border-radius: 50%; background: var(--gold-500); }
+  .pill span { display: block; margin: 1.4mm 0 0 2mm; font-size: 7.7pt; line-height: 1.42; color: var(--navy-100); }
+  .avail { margin-top: 6mm; border-top: .3mm solid rgba(255,255,255,.2); padding-top: 3.5mm; }
+  .avail p { font-size: 7.6pt; font-weight: 700; }
+  .avail .row { margin-top: 2.4mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2mm; }
+  .avail figure { background: #fff; border-radius: 2mm; overflow: hidden; }
+  .avail img { display: block; width: 100%; height: 27mm; object-fit: cover; }
+  .avail figcaption { padding: 1.2mm 1.4mm 1.4mm; font-size: 6.6pt; line-height: 1.3; color: var(--navy-700); font-weight: 700; }
+  .avail figcaption span { display: block; font-weight: 500; color: var(--navy-500); }
 
-  /* ---------- Page 1 ---------- */
-  .p1-photo {
-    position: absolute; top: 0; right: 0; width: 150mm; height: 193mm;
-    background: url(img/lake.jpg) center / cover;
-  }
-  .p1-photo {
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.25) 12%, #000 40%);
-            mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.25) 12%, #000 40%);
-  }
-  .p1-photo::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(255,255,255,0) 45%, rgba(18,21,42,.35) 100%);
-  }
-  .p1-splash { position: absolute; right: -6mm; top: 72mm; width: 130mm; opacity: .95; }
-  .p1-floating { position: absolute; right: 16mm; top: 4mm; height: 104mm; filter: drop-shadow(0 3mm 4mm rgba(18,21,42,.28)); }
+  .b-contact { left: 107mm; top: 12mm; width: 85mm; }
+  .label { font-size: 8pt; font-weight: 700; color: var(--navy-500); }
+  .wa { margin-top: 2.4mm; display: flex; align-items: center; gap: 2.6mm; font-size: 18pt; font-weight: 800; color: var(--navy-900); }
+  .wa svg { width: 7mm; height: 7mm; color: var(--navy-900); }
+  .clist { margin-top: 5mm; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 3.6mm 3mm; }
+  .clist li { display: flex; gap: 2.2mm; font-size: 8.2pt; line-height: 1.3; color: var(--navy-800); }
+  .clist li svg { width: 4mm; height: 4mm; color: var(--gold-500); }
+  .clist li b { display: block; font-size: 6.6pt; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--navy-500); }
+  .clist li.wide { grid-column: span 2; }
+  .b-prod { left: 107mm; top: 156mm; width: 84mm; }
+  .b-prod .name { margin-top: 1mm; font-size: 8.4pt; font-weight: 800; color: var(--navy-900); }
+  .b-prod .txt { margin-top: .6mm; font-size: 7.2pt; line-height: 1.42; }
+  .legal { margin-top: 3mm; display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 3mm; }
+  .legal div { border-left: .5mm solid var(--gold-500); padding-left: 1.8mm; font-size: 7pt; font-weight: 700; color: var(--navy-900); line-height: 1.3; }
+  .legal div b { display: block; font-size: 5.9pt; letter-spacing: .06em; text-transform: uppercase; color: var(--navy-500); font-weight: 700; }
 
-  .p1-left { position: absolute; left: 14mm; top: 13mm; width: 146mm; }
-  .p1-logo { height: 33mm; display: block; margin-left: -1mm; }
-  .p1-tag { margin-top: 8mm; font-size: 21pt; font-weight: 800; line-height: 1.12; color: var(--navy-700); }
-  .p1-tag em { font-style: normal; color: var(--gold-500); }
-  .p1-intro { margin-top: 3.5mm; font-size: 9.6pt; line-height: 1.5; color: var(--navy-800); max-width: 140mm; }
-  .p1-intro strong { color: var(--navy-700); }
+  .c-halal { right: 8mm; top: 8mm; height: 15mm; }
+  .c-logo { left: 216mm; top: 13mm; width: 62mm; }
+  .c-floating { left: 220mm; top: 66mm; height: 92mm; filter: drop-shadow(0 2.5mm 3mm rgba(18,21,42,.3)); }
+  .c-splash { left: 205mm; top: 112mm; width: 92mm; }
+  .c-foot { left: 198mm; width: 99mm; top: 187mm; text-align: center; }
+  .c-foot .co { font-size: 10pt; font-weight: 600; letter-spacing: .16em; color: var(--navy-700); }
+  .c-foot .tag { margin-top: 1.4mm; font-size: 7.6pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-500); }
 
-  .products { margin-top: 9mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
-  .prod {
-    background: #fff; border: .3mm solid var(--navy-100); border-radius: 3mm; overflow: hidden;
-    box-shadow: 0 1.5mm 4mm rgba(28,33,57,.08);
-  }
-  .prod img { display: block; width: 100%; height: 50mm; object-fit: cover; object-position: center 52%; }
-  .prod .body { padding: 2.6mm 3.2mm 3mm; }
-  .prod h3 { font-size: 10.5pt; font-weight: 800; color: var(--navy-700); }
-  .prod p { margin-top: .8mm; font-size: 7.8pt; line-height: 1.35; color: var(--navy-500); }
-  .prod .pack { margin-top: 1.8mm; display: inline-block; font-size: 7.4pt; font-weight: 700; color: var(--gold-600); background: var(--gold-100); border-radius: 1mm; padding: .7mm 2mm; }
+  /* ===== Halaman 2 ===== */
+  .p2a { left: 9mm; top: 10mm; width: 82mm; }
+  .p2b { left: 108mm; top: 10mm; width: 82mm; }
+  .values { margin-top: 3mm; display: grid; grid-template-columns: 1fr 1fr; gap: 3.4mm 3mm; }
+  .values div { display: flex; gap: 2.2mm; align-items: flex-start; }
+  .values svg { width: 8mm; height: 8mm; color: var(--navy-700); stroke-width: 1.7; }
+  .values b { display: block; font-size: 8.3pt; font-weight: 800; color: var(--navy-700); }
+  .values span { display: block; margin-top: .4mm; font-size: 7.3pt; line-height: 1.36; color: var(--navy-800); }
 
-  .contact {
-    position: absolute; right: 12mm; top: 113mm; width: 112mm;
-    background: rgba(28,33,57,.94); color: #fff; border-radius: 3mm; padding: 5mm 6mm 5mm;
-    box-shadow: 0 2mm 6mm rgba(18,21,42,.3);
+  .team {
+    left: 7mm; top: 66mm; width: 44mm; background: rgba(255,255,255,.88); border-radius: 3mm;
+    padding: 3mm 3.4mm; box-shadow: 0 1mm 3mm rgba(18,21,42,.2);
   }
-  .contact .eyebrow { color: var(--gold-300); }
-  .contact h2 { color: #fff; font-size: 13pt; margin-top: 1mm; }
-  .contact ul { list-style: none; margin-top: 3.5mm; display: grid; gap: 2.3mm; }
-  .contact li { display: flex; gap: 2.6mm; align-items: flex-start; font-size: 8.4pt; line-height: 1.38; }
-  .contact li svg { color: var(--gold-300); margin-top: .2mm; }
-  .contact li b { display: block; font-size: 6.6pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--navy-300); }
-  .contact .two { display: grid; grid-template-columns: 1fr 1fr; gap: 2.3mm; }
+  .team h4 { font-size: 7.8pt; font-weight: 800; text-transform: uppercase; color: var(--navy-700); }
+  .team p { margin-top: 1mm; font-size: 7.2pt; line-height: 1.4; color: var(--navy-800); }
+  .shot {
+    width: 34mm; height: 68mm; top: 63mm; border-radius: 5mm; overflow: hidden;
+    border: .8mm solid #fff; box-shadow: 0 1.2mm 3mm rgba(18,21,42,.28);
+  }
+  .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shot span {
+    position: absolute; left: 0; right: 0; bottom: 0; padding: 6mm 2mm 2mm;
+    background: linear-gradient(180deg, rgba(18,21,42,0), rgba(18,21,42,.85));
+    color: #fff; font-size: 6.6pt; font-weight: 700; line-height: 1.25;
+  }
 
-  /* ---------- Page 2 ---------- */
-  .p2-side {
-    position: absolute; left: 0; top: 0; bottom: 17mm; width: 104mm;
-    background: var(--navy-700); color: #fff; padding: 11mm 9mm 0 12mm;
-  }
-  .p2-side::before {
-    content: ''; position: absolute; inset: 0; opacity: .14;
-    background: url(img/lake.jpg) center / cover; mix-blend-mode: luminosity;
-  }
-  .p2-side > * { position: relative; }
-  .p2-side .eyebrow { color: var(--gold-300); }
-  .p2-side h2 { color: #fff; }
-  .p2-side .rule { background: var(--gold-300); }
-  .p2-side p { font-size: 8.3pt; line-height: 1.5; color: var(--navy-100); }
-  .p2-side p + p { margin-top: 1.8mm; }
-  .p2-side h4 { margin-top: 4.5mm; font-size: 7.5pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-300); }
-  .values { margin-top: 2mm; display: grid; grid-template-columns: 1fr 1fr; gap: 2mm; }
-  .values div { background: rgba(255,255,255,.08); border: .3mm solid rgba(255,255,255,.14); border-radius: 2mm; padding: 2mm 2.6mm; }
-  .values b { display: block; font-size: 8.6pt; font-weight: 800; color: #fff; }
-  .values span { display: block; margin-top: .5mm; font-size: 7pt; line-height: 1.35; color: var(--navy-200); }
-  .vm { margin-top: 2mm; display: grid; gap: 2mm; }
-  .vm div { border-left: .7mm solid var(--gold-300); padding: .3mm 0 .3mm 3mm; }
-  .vm b { display: block; font-size: 8.6pt; font-weight: 800; color: #fff; }
-  .vm span { display: block; margin-top: .4mm; font-size: 7.9pt; line-height: 1.45; color: var(--navy-100); }
+  .p2a-low { left: 9mm; top: 148mm; width: 82mm; }
+  .vm { display: grid; gap: 3mm; }
+  .vm h3 { font-size: 8.6pt; }
+  .vm h3::after { margin-top: 1mm; }
+  .vm .txt { margin-top: 1.2mm; }
+  .p2b-low { left: 108mm; top: 148mm; width: 82mm; }
+  .exp { margin-top: 2.6mm; list-style: none; display: grid; gap: 2mm; }
+  .exp li { display: flex; gap: 1.8mm; font-size: 8pt; line-height: 1.4; color: var(--navy-800); }
+  .exp li::before { content: ''; flex: none; margin-top: 1.2mm; width: 1.6mm; height: 1.6mm; border-radius: 50%; background: var(--gold-500); }
 
-  .p2-main { position: absolute; left: 114mm; right: 12mm; top: 11mm; }
-  .p2-head { display: flex; justify-content: space-between; align-items: flex-end; }
-  .p2-head .note { font-size: 7.8pt; color: var(--navy-500); max-width: 78mm; text-align: right; line-height: 1.4; }
-  .gallery { margin-top: 1mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4mm; }
-  .gallery figure { position: relative; border-radius: 2mm; overflow: hidden; height: 38mm; }
-  .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .gallery figcaption {
-    position: absolute; left: 0; right: 0; bottom: 0; padding: 4mm 2.4mm 1.6mm;
-    background: linear-gradient(180deg, rgba(18,21,42,0), rgba(18,21,42,.82));
-    color: #fff; font-size: 7.2pt; font-weight: 700;
-  }
-  .gallery figcaption i { font-style: normal; color: var(--gold-300); margin-right: 1.2mm; }
-
-  .qc { margin-top: 7mm; }
-  .pillars { margin-top: 1mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4mm; }
-  .pillars div { background: var(--water-50); border: .3mm solid var(--water-200); border-radius: 2mm; padding: 2.4mm 3mm; }
-  .pillars b { display: flex; align-items: center; gap: 1.8mm; font-size: 8.4pt; font-weight: 800; color: var(--navy-700); }
-  .pillars b i { font-style: normal; flex: none; width: 4.6mm; height: 4.6mm; border-radius: 50%; background: var(--navy-700); color: #fff; font-size: 6.6pt; display: grid; place-items: center; }
-  .pillars span { display: block; margin-top: 1mm; font-size: 7.3pt; line-height: 1.4; color: var(--navy-800); }
-  .std { margin-top: 3mm; font-size: 7.6pt; color: var(--navy-500); }
-  .std b { color: var(--navy-700); }
+  .p2c { left: 210mm; top: 10mm; width: 80mm; }
+  .qc { margin-top: 3mm; display: grid; gap: 2.4mm; }
+  .qc div { display: flex; gap: 2mm; }
+  .qc i { flex: none; font-style: normal; width: 4.4mm; height: 4.4mm; border-radius: 50%; background: var(--navy-700); color: #fff; font-size: 6.3pt; font-weight: 700; display: grid; place-items: center; }
+  .qc p { font-size: 7.6pt; line-height: 1.38; color: var(--navy-800); }
+  .qc p b { color: var(--navy-700); font-weight: 800; }
+  .p2c-floating { left: 246mm; top: 104mm; height: 62mm; filter: drop-shadow(0 2mm 2.5mm rgba(18,21,42,.3)); }
+  .p2c-legal { left: 210mm; top: 172mm; width: 80mm; display: flex; gap: 3mm; align-items: center; }
+  .p2c-legal img { height: 20mm; flex: none; }
+  .p2c-legal .legal { margin-top: 0; flex: 1; grid-template-columns: 1fr; gap: 1.2mm; }
 </style>
 </head>
 <body>
 
-<!-- ================= HALAMAN 1: produk + kontak ================= -->
+<!-- ============ HALAMAN 1 (luar): panel produk | kontak | sampul ============ -->
 <section class="page">
-  <div class="p1-photo"></div>
-  <img class="p1-splash" src="img/splash.png" alt="">
-  <img class="p1-floating" src="img/floating.png" alt="Produk ARTIC: botol 330 ml, botol 600 ml, dan galon 19 liter">
+  <!-- latar alam panel kiri + pita air yang melengkung di panel tengah & kanan -->
+  <svg class="deco" viewBox="0 0 297 210" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <clipPath id="band1"><path d="M99 82 C150 96 215 78 297 60 L297 176 C240 168 170 140 99 150 Z"/></clipPath>
+    </defs>
+    <image href="img/forest.jpg" x="0" y="38" width="40" height="172" preserveAspectRatio="xMidYMid slice"/>
+    <image href="img/stream.jpg" x="99" y="40" width="198" height="140" preserveAspectRatio="xMidYMid slice" clip-path="url(#band1)"/>
+    <path d="M160 86 C205 82 245 70 297 54 L297 60 C215 78 150 96 99 82 C120 88 140 89 160 86 Z" fill="#303860"/>
+    <path d="M99 82 C150 96 215 78 297 60" fill="none" stroke="#a88038" stroke-width="1.1"/>
+    <path d="M99 150 C170 140 240 168 297 176" fill="none" stroke="#a88038" stroke-width="1.1"/>
+  </svg>
 
-  <div class="p1-left">
-    <img class="p1-logo" src="img/logo.png" alt="ARTIC Air Mineral">
-    <p class="p1-tag">Penuhi kebutuhan air minum Anda<br>dengan <em>ARTIC</em></p>
-    <p class="p1-intro">
-      Air minum dalam kemasan yang <strong>“Premium dan Higienis”</strong> dari
-      <strong>PT. Transwater Roberi Indonesia</strong>. Berdiri sejak 2017 dan diproduksi di Cileungsi, Bogor,
-      untuk konsumen bisnis dan individu.
-    </p>
-
-    <div class="products">
-      <article class="prod">
-        <img src="img/p330.jpg" alt="Botol ARTIC 330 ml">
-        <div class="body">
-          <h3>ARTIC 330 ml</h3>
-          <p>Praktis untuk rapat, acara, dan tamu.</p>
-          <span class="pack">Botol · 1 karton = 24 botol</span>
-        </div>
-      </article>
-      <article class="prod">
-        <img src="img/p600.jpg" alt="Botol ARTIC 600 ml">
-        <div class="body">
-          <h3>ARTIC 600 ml</h3>
-          <p>Pilihan harian untuk kantor dan pelanggan.</p>
-          <span class="pack">Botol · 1 karton = 24 botol</span>
-        </div>
-      </article>
-      <article class="prod">
-        <img src="img/gallon.jpg" alt="Galon ARTIC 19 liter">
-        <div class="body">
-          <h3>ARTIC Galon 19 L</h3>
-          <p>Pasokan utama untuk kantor dan usaha.</p>
-          <span class="pack">Galon · 19 liter</span>
-        </div>
-      </article>
+  <!-- Panel kiri -->
+  <img class="abs a-logo" src="img/logo.png" alt="ARTIC Air Mineral">
+  <div class="abs a-navy">
+    <p class="a-title">Penuhi kebutuhan<br>air minum Anda<br>dengan <em>ARTIC</em></p>
+    <div class="pills">
+      <div class="pill"><b><q>Premium dan Higienis</q></b><span>Air minum dalam kemasan untuk konsumen bisnis dan individu, diproduksi di Cileungsi, Bogor.</span></div>
+      <div class="pill"><b>Sumber air diuji dulu</b><span>Proses dimulai dari pengujian sumber air yang ketat, sebelum air masuk ke produksi.</span></div>
+      <div class="pill"><b>Pengolahan bertahap</b><span>Air diolah dengan teknologi modern, termasuk reverse osmosis, untuk menyingkirkan kemungkinan kontaminasi.</span></div>
+      <div class="pill"><b>Higienis sampai dikemas</b><span>Kebersihan dan sterilisasi dijaga selama proses pengemasan.</span></div>
+    </div>
+    <div class="avail">
+      <p>Tersedia dalam kemasan:</p>
+      <div class="row">
+        <figure><img src="img/p330.jpg" alt="Botol ARTIC 330 ml"><figcaption>Botol 330 ml<span>1 karton = 24 botol</span></figcaption></figure>
+        <figure><img src="img/p600.jpg" alt="Botol ARTIC 600 ml"><figcaption>Botol 600 ml<span>1 karton = 24 botol</span></figcaption></figure>
+        <figure><img src="img/gallon.jpg" alt="Galon ARTIC 19 liter"><figcaption>Galon 19 liter<span>&nbsp;</span></figcaption></figure>
+      </div>
     </div>
   </div>
 
-  <aside class="contact">
-    <p class="eyebrow">Hubungi kami</p>
-    <h2>PT. Transwater Roberi Indonesia</h2>
-    <ul>
-      <li class="two">
-        <div style="display:flex;gap:2.6mm">
-          <svg class="i" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-          <div><b>WhatsApp / Telepon</b>+62 813-9964-1608</div>
-        </div>
-        <div style="display:flex;gap:2.6mm">
-          <svg class="i" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <div><b>Telepon kantor</b>(021) 8993-1363</div>
-        </div>
-      </li>
-      <li>
-        <svg class="i" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        <div><b>Email</b>transwaterroberi03.sn@gmail.com</div>
-      </li>
-      <li>
-        <svg class="i" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        <div><b>Alamat</b>Jl. Raya Cipeucang/Ciuncal No. 88 A, Cipeucang, Kec. Cileungsi, Kab. Bogor, Jawa Barat 16820</div>
-      </li>
-      <li class="two">
-        <div style="display:flex;gap:2.6mm">
-          <svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          <div><b>Jam kerja</b>08.00 - 16.00 WIB</div>
-        </div>
-        <div style="display:flex;gap:2.6mm">
-          <svg class="i" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg>
-          <div><b>Instagram</b>@articwater.id</div>
-        </div>
-      </li>
-      <li>
-        <svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-        <div><b>Website</b>artic.co.id</div>
-      </li>
+  <!-- Panel tengah -->
+  <div class="abs b-contact">
+    <p class="label">Hubungi kami:</p>
+    <p class="wa"><svg class="i" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2Z" stroke-width="1.4"/></svg>+62 813-9964-1608</p>
+    <ul class="clist">
+      <li><svg class="i" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><div><b>Telepon kantor</b>(021) 8993-1363</div></li>
+      <li><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><div><b>Jam kerja</b>08.00 - 16.00 WIB</div></li>
+      <li class="wide"><svg class="i" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><div><b>Email</b>transwaterroberi03.sn@gmail.com</div></li>
+      <li><svg class="i" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg><div><b>Instagram</b>@articwater.id</div></li>
+      <li><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg><div><b>Website</b>artic.co.id</div></li>
     </ul>
-  </aside>
+  </div>
+  <div class="abs b-prod">
+    <p class="label">Diproduksi oleh:</p>
+    <p class="name">PT. TRANSWATER ROBERI INDONESIA</p>
+    <p class="txt">Jl. Raya Cipeucang/Ciuncal No. 88 A, Cipeucang, Kec. Cileungsi, Kab. Bogor, Jawa Barat 16820</p>
+    <div class="legal">
+      <div><b>NIB</b>9120106342207</div>
+      <div><b>Merek terdaftar DJKI</b>IDM000818024</div>
+      <div><b>BPOM RI</b>MD 122882000900549 (botol)</div>
+      <div><b>Halal BPJPH</b>ID00110007032150723</div>
+    </div>
+  </div>
 
-  <footer class="legal">
-    <p class="label">Legalitas</p>
-    <ul>
-      <li><b>NIB</b><span>9120106342207</span></li>
-      <li><b>Merek terdaftar DJKI</b><span>IDM000818024</span></li>
-      <li><b>BPOM RI</b><span>MD 122882000900549 (botol)</span></li>
-      <li><b>Halal BPJPH</b><span>ID00110007032150723</span></li>
-    </ul>
-  </footer>
+  <!-- Panel kanan (sampul) -->
+  <img class="abs c-halal" src="img/halal.png" alt="Halal Indonesia">
+  <img class="abs c-logo" src="img/logo.png" alt="ARTIC Air Mineral">
+  <img class="abs c-splash" src="img/splash.png" alt="">
+  <img class="abs c-floating" src="img/floating.png" alt="Produk ARTIC: botol 330 ml, botol 600 ml, dan galon 19 liter">
+  <div class="abs c-foot">
+    <p class="co">PT TRANSWATER ROBERI INDONESIA</p>
+    <p class="tag"><q>Premium dan Higienis</q></p>
+  </div>
 </section>
 
-<!-- ================= HALAMAN 2: tentang, nilai, visi/misi, proses, kontrol kualitas ================= -->
+<!-- ============ HALAMAN 2 (dalam): tentang | nilai & proses | kontrol kualitas ============ -->
 <section class="page">
-  <div class="p2-side">
-    <p class="eyebrow">Tentang kami</p>
-    <h2>Air minum kemasan yang “Premium dan Higienis<span style="margin-right:-.14em">”</span>, diproduksi di Bogor</h2>
-    <div class="rule"></div>
-    <p>PT. Transwater Roberi Indonesia berdiri pada 2017 dan memproduksi air minum dalam kemasan ARTIC di Cileungsi, Bogor: botol 330 ml, 600 ml, dan galon 19 liter untuk konsumen bisnis dan individu.</p>
-    <p>Air minum harus aman dan konsisten dari satu pengiriman ke pengiriman berikutnya. Karena itu setiap tahap, mulai dari pengolahan air sampai pengemasan, dijalankan dengan kontrol kualitas yang ketat oleh tim karyawan terlatih.</p>
+  <svg class="deco" viewBox="0 0 297 210" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <clipPath id="band2"><path d="M0 62 C60 54 130 60 206 52 L206 132 C130 140 60 136 0 140 Z"/></clipPath>
+    </defs>
+    <image href="img/forest.jpg" x="0" y="48" width="206" height="92" preserveAspectRatio="xMidYMid slice" clip-path="url(#band2)"/>
+    <path d="M0 62 C60 54 130 60 206 52" fill="none" stroke="#303860" stroke-width="1.6"/>
+    <path d="M0 140 C60 136 130 140 206 132" fill="none" stroke="#a88038" stroke-width="1.1"/>
+    <!-- lengkung navy di belakang produk panel kanan -->
+    <path d="M297 96 C262 104 236 128 224 170 L297 170 Z" fill="#303860"/>
+    <path d="M297 90 C258 98 230 124 218 170" fill="none" stroke="#a88038" stroke-width="1.1"/>
+  </svg>
 
-    <h4>Nilai perusahaan</h4>
+  <!-- Panel kiri: tentang kami -->
+  <div class="abs p2a">
+    <h3>Tentang kami</h3>
+    <p class="txt" style="margin-top:2mm">PT. Transwater Roberi Indonesia berdiri pada 2017 dan memproduksi air minum dalam kemasan ARTIC di Cileungsi, Bogor: botol 330 ml, 600 ml, dan galon 19 liter untuk konsumen bisnis dan individu.</p>
+    <p class="txt">Air minum harus aman dan konsisten dari satu pengiriman ke pengiriman berikutnya. Karena itu setiap tahap, dari pengolahan air sampai pengemasan, dijalankan dengan kontrol kualitas yang ketat.</p>
+  </div>
+
+  <!-- Panel tengah: nilai perusahaan -->
+  <div class="abs p2b">
+    <h3>Nilai perusahaan</h3>
     <div class="values">
-      <div><b>Integritas</b><span>Bekerja dengan jujur dan dapat dipercaya.</span></div>
-      <div><b>Kemitraan</b><span>Kerja sama jangka panjang dengan pelanggan dan mitra.</span></div>
-      <div><b>Profesional</b><span>Tim yang berdaya dan profesional di setiap bagian.</span></div>
-      <div><b>Pertumbuhan</b><span>Tumbuh bersama untuk Indonesia yang lebih sehat.</span></div>
-    </div>
-
-    <h4>Visi dan misi</h4>
-    <div class="vm">
-      <div><b>Visi</b><span>Menjadi produsen air minum dalam kemasan yang “Premium dan Higienis” untuk Indonesia yang sehat, dan menjangkau pasar internasional.</span></div>
-      <div><b>Misi</b><span>Menyediakan air minum yang “Premium dan Higienis” dengan teknologi modern demi kesehatan masyarakat Indonesia. Membangun citra merek dan layanan yang unggul, serta menjalin kemitraan yang saling menguntungkan.</span></div>
+      <div><svg class="i" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><p><b>Integritas</b><span>Bekerja dengan jujur dan dapat dipercaya.</span></p></div>
+      <div><svg class="i" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg><p><b>Kemitraan</b><span>Kerja sama jangka panjang dengan pelanggan dan mitra.</span></p></div>
+      <div><svg class="i" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><p><b>Profesional</b><span>Tim yang berdaya dan profesional di setiap bagian.</span></p></div>
+      <div><svg class="i" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg><p><b>Pertumbuhan</b><span>Tumbuh bersama untuk Indonesia yang lebih sehat.</span></p></div>
     </div>
   </div>
 
-  <div class="p2-main">
-    <div class="p2-head">
-      <div>
-        <p class="eyebrow">Proses produksi</p>
-        <h2>Dari pengolahan air sampai gudang</h2>
-        <div class="rule"></div>
-      </div>
-      <p class="note">Beberapa sudut fasilitas produksi kami di Cileungsi, Bogor.</p>
-    </div>
-    <div class="gallery">
-      <figure><img src="img/filter.jpg" alt="Tangki penyaringan air"><figcaption><i>01</i>Penyaringan air awal</figcaption></figure>
-      <figure><img src="img/ro.jpg" alt="Unit reverse osmosis"><figcaption><i>02</i>Unit reverse osmosis (RO)</figcaption></figure>
-      <figure><img src="img/filling.jpg" alt="Mesin pengisian botol"><figcaption><i>03</i>Mesin pengisian botol</figcaption></figure>
-      <figure><img src="img/capped.jpg" alt="Botol berlabel ARTIC di jalur produksi"><figcaption><i>04</i>Botol berlabel di jalur produksi</figcaption></figure>
-      <figure><img src="img/packing.jpg" alt="Pengemasan botol ke dalam karton"><figcaption><i>05</i>Pengemasan ke dalam karton</figcaption></figure>
-      <figure><img src="img/warehouse.jpg" alt="Gudang produk jadi"><figcaption><i>06</i>Gudang produk jadi</figcaption></figure>
-    </div>
+  <!-- Pita foto fasilitas -->
+  <div class="abs team">
+    <h4>Tim kami</h4>
+    <p>Tim karyawan terlatih yang fokus pada mutu produk dan inovasi berkelanjutan, dalam lingkungan kerja yang asri, aman, dan nyaman.</p>
+  </div>
+  <figure class="abs shot" style="left:55mm"><img src="img/filter.jpg" alt="Tangki penyaringan air"><span>Penyaringan air</span></figure>
+  <figure class="abs shot" style="left:85mm"><img src="img/ro.jpg" alt="Unit reverse osmosis"><span>Reverse osmosis (RO)</span></figure>
+  <figure class="abs shot" style="left:115mm"><img src="img/filling-far.jpg" alt="Mesin pengisian"><span>Mesin pengisian</span></figure>
+  <figure class="abs shot" style="left:145mm"><img src="img/filling.jpg" alt="Bagian dalam mesin pengisian"><span>Mesin pengisian (dalam)</span></figure>
+  <figure class="abs shot" style="left:175mm"><img src="img/capped.jpg" alt="Botol berlabel ARTIC di jalur produksi"><span>Botol berlabel di jalur produksi</span></figure>
 
-    <div class="qc">
-      <p class="eyebrow">Kontrol kualitas</p>
-      <h2>Kualitas dijaga di setiap tahap</h2>
-      <div class="rule"></div>
-      <div class="pillars">
-        <div><b><i>1</i>Sumber air diuji dulu</b><span>Proses dimulai dari pengujian sumber air yang ketat, sebelum air masuk ke produksi.</span></div>
-        <div><b><i>2</i>Pengolahan bertahap</b><span>Air diolah dengan teknologi modern, termasuk reverse osmosis, untuk menyingkirkan kemungkinan kontaminasi.</span></div>
-        <div><b><i>3</i>Diuji lagi setelah diolah</b><span>Pengujian tambahan setelah pengolahan memastikan air benar-benar bebas dari kontaminasi.</span></div>
-        <div><b><i>4</i>Higienis sampai dikemas</b><span>Kebersihan dan sterilisasi dijaga selama proses pengemasan.</span></div>
-        <div><b><i>5</i>Bisa dilacak per batch</b><span>Setiap batch diberi kode sehingga asal produksinya dapat ditelusuri.</span></div>
-        <div><b><i>6</i>Diaudit rutin</b><span>Audit rutin memastikan prosedur dipatuhi dan setiap masalah cepat ditangani.</span></div>
-      </div>
-      <p class="std">Proses produksi mengacu pada <b>SNI 3553:2023 (air mineral)</b>.</p>
-    </div>
+  <!-- Panel kiri bawah: visi & misi -->
+  <div class="abs p2a-low vm">
+    <div><h3>Visi</h3><p class="txt">Menjadi produsen air minum dalam kemasan yang <q>Premium dan Higienis</q> untuk Indonesia yang sehat, dan menjangkau pasar internasional.</p></div>
+    <div><h3>Misi</h3><p class="txt">Menyediakan air minum yang <q>Premium dan Higienis</q> dengan teknologi modern demi kesehatan masyarakat Indonesia. Membangun citra merek dan layanan yang unggul, serta menjalin kemitraan yang saling menguntungkan.</p></div>
   </div>
 
-  <footer class="legal">
-    <p class="label">Legalitas</p>
-    <ul>
-      <li><b>NIB</b><span>9120106342207</span></li>
-      <li><b>Merek terdaftar DJKI</b><span>IDM000818024</span></li>
-      <li><b>BPOM RI</b><span>MD 122882000900549 (botol)</span></li>
-      <li><b>Halal BPJPH</b><span>ID00110007032150723</span></li>
+  <!-- Panel tengah bawah: produk & standar -->
+  <div class="abs p2b-low">
+    <h3>Produk & proses</h3>
+    <ul class="exp">
+      <li>Air mineral ARTIC: botol 330 ml dan 600 ml (1 karton = 24 botol), galon 19 liter.</li>
+      <li>Pengolahan air dengan reverse osmosis (RO).</li>
+      <li>Proses produksi mengacu pada SNI 3553:2023 (air mineral).</li>
+      <li>Setiap batch diberi kode sehingga asal produksinya dapat ditelusuri.</li>
     </ul>
-  </footer>
+  </div>
+
+  <!-- Panel kanan: kontrol kualitas -->
+  <div class="abs p2c">
+    <h3>Kontrol kualitas</h3>
+    <div class="qc">
+      <div><i>1</i><p><b>Sumber air diuji dulu.</b> Pengujian sumber air yang ketat sebelum air masuk ke produksi.</p></div>
+      <div><i>2</i><p><b>Pengolahan bertahap.</b> Teknologi modern, termasuk reverse osmosis, untuk menyingkirkan kemungkinan kontaminasi.</p></div>
+      <div><i>3</i><p><b>Diuji lagi setelah diolah.</b> Pengujian tambahan memastikan air benar-benar bebas dari kontaminasi.</p></div>
+      <div><i>4</i><p><b>Higienis sampai dikemas.</b> Kebersihan dan sterilisasi dijaga selama pengemasan.</p></div>
+      <div><i>5</i><p><b>Bisa dilacak per batch.</b> Setiap batch diberi kode untuk penelusuran.</p></div>
+      <div><i>6</i><p><b>Diaudit rutin.</b> Prosedur dipatuhi dan setiap masalah cepat ditangani.</p></div>
+    </div>
+  </div>
+  <img class="abs p2c-floating" src="img/floating.png" alt="Produk ARTIC">
+  <div class="abs p2c-legal">
+    <img src="img/halal.png" alt="Halal Indonesia">
+    <div class="legal">
+      <div><b>BPOM RI</b>MD 122882000900549 (botol)</div>
+      <div><b>Halal BPJPH</b>ID00110007032150723</div>
+      <div><b>NIB</b>9120106342207 · <b style="display:inline">DJKI</b> IDM000818024</div>
+    </div>
+  </div>
 </section>
 
 </body>

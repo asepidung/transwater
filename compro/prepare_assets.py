@@ -1,4 +1,7 @@
-"""Kompres aset dari public/images ke compro/img supaya PDF tetap kecil (<3 MB)."""
+"""Kompres aset dari public/images ke compro/img supaya PDF tetap kecil (<3 MB).
+
+img/halal.png tidak dibuat di sini: dipotong dari compro ARTIC 2023 (logo Halal Indonesia).
+"""
 from pathlib import Path
 from PIL import Image
 
@@ -10,16 +13,16 @@ JOBS = [
     ('logo.png', 'logo.png', 720, 'PNG'),
     ('floating.png', 'floating.png', 760, 'PNG'),
     ('hero-splash.webp', 'splash.png', 640, 'PNG'),
-    ('hero-lake-wide.webp', 'lake.jpg', 1376, 'JPEG'),
     ('product_330ml.png', 'p330.jpg', 640, 'JPEG'),
     ('product_600ml.png', 'p600.jpg', 640, 'JPEG'),
     ('product_gallon.png', 'gallon.jpg', 640, 'JPEG'),
-    ('pabrik/filter.webp', 'filter.jpg', 900, 'JPEG'),
-    ('pabrik/ro.webp', 'ro.jpg', 900, 'JPEG'),
-    ('pabrik/filling-inside.webp', 'filling.jpg', 900, 'JPEG'),
-    ('pabrik/capped-label.webp', 'capped.jpg', 900, 'JPEG'),
-    ('pabrik/packing.webp', 'packing.jpg', 900, 'JPEG'),
-    ('pabrik/warehouse.webp', 'warehouse.jpg', 900, 'JPEG'),
+    ('hero_bg.png', 'stream.jpg', 900, 'JPEG'),
+    ('hero-bg-tall.webp', 'forest.jpg', 900, 'JPEG'),
+    ('pabrik/filling-far.webp', 'filling-far.jpg', 700, 'JPEG'),
+    ('pabrik/filter.webp', 'filter.jpg', 700, 'JPEG'),
+    ('pabrik/ro.webp', 'ro.jpg', 700, 'JPEG'),
+    ('pabrik/filling-inside.webp', 'filling.jpg', 700, 'JPEG'),
+    ('pabrik/capped-label.webp', 'capped.jpg', 700, 'JPEG'),
 ]
 
 OUT.mkdir(exist_ok=True)

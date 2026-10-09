@@ -11,7 +11,7 @@ OUT="${1:-ARTIC-Company-Profile.pdf}"
   --print-to-pdf="$PWD/$OUT" "file://$PWD/index.html" 2>/dev/null
 
 python3 - "$OUT" <<'PY'
-import sys, pathlib, fitz
+import sys, pathlib, pymupdf as fitz
 pdf = sys.argv[1]
 doc = fitz.open(pdf)
 pathlib.Path('preview').mkdir(exist_ok=True)
