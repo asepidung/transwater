@@ -43,6 +43,8 @@ export function AiButtons({ path = '' }: Props) {
 
   const [busy, setBusy] = useState<string | null>(null)
   const [note, setNote] = useState<{ kind: 'ok' | 'error'; text: string } | null>(null)
+  // Teks sebelum AI mengisi kolom, supaya bisa dikembalikan.
+  const [previous, setPrevious] = useState<string | null>(null)
   const [suggestion, setSuggestion] = useState<string | null>(() => {
     try {
       return typeof window === 'undefined' ? null : window.localStorage.getItem(storageKey)
@@ -59,9 +61,22 @@ export function AiButtons({ path = '' }: Props) {
     const r = await callAi(text, 'improve', code)
     setBusy(null)
     if (r.text) {
-      setValue(r.text)
-      setNote({ kind: 'ok', text: 'Sudah diisi ke kolom. Periksa dulu, lalu klik Simpan.' })
+      if (r.text.trim() === text.trim()) {
+        setPrevious(null)
+        setNote({ kind: 'ok', text: 'Teks sudah baik, tidak ada yang perlu diperbaiki. Kolom tidak diubah.' })
+      } else {
+        setPrevious(text)
+        setValue(r.text)
+        setNote({ kind: 'ok', text: 'Kolom sudah diperbarui dengan versi yang dirapikan. Periksa dulu, lalu klik Simpan (atau Kembalikan).' })
+      }
     } else setNote({ kind: 'error', text: r.error ?? 'Gagal.' })
+  }
+
+  function undo() {
+    if (previous == null) return
+    setValue(previous)
+    setPrevious(null)
+    setNote({ kind: 'ok', text: 'Teks sebelumnya dikembalikan.' })
   }
 
   async function makeEnglish() {
@@ -98,8 +113,9 @@ export function AiButtons({ path = '' }: Props) {
       const r = await callAi(source, 'translate', 'id')
       setBusy(null)
       if (r.text) {
+        setPrevious(text)
         setValue(r.text)
-        setNote({ kind: 'ok', text: 'Terjemahan sudah diisi ke kolom. Periksa dulu, lalu klik Simpan.' })
+        setNote({ kind: 'ok', text: 'Terjemahan sudah diisi ke kolom. Periksa dulu, lalu klik Simpan (atau Kembalikan).' })
       } else setNote({ kind: 'error', text: r.error ?? 'Gagal.' })
     } catch {
       setBusy(null)
@@ -109,6 +125,7 @@ export function AiButtons({ path = '' }: Props) {
 
   function useSuggestion() {
     if (suggestion == null) return
+    setPrevious(text)
     setValue(suggestion)
     try {
       window.localStorage.removeItem(storageKey)
@@ -139,6 +156,11 @@ export function AiButtons({ path = '' }: Props) {
         {code === 'id' && (
           <button type="button" className="artic-ai__btn" onClick={makeEnglish} disabled={busy !== null || !text.trim()}>
             {busy === 'translate' ? 'Menerjemahkan...' : '🌐 Buat versi Inggris'}
+          </button>
+        )}
+        {previous != null && (
+          <button type="button" className="artic-ai__btn" onClick={undo} disabled={busy !== null}>
+            ↩ Kembalikan
           </button>
         )}
         {canFromId && (
