@@ -257,9 +257,12 @@ export interface Post {
   id: number;
   title: string;
   /**
-   * Huruf kecil, tanpa spasi, dipakai di URL artikel.
+   * Huruf kecil, angka, dan tanda hubung. Dipakai di alamat artikel, mis. peresmian-lini-baru.
    */
   slug: string;
+  /**
+   * Tanggal yang tampil di artikel. Artikel hanya tampil di situs jika statusnya Terbit.
+   */
   publishedAt?: string | null;
   cover?: (number | null) | Media;
   /**

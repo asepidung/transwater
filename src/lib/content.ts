@@ -145,6 +145,19 @@ export interface SiteContent {
       error: string
     }
   }
+  news: {
+    eyebrow: string
+    title: string
+    description: string
+    empty: string
+    readMore: string
+    back: string
+    othersTitle: string
+    ctaTitle: string
+    ctaText: string
+    navLabel: string
+    dateLocale: string
+  }
   footer: {
     description: string
     menuTitle: string
@@ -427,6 +440,19 @@ const id: SiteContent = {
       error: 'Gagal mengirim. Silakan coba lagi atau hubungi kami lewat WhatsApp.',
     },
   },
+  news: {
+    eyebrow: 'Berita',
+    title: 'Kabar terbaru dari ARTIC',
+    description: 'Informasi, kegiatan, dan pembaruan dari PT. Transwater Roberi Indonesia.',
+    empty: 'Belum ada artikel. Silakan kembali lagi nanti.',
+    readMore: 'Baca selengkapnya',
+    back: 'Semua berita',
+    othersTitle: 'Berita lainnya',
+    ctaTitle: 'Butuh pasokan air minum untuk bisnis Anda?',
+    ctaText: 'Ceritakan kebutuhan Anda, tim kami akan mengirimkan penawaran.',
+    navLabel: 'Berita',
+    dateLocale: 'id-ID',
+  },
   footer: {
     description: 'Air minum dalam kemasan ARTIC oleh PT. Transwater Roberi Indonesia.',
     menuTitle: 'Menu',
@@ -688,6 +714,19 @@ const en: SiteContent = {
       successText: 'Thank you, we will contact you shortly.',
       error: 'Failed to send. Please try again or contact us on WhatsApp.',
     },
+  },
+  news: {
+    eyebrow: 'News',
+    title: 'Latest from ARTIC',
+    description: 'Updates, activities, and announcements from PT. Transwater Roberi Indonesia.',
+    empty: 'No articles yet. Please check back soon.',
+    readMore: 'Read more',
+    back: 'All news',
+    othersTitle: 'More news',
+    ctaTitle: 'Need drinking water supply for your business?',
+    ctaText: 'Tell us what you need and our team will send a quotation.',
+    navLabel: 'News',
+    dateLocale: 'en-US',
   },
   footer: {
     description: 'ARTIC bottled drinking water by PT. Transwater Roberi Indonesia.',

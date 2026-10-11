@@ -16,11 +16,11 @@ const rows = <T, R>(value: T[] | null | undefined, map: (row: T) => R, fallback:
 
 const safeUrl = (value: string | null | undefined, fallback: string) => (isSafeHttpUrl(value) ? value.trim() : fallback)
 
-const isMedia = (value: unknown): value is Media => typeof value === 'object' && value !== null && 'url' in value
+export const isMedia = (value: unknown): value is Media => typeof value === 'object' && value !== null && 'url' in value
 
-function mediaUrl(media: unknown, fallback: string): string {
+export function mediaUrl(media: unknown, fallback: string, size: 'card' | 'hero' | 'thumbnail' = 'card'): string {
   if (!isMedia(media)) return fallback
-  const url = media.sizes?.card?.url ?? media.url
+  const url = media.sizes?.[size]?.url ?? media.url
   if (!url) return fallback
   // Versi = waktu file terakhir diubah, supaya foto yang diganti tidak tertahan di cache browser.
   const v = media.updatedAt ? Date.parse(media.updatedAt) : 0
@@ -33,7 +33,7 @@ export async function getSiteContent(localeParam: string): Promise<SiteContent> 
 
   try {
     const payload = await getPayload({ config })
-    const [home, settings, aboutPage, info, products] = await Promise.all([
+    const [home, settings, aboutPage, info, products, postCount] = await Promise.all([
       payload.findGlobal({ slug: 'home-page', locale, depth: 0 }),
       payload.findGlobal({ slug: 'site-settings', locale, depth: 0 }),
       payload.findGlobal({ slug: 'about-page', locale, depth: 0 }),
@@ -46,6 +46,7 @@ export async function getSiteContent(localeParam: string): Promise<SiteContent> 
         pagination: false,
         where: { _status: { equals: 'published' } },
       }),
+      payload.count({ collection: 'posts', where: { _status: { equals: 'published' } } }),
     ])
 
     const productItems: ProductItem[] = rows(
@@ -65,6 +66,11 @@ export async function getSiteContent(localeParam: string): Promise<SiteContent> 
     return {
       ...d,
       showCredit: settings.showDeveloperCredit !== false,
+      // Menu "Berita" hanya muncul jika sudah ada artikel yang terbit (sebelum Kontak).
+      nav:
+        postCount.totalDocs > 0
+          ? [...d.nav.slice(0, -1), { label: d.news.navLabel, href: `/${locale}/berita` }, ...d.nav.slice(-1)]
+          : d.nav,
       company: {
         ...d.company,
         name: text(settings.companyName, d.company.name),
