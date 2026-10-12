@@ -73,7 +73,7 @@ export default buildConfig({
         Logo: '/components/admin/Logo#Logo',
         Icon: '/components/admin/Icon#Icon',
       },
-      beforeDashboard: ['/components/admin/DashboardIntro#DashboardIntro', '/components/admin/PushSettings#PushSettings'],
+      beforeDashboard: ['/components/admin/DashboardIntro#DashboardIntro', '/components/admin/InstallApp#InstallApp', '/components/admin/PushSettings#PushSettings'],
       afterLogin: ['/components/admin/AdminCredit#AdminCredit'],
       afterNavLinks: ['/components/admin/AdminCredit#AdminCredit'],
     },
