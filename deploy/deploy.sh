@@ -6,14 +6,23 @@
 # Urutan sengaja begini: ambil kode -> pasang dependensi -> BACKUP -> migrasi DB -> build -> reload.
 # Build membaca database (halaman statis dibuat dari konten CMS), jadi migrasi HARUS sebelum build.
 set -euo pipefail
-APP_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+APP_DIR="${DEPLOY_APP_DIR:-$(cd "$(dirname "$0")/.." && pwd)}"
+# Jalankan dari SALINAN skrip ini. Langkah 1 (git pull) bisa mengganti isi deploy.sh di tengah eksekusi;
+# bash membaca skrip sambil jalan, jadi tanpa salinan, skrip yang berubah bisa merusak deploy yang sedang berlangsung.
+if [ -z "${DEPLOY_SELF_COPY:-}" ]; then
+  SELF_COPY="$(mktemp /tmp/artic-deploy.XXXXXX)"
+  cp "$0" "$SELF_COPY"
+  DEPLOY_SELF_COPY=1 DEPLOY_APP_DIR="$APP_DIR" exec bash "$SELF_COPY" "$@"
+fi
+trap 'rm -f "$0"' EXIT
 ENV_FILE="${ENV_FILE:-$HOME/artic-data/.env.production}"
 BRANCH="${BRANCH:-main}"
-PORT_CHECK="${PORT:-3010}"
 
 [ -f "$ENV_FILE" ] || { echo "Env tidak ditemukan: $ENV_FILE"; exit 1; }
 set -a; . "$ENV_FILE"; set +a
 export NODE_ENV=production
+# Port untuk cek kesehatan HARUS dibaca SETELAH env dimuat (staging 3010, produksi 3011).
+PORT_CHECK="${PORT:-3010}"
 cd "$APP_DIR"
 
 echo "== 1/6 Ambil kode ($BRANCH)"
@@ -34,7 +43,22 @@ else
 fi
 
 echo "== 4/6 Migrasi database"
-npm run migrate
+# Migrasi pernah "diam-diam tidak jalan" (tanpa pesan, exit 0), jadi hasilnya DIVERIFIKASI:
+# jumlah file migrasi harus sama dengan jumlah yang tercatat di database. Ulangi sampai 3x, lalu batalkan sebelum build.
+migrations_complete() {
+  local files applied
+  files="$(ls src/migrations/*.ts 2>/dev/null | grep -vc 'index.ts' || true)"
+  applied="$(sqlite3 "${DATABASE_URL#file:}" 'select count(*) from payload_migrations;' 2>/dev/null || echo -1)"
+  [ "$files" = "$applied" ]
+}
+for attempt in 1 2 3; do
+  npm run migrate || true
+  migrations_complete && break
+  echo "-- Migrasi belum lengkap (percobaan $attempt dari 3), mengulang..."
+  sleep 2
+done
+migrations_complete || { echo "GAGAL: migrasi database tidak lengkap setelah 3 percobaan. Deploy dibatalkan SEBELUM build."; exit 1; }
+echo "-- Migrasi lengkap."
 if [ "$FIRST_RUN" = "1" ]; then
   echo "-- Deploy pertama: isi data awal (produk, foto, teks) sebelum build"
   ALLOW_PROD_SEED=1 npm run seed
