@@ -27,9 +27,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       type: 'website',
       siteName: title,
       locale: locale === 'en' ? 'en_US' : 'id_ID',
-      images: [{ url: asset('/images/logo.png'), alt: c.company.brand }],
+      // Gambar preview 1200x630 (WhatsApp, Facebook, LinkedIn). Halaman yang punya gambar sendiri (artikel) menimpanya.
+      images: [{ url: asset('/images/og.jpg'), width: 1200, height: 630, alt: `${c.company.brand} Premium Mineral Water` }],
     },
-    twitter: { card: 'summary' },
+    twitter: { card: 'summary_large_image', images: [asset('/images/og.jpg')] },
   }
 }
 
