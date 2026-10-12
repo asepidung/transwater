@@ -1,5 +1,6 @@
 'use server'
 
+import { notifyNewQuote } from '@/lib/push'
 import { headers } from 'next/headers'
 import { getPayload } from 'payload'
 import config from '@payload-config'
@@ -76,10 +77,13 @@ export async function submitQuote(fd: FormData): Promise<QuoteResult> {
         : (site.products.items.find((p) => p.id === rawProduct)?.name ?? rawProduct)
     const volume = field(fd, 'volume')
     const message = field(fd, 'message')
-    await payload.create({
+    const saved = await payload.create({
       collection: 'messages',
       data: { company, name, contact, product, volume, message, locale },
     })
+
+    // Notifikasi dorong ke perangkat admin (tidak menunggu dan tidak boleh mengganggu pengunjung).
+    void notifyNewQuote(payload, { id: saved.id, company, product })
 
     // Notifikasi email ke tim ARTIC. Pesan sudah tersimpan di CMS, jadi kegagalan kirim
     // email tidak boleh membuat pengunjung melihat galat.

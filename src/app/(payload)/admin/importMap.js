@@ -26,6 +26,7 @@ import { Icon as Icon_dfe4008080d895d460898c3a6155e9ba } from '../../../componen
 import { Logo as Logo_91a09b539d3c86b0aebf520e7564ce08 } from '../../../components/admin/Logo'
 import { AdminCredit as AdminCredit_2ad128b37c73a123d5559ab2afd1bed5 } from '../../../components/admin/AdminCredit'
 import { DashboardIntro as DashboardIntro_b336d34cb88040747692272433eeb172 } from '../../../components/admin/DashboardIntro'
+import { PushSettings as PushSettings_7f2f57c2714675a02424daaaf40b8696 } from '../../../components/admin/PushSettings'
 import { PasswordToggle as PasswordToggle_830ecdc7e02da7a063f1ed533cd09d6b } from '../../../components/admin/PasswordToggle'
 import { PwaRegister as PwaRegister_adf892359c2743d47f84f88eca8ec353 } from '../../../components/admin/PwaRegister'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
@@ -60,6 +61,7 @@ export const importMap = {
   "/components/admin/Logo#Logo": Logo_91a09b539d3c86b0aebf520e7564ce08,
   "/components/admin/AdminCredit#AdminCredit": AdminCredit_2ad128b37c73a123d5559ab2afd1bed5,
   "/components/admin/DashboardIntro#DashboardIntro": DashboardIntro_b336d34cb88040747692272433eeb172,
+  "/components/admin/PushSettings#PushSettings": PushSettings_7f2f57c2714675a02424daaaf40b8696,
   "/components/admin/PasswordToggle#PasswordToggle": PasswordToggle_830ecdc7e02da7a063f1ed533cd09d6b,
   "/components/admin/PwaRegister#PwaRegister": PwaRegister_adf892359c2743d47f84f88eca8ec353,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1

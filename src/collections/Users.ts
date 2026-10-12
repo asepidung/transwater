@@ -61,15 +61,18 @@ export const Users: CollectionConfig = {
     beforeDelete: [
       async ({ req, id }) => {
         const target = await req.payload.findByID({ collection: 'users', id, depth: 0, req })
-        if (target.role !== 'owner') return
-        const others = await req.payload.count({
-          collection: 'users',
-          where: { and: [{ role: { equals: 'owner' } }, { id: { not_equals: id } }] },
-          req,
-        })
-        if (others.totalDocs === 0) {
-          throw new APIError('Pemilik terakhir tidak bisa dihapus. Jadikan akun lain Pemilik dulu.', 400, undefined, true)
+        if (target.role === 'owner') {
+          const others = await req.payload.count({
+            collection: 'users',
+            where: { and: [{ role: { equals: 'owner' } }, { id: { not_equals: id } }] },
+            req,
+          })
+          if (others.totalDocs === 0) {
+            throw new APIError('Pemilik terakhir tidak bisa dihapus. Jadikan akun lain Pemilik dulu.', 400, undefined, true)
+          }
         }
+        // Perangkat notifikasi milik pengguna ikut dibersihkan (kolom pengguna di tabel itu wajib terisi).
+        await req.payload.delete({ collection: 'push-subscriptions', where: { user: { equals: id } }, req, overrideAccess: true })
       },
     ],
   },

@@ -15,6 +15,7 @@ import { Products } from './collections/Products'
 import { Posts } from './collections/Posts'
 import { Messages } from './collections/Messages'
 import { ActivityLog } from './collections/ActivityLog'
+import { PushSubscriptions } from './collections/PushSubscriptions'
 import { withAuditCollection, withAuditGlobal } from './lib/audit'
 import { withAiCollection, withAiGlobal } from './lib/ai-fields'
 import { SiteSettings } from './globals/SiteSettings'
@@ -72,12 +73,12 @@ export default buildConfig({
         Logo: '/components/admin/Logo#Logo',
         Icon: '/components/admin/Icon#Icon',
       },
-      beforeDashboard: ['/components/admin/DashboardIntro#DashboardIntro'],
+      beforeDashboard: ['/components/admin/DashboardIntro#DashboardIntro', '/components/admin/PushSettings#PushSettings'],
       afterLogin: ['/components/admin/AdminCredit#AdminCredit'],
       afterNavLinks: ['/components/admin/AdminCredit#AdminCredit'],
     },
   },
-  collections: [Users, Media, Products, Posts, Messages, ActivityLog].map(withAiCollection).map(withAuditCollection),
+  collections: [Users, Media, Products, Posts, Messages, ActivityLog, PushSubscriptions].map(withAiCollection).map(withAuditCollection),
   globals: [SiteSettings, HomePage, AboutPage, InfoPages].map(withAiGlobal).map(withAuditGlobal),
   localization: {
     locales: [

@@ -5,6 +5,7 @@ import * as migration_20260930_091240_video_section from './20260930_091240_vide
 import * as migration_20261001_143023_site_hours from './20261001_143023_site_hours';
 import * as migration_20261002_032616_activity_log from './20261002_032616_activity_log';
 import * as migration_20261002_122200_user_role from './20261002_122200_user_role';
+import * as migration_20261012_030745_push_subscriptions from './20261012_030745_push_subscriptions';
 
 export const migrations = [
   {
@@ -40,6 +41,11 @@ export const migrations = [
   {
     up: migration_20261002_122200_user_role.up,
     down: migration_20261002_122200_user_role.down,
-    name: '20261002_122200_user_role'
+    name: '20261002_122200_user_role',
+  },
+  {
+    up: migration_20261012_030745_push_subscriptions.up,
+    down: migration_20261012_030745_push_subscriptions.down,
+    name: '20261012_030745_push_subscriptions'
   },
 ];

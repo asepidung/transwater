@@ -73,6 +73,7 @@ export interface Config {
     posts: Post;
     messages: Message;
     'activity-log': ActivityLog;
+    'push-subscriptions': PushSubscription;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     messages: MessagesSelect<false> | MessagesSelect<true>;
     'activity-log': ActivityLogSelect<false> | ActivityLogSelect<true>;
+    'push-subscriptions': PushSubscriptionsSelect<false> | PushSubscriptionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -326,6 +328,22 @@ export interface ActivityLog {
   createdAt: string;
 }
 /**
+ * Perangkat yang menerima notifikasi pesan penawaran baru. Hapus baris untuk mencabut sebuah perangkat.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "push-subscriptions".
+ */
+export interface PushSubscription {
+  id: number;
+  device?: string | null;
+  user: number | User;
+  endpoint: string;
+  p256dh: string;
+  auth: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -372,6 +390,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'activity-log';
         value: number | ActivityLog;
+      } | null)
+    | ({
+        relationTo: 'push-subscriptions';
+        value: number | PushSubscription;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -556,6 +578,19 @@ export interface ActivityLogSelect<T extends boolean = true> {
   item?: T;
   fields?: T;
   summary?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "push-subscriptions_select".
+ */
+export interface PushSubscriptionsSelect<T extends boolean = true> {
+  device?: T;
+  user?: T;
+  endpoint?: T;
+  p256dh?: T;
+  auth?: T;
   updatedAt?: T;
   createdAt?: T;
 }

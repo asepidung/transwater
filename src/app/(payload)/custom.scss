@@ -207,3 +207,42 @@ html[data-theme='light'] a:not(.btn):not([class*='nav']) {
     white-space: pre-wrap;
   }
 }
+
+/* Kartu notifikasi di dasbor (src/components/admin/PushSettings.tsx) */
+.artic-push {
+  margin: 0 0 24px;
+  padding: 14px 16px;
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 10px;
+  background: var(--theme-elevation-50);
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  &__badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--theme-elevation-150);
+    &.is-on {
+      background: #2e7d32;
+      color: #fff;
+    }
+  }
+  &__text {
+    margin: 0 0 10px;
+    font-size: 13px;
+    color: var(--theme-elevation-700);
+    line-height: 1.5;
+  }
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
