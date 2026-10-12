@@ -63,11 +63,15 @@
   .label { font-size: 9.4pt; font-weight: 700; color: var(--navy-500); }
   .wa { margin-top: 2.4mm; display: flex; align-items: center; gap: 2.6mm; font-size: 18pt; font-weight: 800; color: var(--navy-900); }
   .wa svg { width: 7mm; height: 7mm; color: var(--navy-900); }
-  .clist { margin-top: 5mm; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 3.6mm 3mm; }
-  .clist li { display: flex; gap: 2.2mm; font-size: 9.4pt; line-height: 1.3; color: var(--navy-800); }
+  .clist { margin-top: 5mm; width: 66mm; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 3.6mm 3mm; }
+  .clist li { white-space: nowrap; display: flex; gap: 2.2mm; font-size: 9.4pt; line-height: 1.3; color: var(--navy-800); }
   .clist li svg { width: 4mm; height: 4mm; color: var(--gold-500); }
   .clist li b { display: block; font-size: 7.6pt; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--navy-500); }
   .clist li.wide { grid-column: span 2; }
+  .b-qr { left: 175mm; top: 40mm; width: 22mm; background: #d6202f; border-radius: 2mm; overflow: hidden; text-align: center; box-shadow: 0 .8mm 2mm rgba(18,21,42,.2); }
+  .b-qr p { color: #fff; font-size: 8.6pt; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 1.2mm 0; }
+  .b-qr img { display: block; width: 18mm; height: 18mm; margin: 0 auto; background: #fff; padding: 0; }
+  .b-qr .pad { background: #fff; padding: 2mm 2mm 2.4mm; }
   .b-prod { left: 107mm; top: 156mm; width: 84mm; }
   .b-prod .name { margin-top: 1mm; font-size: 9.4pt; font-weight: 800; color: var(--navy-900); }
   .b-prod .txt { margin-top: .6mm; font-size: 8.6pt; line-height: 1.42; }
@@ -172,12 +176,16 @@
     <p class="label">Hubungi kami:</p>
     <p class="wa"><svg class="i" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2Z" stroke-width="1.4"/></svg>+62 813-9964-1608</p>
     <ul class="clist">
-      <li><svg class="i" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><div><b>Telepon kantor</b>(021) 8993-1363</div></li>
+      <li><svg class="i" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><div><b>Kantor</b>(021) 8993-1363</div></li>
       <li><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><div><b>Jam kerja</b>08.00 - 16.00 WIB</div></li>
       <li class="wide"><svg class="i" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><div><b>Email</b>transwaterroberi03.sn@gmail.com</div></li>
       <li><svg class="i" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg><div><b>Instagram</b>@articwater.id</div></li>
       <li><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg><div><b>Website</b>artic.co.id</div></li>
     </ul>
+  </div>
+  <div class="abs b-qr">
+    <p>Scan us</p>
+    <div class="pad"><img src="img/qr.svg" alt="QR code ke artic.co.id"></div>
   </div>
   <div class="abs b-prod">
     <p class="label">Diproduksi oleh:</p>
