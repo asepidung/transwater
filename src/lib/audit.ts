@@ -50,7 +50,7 @@ async function write(req: PayloadRequest, e: Entry) {
 }
 
 export function withAuditCollection(c: CollectionConfig): CollectionConfig {
-  if (c.slug === 'activity-log' || c.slug === 'push-subscriptions') return c
+  if (c.slug === 'activity-log' || c.slug === 'push-subscriptions' || c.slug === 'approval-requests') return c
   const area = label(c.labels?.singular, c.slug)
   const title = (doc: Doc) => {
     const key = c.admin?.useAsTitle

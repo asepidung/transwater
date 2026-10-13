@@ -16,6 +16,7 @@ import { Posts } from './collections/Posts'
 import { Messages } from './collections/Messages'
 import { ActivityLog } from './collections/ActivityLog'
 import { PushSubscriptions } from './collections/PushSubscriptions'
+import { ApprovalRequests } from './collections/ApprovalRequests'
 import { withAuditCollection, withAuditGlobal } from './lib/audit'
 import { withApprovalCollection, withApprovalGlobal } from './lib/approval'
 import { withAiCollection, withAiGlobal } from './lib/ai-fields'
@@ -87,6 +88,7 @@ export default buildConfig({
     Messages,
     ActivityLog,
     PushSubscriptions,
+    ApprovalRequests,
   ].map(withAiCollection).map(withAuditCollection),
   globals: [
     withApprovalGlobal(SiteSettings, '/id/kontak'),

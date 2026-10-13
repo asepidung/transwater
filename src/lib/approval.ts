@@ -1,9 +1,9 @@
 import { APIError, type CollectionBeforeChangeHook, type CollectionConfig, type GlobalBeforeChangeHook, type GlobalConfig, type PayloadRequest } from 'payload'
-import { sendPush } from './push'
 
 // Alur persetujuan: Staf hanya boleh MENYIMPAN DRAF. Draf tidak tampil di situs publik.
 // Pemilik melihat hasilnya lewat tombol "Pratinjau", lalu menekan "Terbitkan" kalau sudah setuju.
-// Pemilik menerima notifikasi (PWA) setiap Staf menyimpan perubahan.
+// Setelah selesai, Staf menekan "Ajukan terbit" (lihat RequestPublish + /api/approval): Pemilik dapat notifikasi
+// dan penanda di dasbor, melihat pratinjau, lalu menerbitkan.
 
 type RoleUser = { id: number | string; role?: 'owner' | 'staff' | null; username?: string | null; name?: string | null } | null | undefined
 
@@ -19,25 +19,22 @@ const blockDirect = (req: PayloadRequest, data: Record<string, unknown> | undefi
   }
 }
 
-async function notifyOwners(req: PayloadRequest, area: string, url: string, tag: string) {
+// Permintaan terbit dihapus otomatis setelah Pemilik menerbitkan (status terbit).
+async function clearRequests(req: PayloadRequest, target: string, docId: string) {
   try {
-    const u = req.user as RoleUser
-    const who = u?.name || u?.username || 'Staf'
-    const owners = await req.payload.find({ collection: 'users', where: { role: { equals: 'owner' } }, limit: 20, depth: 0, overrideAccess: true })
-    await Promise.allSettled(
-      owners.docs.map((o) =>
-        sendPush(req.payload, { title: 'Menunggu persetujuan', body: `${who} mengubah "${area}". Buka untuk pratinjau dan terbitkan.`, url, tag }, o.id),
-      ),
-    )
+    await req.payload.delete({
+      collection: 'approval-requests',
+      where: { and: [{ target: { equals: target } }, { docId: { equals: docId } }] },
+      overrideAccess: true,
+    })
   } catch (err) {
-    req.payload.logger.error({ err }, '[approval] gagal memberi tahu Pemilik')
+    req.payload.logger.error({ err }, '[approval] gagal menghapus permintaan terbit')
   }
 }
 
 const previewPath = (path: string) => `/api/preview?path=${encodeURIComponent(path)}`
 
 export function withApprovalCollection(c: CollectionConfig, pagePath: (doc: { slug?: string }) => string): CollectionConfig {
-  const area = typeof c.labels?.singular === 'string' ? c.labels.singular : c.slug
   const guard: CollectionBeforeChangeHook = ({ data, req }) => {
     blockDirect(req, data as Record<string, unknown>)
     return data
@@ -45,14 +42,18 @@ export function withApprovalCollection(c: CollectionConfig, pagePath: (doc: { sl
   return {
     ...c,
     access: { ...c.access, delete: ownerOnly },
-    admin: { ...c.admin, preview: (doc) => previewPath(pagePath(doc as { slug?: string })) },
+    admin: {
+      ...c.admin,
+      preview: (doc) => previewPath(pagePath(doc as { slug?: string })),
+      components: { ...c.admin?.components, edit: { ...c.admin?.components?.edit, beforeDocumentControls: ['/components/admin/RequestPublish#RequestPublish'] } },
+    },
     hooks: {
       ...c.hooks,
       beforeChange: [...(c.hooks?.beforeChange ?? []), guard],
       afterChange: [
         ...(c.hooks?.afterChange ?? []),
         async ({ doc, req }) => {
-          if (isStaff(req.user)) await notifyOwners(req, `${area}: ${(doc as { title?: string }).title ?? ''}`, `/admin/collections/${c.slug}/${doc.id}`, `approval-${c.slug}-${doc.id}`)
+          if ((doc as { _status?: string })._status === 'published') await clearRequests(req, c.slug, String(doc.id))
           return doc
         },
       ],
@@ -61,7 +62,6 @@ export function withApprovalCollection(c: CollectionConfig, pagePath: (doc: { sl
 }
 
 export function withApprovalGlobal(g: GlobalConfig, pagePath: string): GlobalConfig {
-  const area = typeof g.label === 'string' ? g.label : g.slug
   const guard: GlobalBeforeChangeHook = ({ data, req }) => {
     blockDirect(req, data as Record<string, unknown>)
     return data
@@ -71,14 +71,18 @@ export function withApprovalGlobal(g: GlobalConfig, pagePath: string): GlobalCon
     // Draf global tidak boleh terbaca publik lewat API; situs memakai Local API di server.
     access: { ...g.access, read: ({ req: { user } }) => Boolean(user) },
     versions: { drafts: true, max: 25 },
-    admin: { ...g.admin, preview: () => previewPath(pagePath) },
+    admin: {
+      ...g.admin,
+      preview: () => previewPath(pagePath),
+      components: { ...g.admin?.components, elements: { ...g.admin?.components?.elements, beforeDocumentControls: ['/components/admin/RequestPublish#RequestPublish'] } },
+    },
     hooks: {
       ...g.hooks,
       beforeChange: [...(g.hooks?.beforeChange ?? []), guard],
       afterChange: [
         ...(g.hooks?.afterChange ?? []),
         async ({ doc, req }) => {
-          if (isStaff(req.user)) await notifyOwners(req, area, `/admin/globals/${g.slug}`, `approval-${g.slug}`)
+          if ((doc as { _status?: string })._status === 'published') await clearRequests(req, g.slug, '')
           return doc
         },
       ],

@@ -246,3 +246,7 @@ html[data-theme='light'] a:not(.btn):not([class*='nav']) {
     gap: 6px;
   }
 }
+
+.artic-request { display: flex; align-items: center; gap: 0.5rem; margin-right: 0.75rem; }
+.artic-request__done { color: #15803d; font-weight: 600; font-size: 0.85rem; }
+.artic-request__err { color: #dc2626; font-size: 0.8rem; }

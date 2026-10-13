@@ -154,7 +154,8 @@ export async function runAi(mode: AiMode, locale: AiLocale, text: string, temper
   let lastError: unknown
 
   for (const model of MODELS) {
-    for (let attempt = 0; attempt < TRIES_PER_MODEL; attempt++) {
+    const tries = model === MODELS[0] ? TRIES_PER_MODEL + 2 : TRIES_PER_MODEL // model utama lebih sabar (503 Google biasanya sesaat)
+    for (let attempt = 0; attempt < tries; attempt++) {
       const remaining = TOTAL_BUDGET_MS - (Date.now() - started)
       if (remaining < 3_000) break
       try {
@@ -174,7 +175,7 @@ export async function runAi(mode: AiMode, locale: AiLocale, text: string, temper
           throw new AiError('Kunci AI ditolak oleh Google. Hubungi pengelola website.', 502)
         }
         // 503/5xx/timeout: coba lagi sekali setelah jeda 1 dtk, lalu model berikutnya.
-        if (attempt < TRIES_PER_MODEL - 1) await sleep(1_000)
+        if (attempt < tries - 1) await sleep(1_500)
       }
     }
   }

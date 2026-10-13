@@ -74,6 +74,7 @@ export interface Config {
     messages: Message;
     'activity-log': ActivityLog;
     'push-subscriptions': PushSubscription;
+    'approval-requests': ApprovalRequest;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +89,7 @@ export interface Config {
     messages: MessagesSelect<false> | MessagesSelect<true>;
     'activity-log': ActivityLogSelect<false> | ActivityLogSelect<true>;
     'push-subscriptions': PushSubscriptionsSelect<false> | PushSubscriptionsSelect<true>;
+    'approval-requests': ApprovalRequestsSelect<false> | ApprovalRequestsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -345,6 +347,20 @@ export interface PushSubscription {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "approval-requests".
+ */
+export interface ApprovalRequest {
+  id: number;
+  target: string;
+  docId?: string | null;
+  title: string;
+  requestedBy?: string | null;
+  note?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -394,6 +410,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'push-subscriptions';
         value: number | PushSubscription;
+      } | null)
+    | ({
+        relationTo: 'approval-requests';
+        value: number | ApprovalRequest;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -591,6 +611,19 @@ export interface PushSubscriptionsSelect<T extends boolean = true> {
   endpoint?: T;
   p256dh?: T;
   auth?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "approval-requests_select".
+ */
+export interface ApprovalRequestsSelect<T extends boolean = true> {
+  target?: T;
+  docId?: T;
+  title?: T;
+  requestedBy?: T;
+  note?: T;
   updatedAt?: T;
   createdAt?: T;
 }
