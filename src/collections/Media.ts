@@ -1,6 +1,7 @@
 import path from 'path'
 import { APIError, type CollectionConfig } from 'payload'
 import { revalidateSite } from '../lib/revalidate'
+import { ownerOnly } from '../lib/approval'
 
 // Lokasi file upload. Di produksi arahkan ke folder DI LUAR folder aplikasi (mis. /home/user/artic-data/media)
 // supaya deploy ulang tidak menghapus foto. Default untuk lokal: ./media
@@ -9,8 +10,12 @@ const mediaDir = process.env.MEDIA_DIR ? path.resolve(process.env.MEDIA_DIR) : p
 export const Media: CollectionConfig = {
   slug: 'media',
   labels: { singular: 'Foto/Berkas', plural: 'Foto & Berkas' },
+  // Staf boleh mengunggah foto baru; mengubah/menghapus foto yang sudah ada hanya Pemilik
+  // (foto yang sudah dipakai di situs langsung tayang, tanpa draf).
   access: {
     read: () => true,
+    update: ownerOnly,
+    delete: ownerOnly,
   },
   hooks: {
     // Foto diganti/dihapus -> halaman statis dirender ulang supaya tidak menampilkan URL lama.

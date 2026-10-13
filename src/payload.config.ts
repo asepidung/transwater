@@ -17,6 +17,7 @@ import { Messages } from './collections/Messages'
 import { ActivityLog } from './collections/ActivityLog'
 import { PushSubscriptions } from './collections/PushSubscriptions'
 import { withAuditCollection, withAuditGlobal } from './lib/audit'
+import { withApprovalCollection, withApprovalGlobal } from './lib/approval'
 import { withAiCollection, withAiGlobal } from './lib/ai-fields'
 import { SiteSettings } from './globals/SiteSettings'
 import { HomePage } from './globals/HomePage'
@@ -73,13 +74,26 @@ export default buildConfig({
         Logo: '/components/admin/Logo#Logo',
         Icon: '/components/admin/Icon#Icon',
       },
-      beforeDashboard: ['/components/admin/DashboardIntro#DashboardIntro', '/components/admin/InstallApp#InstallApp', '/components/admin/PushSettings#PushSettings'],
+      beforeDashboard: ['/components/admin/DashboardIntro#DashboardIntro', '/components/admin/PendingApprovals#PendingApprovals', '/components/admin/InstallApp#InstallApp', '/components/admin/PushSettings#PushSettings'],
       afterLogin: ['/components/admin/AdminCredit#AdminCredit'],
       afterNavLinks: ['/components/admin/AdminCredit#AdminCredit'],
     },
   },
-  collections: [Users, Media, Products, Posts, Messages, ActivityLog, PushSubscriptions].map(withAiCollection).map(withAuditCollection),
-  globals: [SiteSettings, HomePage, AboutPage, InfoPages].map(withAiGlobal).map(withAuditGlobal),
+  collections: [
+    Users,
+    Media,
+    withApprovalCollection(Products, (d) => `/id/produk/${d.slug ?? ''}`),
+    withApprovalCollection(Posts, (d) => `/id/berita/${d.slug ?? ''}`),
+    Messages,
+    ActivityLog,
+    PushSubscriptions,
+  ].map(withAiCollection).map(withAuditCollection),
+  globals: [
+    withApprovalGlobal(SiteSettings, '/id/kontak'),
+    withApprovalGlobal(HomePage, '/id'),
+    withApprovalGlobal(AboutPage, '/id/tentang'),
+    withApprovalGlobal(InfoPages, '/id/kualitas'),
+  ].map(withAiGlobal).map(withAuditGlobal),
   localization: {
     locales: [
       { label: 'Bahasa Indonesia', code: 'id' },

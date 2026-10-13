@@ -18,7 +18,7 @@ export async function DashboardIntro({ payload, user }: Props) {
   return (
     <div className="artic-dash">
       <h2 className="artic-dash__hello">Halo{who ? `, ${who}` : ''} 👋</h2>
-      <p className="artic-dash__sub">Kelola isi website ARTIC dari sini. Perubahan tampil di situs setelah disimpan/diterbitkan.</p>
+      <p className="artic-dash__sub">Kelola isi website ARTIC dari sini. Perubahan dari Staf berupa draf: tampil di situs setelah Pemilik menerbitkannya.</p>
 
       <div className="artic-dash__grid">
         <a

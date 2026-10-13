@@ -165,6 +165,7 @@ export interface SiteContent {
     certifications: string[]
     rights: string
     privacy: string
+    profile: string
     credit: string
   }
   showCredit: boolean
@@ -461,6 +462,7 @@ const id: SiteContent = {
     rights: 'Hak cipta dilindungi.',
     credit: 'Website oleh',
     privacy: 'Kebijakan Privasi',
+    profile: 'Unduh Company Profile (PDF)',
   },
 }
 
@@ -736,6 +738,7 @@ const en: SiteContent = {
     rights: 'All rights reserved.',
     credit: 'Website by',
     privacy: 'Privacy Policy',
+    profile: 'Download Company Profile (PDF)',
   },
 }
 

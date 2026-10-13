@@ -5,6 +5,7 @@ import { setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { getSiteContent } from '@/lib/get-content'
 import { allowIndexing, asset, siteUrl } from '@/lib/site'
+import { isPreview } from '@/lib/preview-mode'
 import '../globals.css'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -52,12 +53,21 @@ export default async function LocaleLayout({
     notFound()
   }
   setRequestLocale(locale)
+  const preview = await isPreview()
 
   // Tanpa NextIntlClientProvider: tidak ada kode next-intl yang dikirim ke browser.
   // Teks halaman datang dari src/lib/content.ts (kelak dari Payload).
   return (
     <html lang={locale} className={plusJakartaSans.variable}>
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        {preview && (
+          <div className="sticky top-0 z-[100] flex flex-wrap items-center justify-center gap-3 bg-gold-300 px-4 py-2 text-sm font-semibold text-navy-900">
+            <span>Mode pratinjau: Anda melihat draf yang belum terbit.</span>
+            <a href="/api/preview/exit" className="rounded bg-navy-900 px-3 py-1 text-white">Keluar &amp; kembali ke admin</a>
+          </div>
+        )}
+        {children}
+      </body>
     </html>
   )
 }

@@ -40,6 +40,11 @@ export default function Footer({ c }: { c: SiteContent }) {
                 <a href={n.href} className="hover:text-white">{n.label}</a>
               </li>
             ))}
+            <li>
+              <a href="/files/ARTIC-Company-Profile.pdf" download className="font-semibold text-gold-300 hover:text-white">
+                {f.profile}
+              </a>
+            </li>
           </ul>
         </div>
 

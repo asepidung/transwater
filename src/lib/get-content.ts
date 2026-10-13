@@ -2,6 +2,7 @@ import { isSafeHttpUrl } from './validate'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { Media } from '@/payload-types'
+import { isPreview } from './preview-mode'
 import { getDefaultContent, toLocale, type IconName, type ProductItem, type SiteContent } from './content'
 
 const ICONS: IconName[] = ['package', 'zap', 'truck', 'headset']
@@ -32,21 +33,23 @@ export async function getSiteContent(localeParam: string): Promise<SiteContent> 
   const d = getDefaultContent(locale)
 
   try {
+    const draft = await isPreview()
     const payload = await getPayload({ config })
     const [home, settings, aboutPage, info, products, postCount] = await Promise.all([
-      payload.findGlobal({ slug: 'home-page', locale, depth: 0 }),
-      payload.findGlobal({ slug: 'site-settings', locale, depth: 0 }),
-      payload.findGlobal({ slug: 'about-page', locale, depth: 0 }),
-      payload.findGlobal({ slug: 'info-pages', locale, depth: 0 }),
+      payload.findGlobal({ slug: 'home-page', locale, depth: 0, draft }),
+      payload.findGlobal({ slug: 'site-settings', locale, depth: 0, draft }),
+      payload.findGlobal({ slug: 'about-page', locale, depth: 0, draft }),
+      payload.findGlobal({ slug: 'info-pages', locale, depth: 0, draft }),
       payload.find({
         collection: 'products',
         locale,
         depth: 1,
         sort: 'order',
         pagination: false,
-        where: { _status: { equals: 'published' } },
+        draft,
+        ...(draft ? {} : { where: { _status: { equals: 'published' as const } } }),
       }),
-      payload.count({ collection: 'posts', where: { _status: { equals: 'published' } } }),
+      payload.find({ collection: 'posts', draft, limit: 1, depth: 0, ...(draft ? {} : { where: { _status: { equals: 'published' as const } } }) }),
     ])
 
     const productItems: ProductItem[] = rows(

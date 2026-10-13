@@ -678,6 +678,7 @@ export interface SiteSetting {
    */
   showDeveloperCredit?: boolean | null;
   footerDescription?: string | null;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -768,6 +769,7 @@ export interface HomePage {
     title?: string | null;
     description?: string | null;
   };
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -815,6 +817,7 @@ export interface AboutPage {
     title?: string | null;
     description?: string | null;
   };
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -874,6 +877,7 @@ export interface InfoPage {
         }[]
       | null;
   };
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -899,6 +903,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
       };
   showDeveloperCredit?: T;
   footerDescription?: T;
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -996,6 +1001,7 @@ export interface HomePageSelect<T extends boolean = true> {
         title?: T;
         description?: T;
       };
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1047,6 +1053,7 @@ export interface AboutPageSelect<T extends boolean = true> {
         title?: T;
         description?: T;
       };
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1106,6 +1113,7 @@ export interface InfoPagesSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

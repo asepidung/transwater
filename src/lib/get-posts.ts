@@ -3,6 +3,7 @@ import config from '@payload-config'
 import type { Post } from '@/payload-types'
 import { isMedia, mediaUrl } from './get-content'
 import { toLocale } from './content'
+import { isPreview } from './preview-mode'
 
 // Data artikel untuk halaman Berita. Hanya artikel berstatus "Terbit" yang diambil
 // (draft tidak pernah sampai ke situs publik).
@@ -49,14 +50,15 @@ function toItem(p: Post): NewsItem {
 export async function getPosts(localeParam: string, limit = 50): Promise<NewsItem[]> {
   const locale = toLocale(localeParam)
   try {
+    const draft = await isPreview()
     const payload = await getPayload({ config })
-    const query = { collection: 'posts' as const, depth: 1, limit, sort: '-publishedAt', where: { _status: { equals: 'published' as const } } }
+    const query = { collection: 'posts' as const, depth: 1, limit, sort: '-publishedAt', draft, ...(draft ? {} : { where: { _status: { equals: 'published' as const } } }) }
     const other = locale === 'id' ? 'en' : 'id'
     const [res, alt] = await Promise.all([payload.find({ ...query, locale }), payload.find({ ...query, locale: other })])
     const altById = new Map(alt.docs.map((d) => [d.id, d]))
     return res.docs
       .map((d) => withFallback(d, altById.get(d.id)))
-      .filter((d) => Boolean(d.title))
+      .filter((d) => Boolean(d.title) && typeof d.slug === 'string' && d.slug !== '')
       .map(toItem)
   } catch (error) {
     console.error('[getPosts] gagal membaca Payload:', error)
@@ -70,8 +72,9 @@ export async function getPost(slug: string, localeParam: string): Promise<NewsIt
   const locale = toLocale(localeParam)
   try {
     const payload = await getPayload({ config })
-    const where: Where = { and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }] }
-    const query = { collection: 'posts' as const, depth: 2, limit: 1, where }
+    const draft = await isPreview()
+    const where: Where = draft ? { slug: { equals: slug } } : { and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }] }
+    const query = { collection: 'posts' as const, depth: 2, limit: 1, where, draft }
     const other = locale === 'id' ? 'en' : 'id'
     const [res, alt] = await Promise.all([payload.find({ ...query, locale }), payload.find({ ...query, locale: other })])
     const doc = res.docs[0] ? withFallback(res.docs[0], alt.docs[0]) : null
@@ -96,7 +99,7 @@ export async function getAllPostSlugs(): Promise<string[]> {
       pagination: false,
       where: { _status: { equals: 'published' } },
     })
-    return res.docs.map((p) => p.slug)
+    return res.docs.map((p) => p.slug).filter((s): s is string => typeof s === 'string' && s !== '')
   } catch (error) {
     console.error('[getAllPostSlugs] gagal membaca Payload:', error)
     if (process.env.NODE_ENV === 'production') throw error
