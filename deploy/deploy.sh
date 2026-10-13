@@ -6,6 +6,11 @@
 # Urutan sengaja begini: ambil kode -> pasang dependensi -> BACKUP -> migrasi DB -> build -> reload.
 # Build membaca database (halaman statis dibuat dari konten CMS), jadi migrasi HARUS sebelum build.
 set -euo pipefail
+# Shell non-interaktif (nohup/ssh tanpa login) tidak memuat nvm, sehingga pm2 tidak ditemukan di langkah restart.
+if ! command -v pm2 >/dev/null 2>&1; then
+  export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" || true
+fi
 APP_DIR="${DEPLOY_APP_DIR:-$(cd "$(dirname "$0")/.." && pwd)}"
 # Jalankan dari SALINAN skrip ini. Langkah 1 (git pull) bisa mengganti isi deploy.sh di tengah eksekusi;
 # bash membaca skrip sambil jalan, jadi tanpa salinan, skrip yang berubah bisa merusak deploy yang sedang berlangsung.
