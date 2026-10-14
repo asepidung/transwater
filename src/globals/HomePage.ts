@@ -67,9 +67,31 @@ export const HomePage: GlobalConfig = {
               label: 'Tampilkan bagian video di Beranda',
               defaultValue: true,
             },
-            { name: 'eyebrow', type: 'text', localized: true, label: 'Label kecil di atas judul' },
-            { name: 'title', type: 'text', localized: true, label: 'Judul' },
-            { name: 'text', type: 'textarea', localized: true, label: 'Deskripsi' },
+            // Dibiarkan kosong = website memakai teks bawaan (yang sedang tampil). Teks bawaan ditampilkan sebagai contoh isian.
+            {
+              name: 'eyebrow',
+              type: 'text',
+              localized: true,
+              label: 'Label kecil di atas judul',
+              admin: { placeholder: 'Sekilas ARTIC', description: 'Kosong = memakai teks bawaan yang sedang tampil di website.' },
+            },
+            {
+              name: 'title',
+              type: 'text',
+              localized: true,
+              label: 'Judul',
+              admin: { placeholder: 'Segar dari sumbernya', description: 'Kosong = memakai teks bawaan yang sedang tampil di website.' },
+            },
+            {
+              name: 'text',
+              type: 'textarea',
+              localized: true,
+              label: 'Deskripsi',
+              admin: {
+                placeholder: 'Air minum dalam kemasan ARTIC diproduksi di Cileungsi, Bogor, dengan pengolahan bertahap dan kontrol kualitas di setiap tahap.',
+                description: 'Kosong = memakai teks bawaan yang sedang tampil di website.',
+              },
+            },
           ],
         },
         {
