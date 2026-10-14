@@ -179,7 +179,7 @@ const company = {
   // Data resmi dari formulir requirement ARTIC (1 Okt 2026). Nomor kantor ditambahkan 6 Okt 2026 (permintaan Pak Feri).
   phone: '(021) 8993-1363 / +62 813-9964-1608',
   email: 'transwaterroberi03.sn@gmail.com',
-  hours: '08.00 - 16.00 WIB',
+  hours: 'Senin - Sabtu, 08.00 - 16.00 WIB',
   whatsapp: '6281399641608',
   instagram: 'https://www.instagram.com/articwater.id/',
 }
