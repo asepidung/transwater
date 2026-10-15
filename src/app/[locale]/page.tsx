@@ -12,6 +12,7 @@ import Products from '@/components/site/Products'
 import BrandVideo from '@/components/site/BrandVideo'
 import Benefits from '@/components/site/Benefits'
 import Segments from '@/components/site/Segments'
+import Partners from '@/components/site/Partners'
 import Process from '@/components/site/Process'
 import QuoteSection from '@/components/site/QuoteSection'
 import Footer from '@/components/site/Footer'
@@ -48,6 +49,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <BrandVideo c={c} />
         <Benefits c={c} />
         <Segments c={c} />
+        <Partners c={c} />
         <Process c={c} />
         <QuoteSection c={c} />
       </main>

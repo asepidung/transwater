@@ -117,6 +117,7 @@ export interface SiteContent {
     items: { icon: IconName; title: string; text: string }[]
   }
   segments: { eyebrow: string; title: string; items: string[] }
+  partners: { eyebrow: string; title: string; items: string[] }
   process: { eyebrow: string; title: string; steps: { title: string; text: string }[] }
   quote: {
     eyebrow: string
@@ -170,6 +171,16 @@ export interface SiteContent {
   }
   showCredit: boolean
 }
+
+// Nama partner/pelanggan (disetujui Pak Feri). Hanya nama teks, tanpa logo. Daftar lengkap dikelola tim ARTIC lewat admin (tab Partner).
+const PARTNERS = [
+  'Avenzel Hotel and Convention Cibubur',
+  'Batavia Hotel & Apartments',
+  'PT. JCO Donut & Coffee',
+  'Rumah Sakit Medistra',
+  'Sekolah Internasional Kinderfield',
+  'Cafe Langit Seduh',
+]
 
 const company = {
   name: 'PT. Transwater Roberi Indonesia',
@@ -404,6 +415,11 @@ const id: SiteContent = {
     eyebrow: 'Kami melayani',
     title: 'Untuk berbagai kebutuhan usaha',
     items: ['Distributor & Agen', 'Hotel, Restoran & Kafe', 'Perkantoran', 'Event & Katering', 'Sekolah & Instansi'],
+  },
+  partners: {
+    eyebrow: 'Dipercaya oleh',
+    title: 'Partner Kami',
+    items: PARTNERS,
   },
   process: {
     eyebrow: 'Cara pemesanan',
@@ -680,6 +696,11 @@ const en: SiteContent = {
     eyebrow: 'Who we serve',
     title: 'For a wide range of businesses',
     items: ['Distributors & Agents', 'Hotels, Restaurants & Cafes', 'Offices', 'Events & Catering', 'Schools & Institutions'],
+  },
+  partners: {
+    eyebrow: 'Trusted by',
+    title: 'Our Partners',
+    items: PARTNERS,
   },
   process: {
     eyebrow: 'How to order',

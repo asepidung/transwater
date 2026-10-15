@@ -686,7 +686,7 @@ export interface SiteSetting {
   phone?: string | null;
   email?: string | null;
   /**
-   * Contoh: 08.00 - 16.00 WIB
+   * Contoh: Senin - Sabtu, 08.00 - 16.00 WIB
    */
   hours?: string | null;
   /**
@@ -742,8 +742,17 @@ export interface HomePage {
   };
   videoSection?: {
     enabled?: boolean | null;
+    /**
+     * Kosong = memakai teks bawaan yang sedang tampil di website.
+     */
     eyebrow?: string | null;
+    /**
+     * Kosong = memakai teks bawaan yang sedang tampil di website.
+     */
     title?: string | null;
+    /**
+     * Kosong = memakai teks bawaan yang sedang tampil di website.
+     */
     text?: string | null;
   };
   trust?: {
@@ -782,6 +791,19 @@ export interface HomePage {
     items?:
       | {
           text: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  partners?: {
+    eyebrow?: string | null;
+    title?: string | null;
+    /**
+     * Tambah satu baris per nama. Kosongkan semua baris untuk menyembunyikan bagian ini dari beranda.
+     */
+    items?:
+      | {
+          name: string;
           id?: string | null;
         }[]
       | null;
@@ -1011,6 +1033,18 @@ export interface HomePageSelect<T extends boolean = true> {
           | T
           | {
               text?: T;
+              id?: T;
+            };
+      };
+  partners?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        items?:
+          | T
+          | {
+              name?: T;
               id?: T;
             };
       };

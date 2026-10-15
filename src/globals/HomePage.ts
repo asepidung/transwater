@@ -157,6 +157,19 @@ export const HomePage: GlobalConfig = {
           ]),
         },
         {
+          label: 'Partner',
+          name: 'partners',
+          fields: sectionHead([
+            {
+              name: 'items',
+              type: 'array',
+              label: 'Nama partner / pelanggan',
+              admin: { description: 'Tambah satu baris per nama. Kosongkan semua baris untuk menyembunyikan bagian ini dari beranda.' },
+              fields: [{ name: 'name', type: 'text', required: true, label: 'Nama (tulis apa adanya, sama di semua bahasa)' }],
+            },
+          ]),
+        },
+        {
           label: 'Cara Pesan',
           name: 'process',
           fields: sectionHead([

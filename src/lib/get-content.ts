@@ -179,6 +179,12 @@ export async function getSiteContent(localeParam: string): Promise<SiteContent> 
         title: text(home.segments?.title, d.segments.title),
         items: rows(home.segments?.items, (s) => s.text, d.segments.items),
       },
+      partners: {
+        eyebrow: text(home.partners?.eyebrow, d.partners.eyebrow),
+        title: text(home.partners?.title, d.partners.title),
+        // Daftar diisi lewat migrasi awal dan dikelola di admin; dikosongkan = bagian disembunyikan (tidak memakai bawaan).
+        items: (home.partners?.items ?? []).map((p) => p.name).filter(Boolean),
+      },
       process: {
         eyebrow: text(home.process?.eyebrow, d.process.eyebrow),
         title: text(home.process?.title, d.process.title),
