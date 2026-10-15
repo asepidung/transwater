@@ -12,6 +12,7 @@
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "seed": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/seed.ts",
+    "replace-photos": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/replace-product-photos.ts",
     "migrate": "cross-env NODE_OPTIONS=--no-deprecation payload migrate",
     "migrate:create": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:create",
     "backup": "node scripts/backup-db.mjs"

@@ -97,7 +97,7 @@ export default function Hero({ c }: { c: SiteContent }) {
         {banner ? (
           <div className="relative mx-auto w-full max-w-sm lg:max-w-lg">
             <Image
-              src={asset('/images/floating.png')}
+              src={asset('/images/floating.webp')}
               alt="Botol dan galon ARTIC"
               width={800}
               height={800}
@@ -149,7 +149,7 @@ export default function Hero({ c }: { c: SiteContent }) {
               />
             )}
             <Image
-              src={asset('/images/floating.png')}
+              src={asset('/images/floating.webp')}
               alt="Botol dan galon ARTIC"
               width={800}
               height={800}
