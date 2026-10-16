@@ -23,6 +23,10 @@ export default {
   // pertama (~600 ms lebih lambat di situs publik). Batasi hanya untuk /admin.
   async headers() {
     const rules = (await payloadHeaders?.()) ?? []
-    return rules.map((rule) => (rule.source === '/:path*' ? { ...rule, source: '/admin/:path*' } : rule))
+    const mapped = rules.map((rule) => (rule.source === '/:path*' ? { ...rule, source: '/admin/:path*' } : rule))
+    // Panel admin dan API tidak boleh masuk indeks Google. Dipakai noindex (bukan Disallow di robots.txt),
+    // karena alamat yang sudah terlanjur terindeks hanya bisa dikeluarkan jika Google boleh membaca tanda ini.
+    const noindex = [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }]
+    return [...mapped, { source: '/admin/:path*', headers: noindex }, { source: '/api/:path*', headers: noindex }]
   },
 } satisfies NextConfig;
