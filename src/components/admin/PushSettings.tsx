@@ -26,6 +26,8 @@ async function api(body?: Record<string, unknown>) {
 export function PushSettings() {
   const [status, setStatus] = useState<Status>('loading')
   const [busy, setBusy] = useState(false)
+  // Tetap tampil sampai halaman dimuat ulang setelah menekan "Aktifkan", supaya sempat menekan "Kirim tes".
+  const [justEnabled, setJustEnabled] = useState(false)
   const [note, setNote] = useState<{ kind: 'ok' | 'error'; text: string } | null>(null)
 
   useEffect(() => {
@@ -73,6 +75,7 @@ export function PushSettings() {
       const saved = await api({ action: 'subscribe', subscription: sub.toJSON(), userAgent: navigator.userAgent })
       if (!saved.ok) throw new Error(String(saved.data.error || 'gagal'))
       setStatus('on')
+      setJustEnabled(true)
       setNote({ kind: 'ok', text: 'Aktif. Klik "Kirim tes" untuk memastikan notifikasi muncul di perangkat ini.' })
     } catch (e) {
       setNote({ kind: 'error', text: `Gagal mengaktifkan notifikasi${e instanceof Error && e.message ? `: ${e.message}` : ''}.` })
@@ -92,6 +95,7 @@ export function PushSettings() {
         await sub.unsubscribe()
       }
       setStatus('off')
+      setJustEnabled(false)
       setNote({ kind: 'ok', text: 'Notifikasi di perangkat ini dimatikan.' })
     } catch {
       setNote({ kind: 'error', text: 'Gagal mematikan notifikasi. Coba lagi.' })
@@ -121,6 +125,8 @@ export function PushSettings() {
   }
 
   if (status === 'loading') return null
+  // Sudah aktif di perangkat ini: kartu disembunyikan. Muncul lagi hanya jika notifikasi belum/tidak aktif.
+  if (status === 'on' && !justEnabled) return null
 
   return (
     <div className="artic-push">
