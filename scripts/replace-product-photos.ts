@@ -11,15 +11,16 @@ import config from '../src/payload.config'
 //   NEW_330=/path/ke/new330.png NEW_600=/path/ke/new600.png npm run replace-photos
 // Tanpa NEW_330/NEW_600 skrip hanya menampilkan dokumen yang akan diganti (tidak mengubah apa pun).
 // Nama berkas bisa 'product_330ml.png' (awal) atau 'new330.png' (setelah penggantian pertama), jadi skrip aman dijalankan ulang.
+// Dicari lewat awalan nama: product_330ml*, new330* (termasuk 'new330-1.png' dst. dari penggantian sebelumnya).
 const targets: { filename: string[]; file?: string }[] = [
-  { filename: ['product_330ml.png', 'new330.png'], file: process.env.NEW_330 },
-  { filename: ['product_600ml.png', 'new600.png'], file: process.env.NEW_600 },
+  { filename: ['product_330ml', 'new330'], file: process.env.NEW_330 },
+  { filename: ['product_600ml', 'new600'], file: process.env.NEW_600 },
 ]
 
 const payload = await getPayload({ config })
 
 for (const t of targets) {
-  const found = await payload.find({ collection: 'media', where: { filename: { in: t.filename } }, limit: 2, depth: 0, overrideAccess: true })
+  const found = await payload.find({ collection: 'media', where: { or: t.filename.map((f) => ({ filename: { like: `${f}%` } })) }, sort: 'id', limit: 5, depth: 0, overrideAccess: true })
   const doc = found.docs[0]
   if (!doc) {
     console.log(`[lewati] ${t.filename[0]}: dokumen media tidak ditemukan`)
