@@ -66,12 +66,14 @@ const clip = (s: string, n: number) => (s.length > n ? `${s.slice(0, n - 1)}…`
 export async function notifyNewQuote(payload: Payload, doc: { id: number | string; company: string; product?: string | null }) {
   if (!pushEnabled()) return
   try {
-    await sendPush(payload, {
+    const r = await sendPush(payload, {
       title: 'Permintaan penawaran baru',
       body: clip([doc.company, doc.product].filter(Boolean).join(' · '), 110),
       url: `/admin/collections/messages/${doc.id}`,
       tag: `quote-${doc.id}`,
     })
+    // Dicatat supaya bisa dicek bila ada yang bilang tidak menerima: terkirim / perangkat dihapus / gagal.
+    console.log(`[push] penawaran #${doc.id}: terkirim ${r.sent}, dihapus ${r.removed}, gagal ${r.failed} (dari ${r.sent + r.removed + r.failed} perangkat)`)
   } catch (error) {
     console.error('[push] notifikasi pesan baru gagal:', error)
   }
