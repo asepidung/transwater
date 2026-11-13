@@ -29,7 +29,7 @@ export const Messages: CollectionConfig = {
       type: 'checkbox',
       defaultValue: false,
       label: 'Sudah ditindaklanjuti',
-      admin: { position: 'sidebar' },
+      admin: { position: 'sidebar', components: { Cell: '/components/admin/HandledCell#HandledCell' } },
     },
   ],
 }
