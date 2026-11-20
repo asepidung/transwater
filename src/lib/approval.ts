@@ -78,6 +78,17 @@ export function withApprovalGlobal(g: GlobalConfig, pagePath: string): GlobalCon
     },
     hooks: {
       ...g.hooks,
+      // "Pulihkan versi" pada global TIDAK menjalankan beforeChange (beda dengan koleksi), jadi tanpa ini
+      // Staf bisa menayangkan versi lama tanpa Pemilik. Pulihkan versi global hanya untuk Pemilik.
+      beforeOperation: [
+        ...(g.hooks?.beforeOperation ?? []),
+        ({ operation, req, args }) => {
+          if (operation === 'restoreVersion' && isStaff(req.user)) {
+            throw new APIError('Hanya Pemilik yang bisa memulihkan versi lama. Staf: salin isinya lalu tekan "Simpan draf".', 403, undefined, true)
+          }
+          return args
+        },
+      ],
       beforeChange: [...(g.hooks?.beforeChange ?? []), guard],
       afterChange: [
         ...(g.hooks?.afterChange ?? []),
