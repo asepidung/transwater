@@ -5,6 +5,8 @@ import { withPayload } from '@payloadcms/next/withPayload';
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
+  // Jangan umumkan teknologi yang dipakai (header X-Powered-By).
+  poweredByHeader: false,
   images: {
     localPatterns: [
       { pathname: '/api/media/file/**' },
