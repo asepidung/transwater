@@ -9,7 +9,9 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const path = searchParams.get('path') || '/'
   // Hanya jalur di situs ini ("/id/..."), bukan alamat luar atau "//host".
-  if (!path.startsWith('/') || path.startsWith('//') || path.includes(String.fromCharCode(92))) return new Response('Jalur tidak valid', { status: 400 })
+  // Karakter kontrol (tab, baris baru) juga ditolak: browser membuangnya, sehingga "/<tab>/host" bisa menjadi "//host".
+  const hasControl = [...path].some((ch) => ch.charCodeAt(0) < 32 || ch.charCodeAt(0) === 127)
+  if (!path.startsWith('/') || path.startsWith('//') || path.includes(String.fromCharCode(92)) || hasControl) return new Response('Jalur tidak valid', { status: 400 })
 
   const payload = await getPayload({ config })
   const { user } = await payload.auth({ headers: request.headers })
