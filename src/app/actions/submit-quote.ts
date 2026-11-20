@@ -22,7 +22,10 @@ function rateLimited(ip: string) {
   }
   recent.push(now)
   hits.set(ip, recent)
-  if (hits.size > 5000) hits.clear()
+  // Batasi memori: buang catatan yang sudah kedaluwarsa (dulu: hapus SEMUA, sehingga batas kiriman ikut ter-reset).
+  if (hits.size > 5000) {
+    for (const [key, times] of hits) if (!times.some((t) => now - t < WINDOW_MS)) hits.delete(key)
+  }
   return false
 }
 
